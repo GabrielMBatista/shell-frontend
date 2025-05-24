@@ -2,8 +2,6 @@
 
 import { useTranslation } from '@/hooks/useTranslation';
 
-
-
 export default function Home() {
   const { t, locale, changeLocale } = useTranslation('Home');
 

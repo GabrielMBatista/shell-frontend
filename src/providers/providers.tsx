@@ -1,7 +1,5 @@
 'use client';
 
-
-
 import { I18nProvider } from '@/providers/I18nProvider';
 import { ReactNode } from 'react';
 

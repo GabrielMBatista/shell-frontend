@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useCallback, useContext, useEffect, useState, ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, useCallback, ReactNode } from 'react';
 import pt from '../i18n/locales/pt/common.json';
 import en from '../i18n/locales/en/common.json';
 
@@ -17,7 +17,7 @@ interface I18nContextProps {
 const I18nContext = createContext<I18nContextProps | undefined>(undefined);
 
 export const I18nProvider = ({ children }: { children: ReactNode }) => {
-  const [locale, setLocale] = useState('pt');
+  const [locale, setLocale] = useState<string>('pt');
 
   useEffect(() => {
     const stored = localStorage.getItem('locale') || 'pt';
