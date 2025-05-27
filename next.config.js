@@ -13,6 +13,7 @@ const nextConfig = {
         remotes: {
           // exemplo:
           // dashboard: 'dashboard@http://localhost:3001/_next/static/chunks/remoteEntry.js',
+          Chatbot: 'Chatbot@http://localhost:3002/_next/static/chunks/remoteEntry.js',
         },
         exposes: {
           './App': './src/pages/_app.tsx',
