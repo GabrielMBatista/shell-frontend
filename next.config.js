@@ -16,11 +16,12 @@ const nextConfig = {
         },
         exposes: {
           './App': './src/pages/_app.tsx',
-          './Index': './src/pages/home/index.tsx',
+          './Home': './src/pages/home/index.tsx',
           './Error': './src/pages/_error.tsx',
         },
         shared: {
           'react-dom': { singleton: true, requiredVersion: false },
+          'next-intl': { singleton: true, requiredVersion: false },
           // 'next-auth': { singleton: true },
           // '@tanstack/react-query': { singleton: true },
           // zustand: { singleton: true },

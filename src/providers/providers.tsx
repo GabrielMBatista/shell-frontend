@@ -1,17 +1,20 @@
 'use client';
 
-import { I18nProvider } from '@/providers/I18nProvider';
 import { ReactNode } from 'react';
-
-// Se tiver outros providers, importa aqui
-// import { ThemeProvider } from './providers/ThemeProvider';
-// import { AuthProvider } from './providers/AuthProvider';
+import { I18nProvider } from './I18nProvider';
+// Exemplo de outros providers caso use:
+// import { ThemeProvider } from './ThemeProvider';
+// import { AuthProvider } from './AuthProvider';
 
 export function Providers({ children }: { children: ReactNode }) {
   return (
     <I18nProvider>
-      {/* Outros providers podem ser aninhados aqui */}
+      {/* Exemplo de outros providers: */}
+      {/* <AuthProvider> */}
+      {/* <ThemeProvider> */}
       {children}
+      {/* </ThemeProvider> */}
+      {/* </AuthProvider> */}
     </I18nProvider>
   );
 }
