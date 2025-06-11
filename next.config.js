@@ -3,7 +3,7 @@ import { NextFederationPlugin } from '@module-federation/nextjs-mf';
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['storage.googleapis.com'],
+    domains: ['storage.googleapis.com', 'picsum.photos'],
   },
   webpack: (config) => {
     config.plugins.push(
@@ -23,6 +23,11 @@ const nextConfig = {
         shared: {
           'react-dom': { singleton: true, requiredVersion: false },
           'next-intl': { singleton: true, requiredVersion: false },
+          // '@gabrielmbatista/ui-library-stencil': {
+          //   singleton: true,
+          //   eager: true, 
+          //   requiredVersion: false,
+          // },
           // 'next-auth': { singleton: true },
           // '@tanstack/react-query': { singleton: true },
           // zustand: { singleton: true },
@@ -44,6 +49,15 @@ const nextConfig = {
   },
   transpilePackages: ['@meta/react-components'],
   output: 'standalone',
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/home',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

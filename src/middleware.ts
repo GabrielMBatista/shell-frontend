@@ -1,32 +1,26 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { getToken } from 'next-auth/jwt';
 
-const PUBLIC_ROUTES = ['/', '/home', '/login', '/register', '/about', '/chatbot']; // 🔥 Adicione aqui as rotas públicas
+const PUBLIC_ROUTES = ['/auth/signin', '/register', '/about', '/home'];
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  console.log('🛡️ Middleware executando na rota:', pathname);
-
-  const token = request.cookies.get('token')?.value;
-  const isAuthenticated = Boolean(token);
+  const token = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET });
+  const isAuthenticated = !!token;
 
   const isPublicRoute = PUBLIC_ROUTES.some(
     (publicPath) => pathname === publicPath || pathname.startsWith(`${publicPath}/`),
   );
 
   if (!isPublicRoute && !isAuthenticated) {
-    console.log('🔒 Acesso não autorizado. Redirecionando para /login');
-    return NextResponse.redirect(new URL('/login', request.url));
+    return NextResponse.redirect(new URL('/auth/signin', request.url));
   }
 
-  // ✅ Acesso permitido
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: [
-    // 🌟 Executa em todas as rotas, exceto API e arquivos estáticos
-    '/((?!api|_next|.*\\..*).*)',
-  ],
+  matcher: ['/((?!api|_next|.*\\..*).*)'],
 };
