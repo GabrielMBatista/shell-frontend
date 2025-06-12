@@ -1,11 +1,15 @@
 import { NextFederationPlugin } from '@module-federation/nextjs-mf';
 
 /** @type {import('next').NextConfig} */
+const { PrismaPlugin } = require("@prisma/nextjs-monorepo-workaround-plugin");
 const nextConfig = {
   images: {
     domains: ['storage.googleapis.com', 'picsum.photos'],
   },
-  webpack: (config) => {
+  webpack: (config, { isServer }) => {
+    if (isServer) {
+      config.plugins.push(new PrismaPlugin());
+    }
     config.plugins.push(
       new NextFederationPlugin({
         name: 'shell',

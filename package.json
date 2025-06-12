@@ -27,6 +27,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@module-federation/nextjs-mf": "^8.8.20",
+    "@prisma/nextjs-monorepo-workaround-plugin": "^6.9.0",
     "@types/bcrypt": "^5.0.2",
     "@types/node": "^20",
     "@types/react": "^18.2.0",
