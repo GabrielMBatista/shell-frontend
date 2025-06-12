@@ -22,6 +22,7 @@ const nextConfig = {
           './App': './src/pages/_app.tsx',
           './Home': './src/pages/home/index.tsx',
           './Error': './src/pages/_error.tsx',
+          './Providers': './src/providers/providers.tsx',
         },
         shared: {
           'react-dom': { singleton: true, requiredVersion: false },

@@ -1,5 +1,5 @@
-import { CtxOrReq } from 'next-auth/client/_utils';
 import { getCsrfToken } from 'next-auth/react';
+import { GetServerSideProps } from 'next';
 
 interface SignInProps {
   csrfToken: string;
@@ -11,19 +11,20 @@ export default function SignIn({ csrfToken }: SignInProps) {
       <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
       <label>
         Email:
-        <input name="email" type="email" />
+        <input name="email" type="email" autoComplete="email" required />
       </label>
       <label>
         Senha:
-        <input name="password" type="password" />
+        <input name="password" type="password" autoComplete="current-password" required />
       </label>
       <button type="submit">Entrar</button>
     </form>
   );
 }
 
-SignIn.getInitialProps = async (context: CtxOrReq | undefined) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const csrfToken = await getCsrfToken(context);
   return {
-    csrfToken: await getCsrfToken(context),
+    props: { csrfToken },
   };
 };

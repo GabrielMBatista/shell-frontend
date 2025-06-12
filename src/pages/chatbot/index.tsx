@@ -1,23 +1,17 @@
+import Loading from '@/utils/loading';
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
 
 const RemoteApp = dynamic(() => import('Chatbot/Chatbot').then((mod) => mod.default), {
   ssr: false,
-  loading: () => <span>Carregando animação...</span>,
+  loading: () => <Loading />,
 });
-
-// const RemoteChatbot = dynamic(() => import('Chatbot/Chatbot'), {
-//   ssr: false,
-//   suspense: true,
-// });
 
 export default function ChatbotPage() {
   return (
-    <Suspense fallback={<div>Carregando Chatbot...</div>}>
+    <Suspense fallback={<Loading />}>
       <h1>Chatbot vindo do MFE remoto ✅</h1>
       <RemoteApp />
     </Suspense>
   );
 }
-
-

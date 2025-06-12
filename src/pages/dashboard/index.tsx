@@ -9,7 +9,7 @@ const RemoteApp = dynamic(() => import('Dashboard/Dashboard').then((mod) => mod.
 
 export default function ChatbotPage() {
   return (
-    <Suspense fallback={<div>Carregando Chatbot...</div>}>
+    <Suspense fallback={<Loading />}>
       <h1>Chatbot vindo do MFE remoto ✅</h1>
       <RemoteApp />
     </Suspense>
