@@ -2,11 +2,14 @@
 
 html,
 body {
-    min-height: 100vh;
-    min-width: 100vw;
+    height: 100vh;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
     font-family: var(--font-base, 'Inter', Arial, sans-serif);
     background: var(--color-background, #fff);
+}
+
+main {
+    height: auto;
+    width: calc(100%- padding 24px);
 }

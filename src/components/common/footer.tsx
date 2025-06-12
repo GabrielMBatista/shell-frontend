@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <ui-footer fixed>
+    <ui-footer >
       <div slot="contact">📧 contact@example.com</div>
       <div slot="links">
         <Link href="/privacy" passHref legacyBehavior>
