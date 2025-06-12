@@ -1,7 +1,7 @@
 import { NextFederationPlugin } from '@module-federation/nextjs-mf';
+import { PrismaPlugin } from "@prisma/nextjs-monorepo-workaround-plugin";
 
 /** @type {import('next').NextConfig} */
-const { PrismaPlugin } = require("@prisma/nextjs-monorepo-workaround-plugin");
 const nextConfig = {
   images: {
     domains: ['storage.googleapis.com', 'picsum.photos'],
