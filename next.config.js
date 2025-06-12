@@ -11,9 +11,8 @@ const nextConfig = {
         name: 'shell',
         filename: 'static/chunks/remoteEntry.js',
         remotes: {
-          // exemplo:
-          // dashboard: 'dashboard@http://localhost:3001/_next/static/chunks/remoteEntry.js',
-          Chatbot: 'Chatbot@http://localhost:3002/_next/static/chunks/remoteEntry.js',
+          Chatbot: `Chatbot@${process.env.NEXT_PUBLIC_CHATBOT_REMOTE_URL}/_next/static/chunks/remoteEntry.js`,
+          Dashboard: `Dashboard@${process.env.NEXT_PUBLIC_DASHBOARD_REMOTE_URL}/_next/static/chunks/remoteEntry.js`,
         },
         exposes: {
           './App': './src/pages/_app.tsx',
