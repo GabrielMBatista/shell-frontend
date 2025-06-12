@@ -7,6 +7,7 @@
     "dev": "NEXT_PRIVATE_LOCAL_WEBPACK=true next dev",
     "build": "NEXT_PRIVATE_LOCAL_WEBPACK=true next build",
     "start": "NEXT_PRIVATE_LOCAL_WEBPACK=true next start",
+    "postinstall": "prisma generate",
     "seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
