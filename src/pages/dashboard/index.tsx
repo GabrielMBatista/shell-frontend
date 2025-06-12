@@ -1,36 +1,17 @@
-import { getSession, GetSessionParams } from 'next-auth/react';
+import Loading from '@/utils/loading';
+import dynamic from 'next/dynamic';
+import { Suspense } from 'react';
 
-export async function getServerSideProps(context: GetSessionParams | undefined) {
-  const session = await getSession(context);
+const RemoteApp = dynamic(() => import('Dashboard/Dashboard').then((mod) => mod.default), {
+  ssr: false,
+  loading: () => <Loading />,
+});
 
-  if (!session) {
-    return {
-      redirect: {
-        destination: '/api/auth/signin',
-        permanent: false,
-      },
-    };
-  }
-
-  return {
-    props: { session },
-  };
-}
-
-interface SessionProps {
-  session: {
-    user: {
-      name: string;
-      email: string;
-    };
-  };
-}
-
-export default function Dashboard({ session }: SessionProps) {
+export default function ChatbotPage() {
   return (
-    <div>
-      <h1>Bem-vindo, {session.user.name}</h1>
-      <p>Email: {session.user.email}</p>
-    </div>
+    <Suspense fallback={<div>Carregando Chatbot...</div>}>
+      <h1>Chatbot vindo do MFE remoto ✅</h1>
+      <RemoteApp />
+    </Suspense>
   );
 }
