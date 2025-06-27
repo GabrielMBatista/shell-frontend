@@ -1,14 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-export const runtime = 'nodejs';
-
-import NextAuth, { User } from 'next-auth';
+import { NextAuthOptions } from 'next-auth';
 import GitHubProvider from 'next-auth/providers/github';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import { prisma } from '@/lib/prisma';
 import bcrypt from 'bcryptjs';
 
-const handler = NextAuth({
+export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   session: {
     strategy: 'jwt',
@@ -45,7 +43,7 @@ const handler = NextAuth({
     }),
   ],
   callbacks: {
-    async jwt({ token, user }: { token: any; user?: User }) {
+    async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
         token.email = user.email;
@@ -80,6 +78,10 @@ const handler = NextAuth({
         },
       }),
   secret: process.env.NEXTAUTH_SECRET,
-});
+};
+
+// 🔁 handler separado
+import NextAuth from 'next-auth';
+const handler = NextAuth(authOptions);
 
 export default handler;

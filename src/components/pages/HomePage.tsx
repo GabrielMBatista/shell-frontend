@@ -13,7 +13,8 @@ export default function HomePage() {
           Bem-vindo, {userName}!
         </h2>
         <p>Este é o portfólio profissional de Gabriel Marques — desenvolvedor front-end.</p>
-        <ui-theme-configurator/>
+        <div data-gabs="projetos">teste</div>
+        <ui-theme-configurator />
       </main>
     </div>
   );

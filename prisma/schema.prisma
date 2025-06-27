@@ -19,6 +19,7 @@ model User {
   hashedPassword String?
   accounts      Account[]
   sessions      Session[]
+  assistantProfile AssistantProfile? 
 }
 
 
@@ -44,4 +45,18 @@ model Session {
   userId       String
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model AssistantProfile {
+  id            String   @id @default(uuid())
+  userId        String   @unique
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  name          String   @default("Gabs.IA")
+  avatarUrl     String?  // Link da imagem (CDN, local, etc.)
+  avatarBase64  String?  // Base64 da imagem como fallback
+  personality   String   @default("neutro") // Ex: bem-humorado, sério...
+  model         String   @default("gpt-3.5-turbo")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 }
