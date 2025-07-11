@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Image from 'next/image';
+// import Image from 'next/image';
 import { useSession } from 'next-auth/react';
 
 export default function Header() {
@@ -8,33 +8,27 @@ export default function Header() {
   const userImage = session?.user?.image || 'https://picsum.photos/id/64/4326/2884.jpg';
 
   return (
-    <ui-header>
-      <span slot="left">
+    <ui-header fixed={true}>
+      {/* <div slot="left">
         <a href="/" className="ui-header-logo">
           <Image src="https://picsum.photos/32" alt="Brand Logo" width="32" height="32" />
         </a>
-      </span>
-      <span slot="center" style={{ fontWeight: 700, color: 'var(--color-primary)' }}>
+      </div> */}
+      {/* <span slot="center" style={{ fontWeight: 700, color: 'var(--color-primary)' }}>
         Portfólio
-      </span>
+      </span> */}
       <ui-navbar slot="navbar" insideHeader={true}>
         <span slot="left">
-          <Link href="/" passHref legacyBehavior>
-            <a>
-              <ui-navbar-slot icon="home" label="Início" />
-            </a>
+          <Link href="/" passHref>
+            <ui-navbar-slot icon="home" label="Início" />
           </Link>
         </span>
         <span slot="center">
-          <Link href="/projetos" passHref legacyBehavior>
-            <a>
-              <ui-navbar-slot label="Projetos" />
-            </a>
+          <Link href="/projetos" passHref>
+            <ui-navbar-slot label="Projetos" />
           </Link>
-          <Link href="/sobre" passHref legacyBehavior>
-            <a>
-              <ui-navbar-slot label="Sobre" />
-            </a>
+          <Link href="/sobre" passHref>
+            <ui-navbar-slot label="Sobre" />
           </Link>
         </span>
         <span slot="right">
