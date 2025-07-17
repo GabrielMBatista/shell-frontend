@@ -89,6 +89,7 @@ export default function HomePage() {
                   boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
                   transform: `scale(${resolution.scale ?? 1})`,
                   transformOrigin: 'top center',
+                  backgroundColor: 'var(--color-background, #fff)',
                 }}
               >
                 <iframe
@@ -132,6 +133,7 @@ export default function HomePage() {
                   boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
                   transform: `scale(${resolution.scale ?? 1})`,
                   transformOrigin: 'top center',
+                  backgroundColor: 'var(--color-background, #fff)',
                 }}
               >
                 <iframe
@@ -174,6 +176,7 @@ export default function HomePage() {
                   boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
                   transform: `scale(${resolution.scale ?? 1})`,
                   transformOrigin: 'top center',
+                  backgroundColor: 'var(--color-background, #fff)',
                 }}
               >
                 <iframe
