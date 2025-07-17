@@ -180,7 +180,7 @@ export default function HomePage() {
                 }}
               >
                 <iframe
-                  src="hhttps://mfe-entrevista-lcek.vercel.app/home"
+                  src="https://mfe-entrevista-lcek.vercel.app/home"
                   allow="microphone"
                   style={{
                     width: '100%',
