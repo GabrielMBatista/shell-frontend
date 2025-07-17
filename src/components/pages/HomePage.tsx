@@ -147,13 +147,13 @@ export default function HomePage() {
             </div>
           </ui-project-card>
           <ui-project-card
-            projectTitle="Alphabet Recorder"
-            description="Gravador de áudio para treinar fonemas do alfabeto, com interface simples e prática."
+            projectTitle="Entrevista AI"
+            description="Este é um sistema para gerenciar e avaliar sessões de entrevistas."
             techs={['Next.js', 'Web Audio API']}
           >
             <iframe
               slot="thumb"
-              src="https://alphabet-recorder.vercel.app"
+              src="https://mfe-entrevista-lcek.vercel.app"
               style={{ width: '100%', height: '200px', border: 'none', pointerEvents: 'none' }}
             />
             <div
@@ -177,7 +177,7 @@ export default function HomePage() {
                 }}
               >
                 <iframe
-                  src="https://alphabet-recorder.vercel.app"
+                  src="https://mfe-entrevista-lcek.vercel.app"
                   allow="microphone"
                   style={{
                     width: '100%',
@@ -189,48 +189,6 @@ export default function HomePage() {
             </div>
           </ui-project-card>
 
-          <ui-project-card
-            projectTitle="Alphabet Recorder"
-            description="Gravador de áudio para treinar fonemas do alfabeto, com interface simples e prática."
-            techs={['Next.js', 'Web Audio API']}
-          >
-            <iframe
-              slot="thumb"
-              src="https://alphabet-recorder.vercel.app"
-              style={{ width: '100%', height: '200px', border: 'none', pointerEvents: 'none' }}
-            />
-            <div
-              slot="preview"
-              style={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'flex-start',
-                padding: '1rem',
-                overflow: 'auto',
-              }}
-            >
-              <div
-                style={{
-                  width: resolution.width,
-                  height: resolution.height,
-                  border: '1px solid #ccc',
-                  boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
-                  transform: `scale(${resolution.scale ?? 1})`,
-                  transformOrigin: 'top center',
-                }}
-              >
-                <iframe
-                  src="https://alphabet-recorder.vercel.app"
-                  allow="microphone"
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    border: 'none',
-                  }}
-                />
-              </div>
-            </div>
-          </ui-project-card>
         </div>
       </ui-section>
       <ui-section>
