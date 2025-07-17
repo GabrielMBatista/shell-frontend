@@ -153,7 +153,7 @@ export default function HomePage() {
           >
             <iframe
               slot="thumb"
-              src="https://mfe-entrevista-lcek.vercel.app"
+              src="https://mfe-entrevista-lcek.vercel.app/home"
               style={{ width: '100%', height: '200px', border: 'none', pointerEvents: 'none' }}
             />
             <div
@@ -177,7 +177,7 @@ export default function HomePage() {
                 }}
               >
                 <iframe
-                  src="https://mfe-entrevista-lcek.vercel.app"
+                  src="hhttps://mfe-entrevista-lcek.vercel.app/home"
                   allow="microphone"
                   style={{
                     width: '100%',
@@ -188,7 +188,6 @@ export default function HomePage() {
               </div>
             </div>
           </ui-project-card>
-
         </div>
       </ui-section>
       <ui-section>
