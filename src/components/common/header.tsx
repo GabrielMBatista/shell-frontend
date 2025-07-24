@@ -9,27 +9,14 @@ export default function Header() {
 
   return (
     <ui-header fixed={true}>
-      {/* <div slot="left">
-        <a href="/" className="ui-header-logo">
-          <Image src="https://picsum.photos/32" alt="Brand Logo" width="32" height="32" />
-        </a>
-      </div> */}
-      {/* <span slot="center" style={{ fontWeight: 700, color: 'var(--color-primary)' }}>
-        Portfólio
-      </span> */}
       <ui-navbar slot="navbar" insideHeader={true}>
-        <span slot="left">
+        {/* <span slot="left">
           <Link href="/" passHref>
-            <ui-navbar-slot icon="home" label="Início" />
+            <ui-navbar-slot icon="home"/>
           </Link>
-        </span>
+        </span> */}
         <span slot="center">
-          <Link href="/projetos" passHref>
-            <ui-navbar-slot label="Projetos" />
-          </Link>
-          <Link href="/sobre" passHref>
-            <ui-navbar-slot label="Sobre" />
-          </Link>
+          <ui-navbar-slot label="Gabriel Marques Batista" />
         </span>
         <span slot="right">
           <ui-navbar-slot>
