@@ -16,11 +16,11 @@ export default function Footer({ isDark }: FooterProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <div className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-            © 2024 Gabriel Marques. Todos os direitos reservados.
+            © 2025 Gabriel Marques. Todos os direitos reservados.
           </div>
           <div className="flex items-center gap-4">
             <a
-              href="#"
+              href="https://github.com/GabrielMBatista"
               className={`p-2 rounded-lg transition-colors ${
                 isDark
                   ? 'text-gray-400 hover:text-white hover:bg-gray-800'
@@ -30,7 +30,7 @@ export default function Footer({ isDark }: FooterProps) {
               <Github size={20} />
             </a>
             <a
-              href="#"
+              href="https://www.linkedin.com/in/gabriel-marques-batista/"
               className={`p-2 rounded-lg transition-colors ${
                 isDark
                   ? 'text-gray-400 hover:text-white hover:bg-gray-800'
@@ -40,7 +40,7 @@ export default function Footer({ isDark }: FooterProps) {
               <Linkedin size={20} />
             </a>
             <a
-              href="#"
+              href="mailto:gabbriel_gbl2@hotmail.com"
               className={`p-2 rounded-lg transition-colors ${
                 isDark
                   ? 'text-gray-400 hover:text-white hover:bg-gray-800'

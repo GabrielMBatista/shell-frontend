@@ -5,11 +5,22 @@ import { Providers } from '@/providers/providers';
 import { ClientOnly } from '@/utils/client-only';
 import Header from '@/components/common/Header';
 import Footer from '@/components/common/Footer';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   const GabsIA = dynamic(() => import('Chatbot/GabsIAWidget'), { ssr: false });
   const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('isDark');
+    if (savedTheme !== null) {
+      setIsDark(savedTheme === 'true');
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('isDark', isDark.toString());
+  }, [isDark]);
 
   return (
     <Providers session={pageProps.session}>

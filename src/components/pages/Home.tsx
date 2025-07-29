@@ -9,12 +9,13 @@ import {
   Linkedin,
   Mail,
   Code,
-  Palette,
+  Brain,
   Smartphone,
   PhoneOutgoing,
+  Palette,
 } from 'lucide-react';
 import Image from 'next/image';
-import gabrielPhoto from '@/assets/gabrielPhoto.jpg'; // Importando a imagem
+import gabrielPhoto from '@/assets/gabrielPhoto.jpg';
 
 export default function Home({ isDark }: { isDark: boolean }) {
   const fontFamily = useGoogleFont('Inter');
@@ -95,7 +96,7 @@ export default function Home({ isDark }: { isDark: boolean }) {
                 </span>
                 <div className="flex gap-3">
                   <a
-                    href="#"
+                    href="https://github.com/GabrielMBatista"
                     className={`p-3 rounded-lg transition-all duration-200 hover:scale-110 ${
                       isDark
                         ? 'bg-gray-800 text-white hover:bg-gray-700'
@@ -105,7 +106,7 @@ export default function Home({ isDark }: { isDark: boolean }) {
                     <Github size={20} />
                   </a>
                   <a
-                    href="#"
+                    href="https://www.linkedin.com/in/gabriel-marques-batista/"
                     className={`p-3 rounded-lg transition-all duration-200 hover:scale-110 ${
                       isDark
                         ? 'bg-gray-800 text-white hover:bg-gray-700'
@@ -115,7 +116,7 @@ export default function Home({ isDark }: { isDark: boolean }) {
                     <Linkedin size={20} />
                   </a>
                   <a
-                    href="#"
+                    href="mailto:gabbriel_gbl2@hotmail.com"
                     className={`p-3 rounded-lg transition-all duration-200 hover:scale-110 ${
                       isDark
                         ? 'bg-gray-800 text-white hover:bg-gray-700'
@@ -125,7 +126,7 @@ export default function Home({ isDark }: { isDark: boolean }) {
                     <Mail size={20} />
                   </a>
                   <a
-                    href="#"
+                    href="https://wa.me/5511951222379?text=Ol%C3%A1%2C%20vi%20seu%20portf%C3%B3lio%20e%20gostaria%20de%20conversar!"
                     className={`p-3 rounded-lg transition-all duration-200 hover:scale-110 ${
                       isDark
                         ? 'bg-gray-800 text-white hover:bg-gray-700'
@@ -164,12 +165,17 @@ export default function Home({ isDark }: { isDark: boolean }) {
               </div>
               <div className="absolute top-32 -right-8 animate-bounce delay-150">
                 <div className={`p-4 rounded-xl shadow-lg ${isDark ? 'bg-gray-800' : 'bg-white'}`}>
-                  <Palette size={24} className="text-purple-600" />
+                  <Brain size={24} className="text-purple-600" />
                 </div>
               </div>
               <div className="absolute bottom-20 -left-8 animate-bounce delay-300">
                 <div className={`p-4 rounded-xl shadow-lg ${isDark ? 'bg-gray-800' : 'bg-white'}`}>
                   <Smartphone size={24} className="text-green-600" />
+                </div>
+              </div>
+              <div className="absolute bottom-10 right-10 animate-bounce delay-600">
+                <div className={`p-4 rounded-xl shadow-lg ${isDark ? 'bg-gray-800' : 'bg-white'}`}>
+                  <Palette size={24} className="text-yellow-600" />
                 </div>
               </div>
             </div>
@@ -281,29 +287,30 @@ export default function Home({ isDark }: { isDark: boolean }) {
               }`}
             >
               <div className="w-12 h-12 bg-green-600 rounded-xl flex items-center justify-center mb-6">
-                <Palette size={24} className="text-white" />
+                <Brain size={24} className="text-white" />
               </div>
               <h3 className={`text-xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                UI/UX Design
+                Pensamento Crítico e Resolução de Problemas
               </h3>
               <p className={`mb-6 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                Design centrado no usuário com foco em usabilidade e conversão
+                Capacidade de decompor desafios técnicos complexos em soluções eficientes e
+                elegantes, sempre com foco em qualidade e clareza.
               </p>
               <div className="flex flex-wrap gap-2">
                 <span
                   className={`px-3 py-1 text-sm rounded-full ${isDark ? 'bg-gray-700 text-gray-300' : 'bg-gray-100 text-gray-700'}`}
                 >
-                  Figma
+                  Análise Crítica
                 </span>
                 <span
                   className={`px-3 py-1 text-sm rounded-full ${isDark ? 'bg-gray-700 text-gray-300' : 'bg-gray-100 text-gray-700'}`}
                 >
-                  Adobe XD
+                  Solução Criativa
                 </span>
                 <span
                   className={`px-3 py-1 text-sm rounded-full ${isDark ? 'bg-gray-700 text-gray-300' : 'bg-gray-100 text-gray-700'}`}
                 >
-                  Prototyping
+                  Estratégia
                 </span>
               </div>
             </div>
@@ -315,8 +322,8 @@ export default function Home({ isDark }: { isDark: boolean }) {
         isDark={isDark}
         title="Vamos trabalhar juntos?"
         description="Estou sempre aberto a discutir novos projetos, ideias criativas ou oportunidades de colaboração."
-        primaryLink={{ href: '/index.html?screen=Contato', label: 'Entrar em Contato' }}
-        secondaryLink={{ href: '/index.html?screen=Sobre', label: 'Saiba Mais Sobre Mim' }}
+        primaryLink={{ href: '/contact', label: 'Entrar em Contato' }}
+        secondaryLink={{ href: '/about', label: 'Saiba Mais Sobre Mim' }}
       />
     </div>
   );
