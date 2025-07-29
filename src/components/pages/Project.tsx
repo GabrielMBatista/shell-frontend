@@ -3,83 +3,61 @@ import React, { useState } from 'react';
 import { useGoogleFont } from '@/utils/fonts';
 import { Github, ExternalLink, Search, Code, Smartphone, Globe, Database, Zap } from 'lucide-react';
 import CTASection from '@/components/common/CTASection';
+import { resolutions } from '@/utils/resolutions'; // Importar resoluções
 
 export default function Projetos({ isDark }: { isDark: boolean }) {
   const fontFamily = useGoogleFont('Inter');
   const [activeFilter, setActiveFilter] = useState('todos');
   const [searchTerm, setSearchTerm] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [demoUrl, setDemoUrl] = useState('');
+  const [selectedResolution, setSelectedResolution] =
+    useState<keyof typeof resolutions>('Laptop (720p)');
+
+  const resolution = resolutions[selectedResolution];
+
+  const openDemo = (url: string) => {
+    setDemoUrl(url);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setDemoUrl('');
+  };
 
   const projects = [
     {
-      id: 1,
-      title: 'E-commerce Moderno',
+      id: 7,
+      title: 'Alphabet Recorder',
       description:
-        'Plataforma completa de e-commerce com carrinho de compras, pagamento integrado, painel administrativo e sistema de avaliações.',
-      image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=250&fit=crop',
-      category: 'fullstack',
-      technologies: ['React', 'Node.js', 'PostgreSQL', 'Stripe'],
-      github: 'https://github.com/usuario/ecommerce',
-      demo: 'https://ecommerce-demo.com',
-      featured: true,
-    },
-    {
-      id: 2,
-      title: 'Dashboard Analytics',
-      description:
-        'Dashboard interativo para análise de dados com gráficos em tempo real, métricas de performance e relatórios customizáveis.',
-      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=250&fit=crop',
+        'Teste técnico Gravador de áudio para treinar fonemas do alfabeto, com interface simples e prática.',
       category: 'frontend',
-      technologies: ['React', 'TypeScript', 'Chart.js', 'Tailwind'],
-      github: 'https://github.com/usuario/dashboard',
-      demo: 'https://dashboard-demo.com',
-      featured: true,
-    },
-    {
-      id: 3,
-      title: 'App Mobile Fitness',
-      description:
-        'Aplicativo mobile para acompanhamento de exercícios, dieta e progresso físico com sincronização em nuvem.',
-      image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=250&fit=crop',
-      category: 'mobile',
-      technologies: ['React Native', 'Firebase', 'Redux', 'Expo'],
-      github: 'https://github.com/usuario/fitness-app',
-      demo: 'https://fitness-app-demo.com',
+      technologies: ['Next.js', 'Web Audio API'],
+      github: 'https://github.com/usuario/alphabet-recorder',
+      demo: 'https://alphabet-recorder.vercel.app',
       featured: false,
     },
     {
-      id: 4,
-      title: 'Sistema de Blog',
+      id: 8,
+      title: 'Tropa Login',
       description:
-        'CMS completo para blogs com editor rich text, sistema de comentários, SEO otimizado e painel administrativo.',
-      image: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=400&h=250&fit=crop',
-      category: 'fullstack',
-      technologies: ['Next.js', 'MongoDB', 'Prisma', 'NextAuth'],
-      github: 'https://github.com/usuario/blog-cms',
-      demo: 'https://blog-demo.com',
-      featured: false,
-    },
-    {
-      id: 5,
-      title: 'Landing Page SaaS',
-      description:
-        'Landing page moderna e responsiva para produto SaaS com animações, formulários de contato e integração com CRM.',
-      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=250&fit=crop',
+        'Teste técnico para uma vaga do LinkedIn com o intuito de desenvolver uma tela de login funcional.',
       category: 'frontend',
-      technologies: ['React', 'Framer Motion', 'Tailwind', 'Vercel'],
-      github: 'https://github.com/usuario/saas-landing',
-      demo: 'https://saas-landing-demo.com',
+      technologies: ['Next.js', 'Web Audio API'],
+      github: 'https://github.com/usuario/tropa-login',
+      demo: 'https://tropa-login.vercel.app',
       featured: false,
     },
     {
-      id: 6,
-      title: 'API REST Completa',
+      id: 9,
+      title: 'Entrevista AI',
       description:
-        'API RESTful robusta com autenticação JWT, documentação Swagger, testes automatizados e deploy em Docker.',
-      image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&h=250&fit=crop',
-      category: 'backend',
-      technologies: ['Node.js', 'Express', 'PostgreSQL', 'Docker'],
-      github: 'https://github.com/usuario/rest-api',
-      demo: 'https://api-docs-demo.com',
+        'Sistema básico que usa a API da OpenAI para avaliar níveis técnicos, agilizando o processo de triagem.',
+      category: 'fullstack',
+      technologies: ['Next.js', 'Web Audio API'],
+      github: 'https://github.com/usuario/entrevista-ai',
+      demo: 'https://mfe-entrevista-lcek.vercel.app/home',
       featured: false,
     },
   ];
@@ -108,6 +86,53 @@ export default function Projetos({ isDark }: { isDark: boolean }) {
       className={`min-h-screen transition-colors duration-300 ${isDark ? 'bg-gray-900' : 'bg-gray-50'}`}
       style={{ fontFamily }}
     >
+      {/* Modal */}
+      {isModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 overflow-hidden">
+          <div
+            className="relative bg-white rounded-lg shadow-lg overflow-hidden"
+            style={{
+              width: resolution.width,
+              height: resolution.height,
+              maxWidth: '90vw',
+              maxHeight: '90vh',
+            }}
+          >
+            {/* Header */}
+            <div className="sticky top-0 left-0 right-0 bg-gray-100 border-b border-gray-300 flex items-center justify-between px-4 py-2 z-10">
+              <select
+                value={selectedResolution}
+                onChange={(e) => setSelectedResolution(e.target.value as keyof typeof resolutions)}
+                className="block px-3 py-1 border rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              >
+                {Object.keys(resolutions).map((key) => (
+                  <option key={key} value={key}>
+                    {key}
+                  </option>
+                ))}
+              </select>
+              <button
+                onClick={closeModal}
+                className="text-gray-600 hover:text-gray-900 font-bold text-lg"
+              >
+                ✕
+              </button>
+            </div>
+
+            {/* Iframe */}
+            <iframe
+              src={demoUrl}
+              className="w-full h-[calc(100%-40px)] rounded-b-lg"
+              style={{
+                transform: 'scale(0.98)',
+              }}
+              allow="camera; microphone; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          </div>
+        </div>
+      )}
+
       {/* Hero Section */}
       <section className="py-16 lg:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -147,11 +172,23 @@ export default function Projetos({ isDark }: { isDark: boolean }) {
                 }`}
               >
                 <div className="relative overflow-hidden">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110"
-                  />
+                  <div
+                    className="relative"
+                    style={{
+                      width: resolution.width,
+                      height: resolution.height,
+                      transform: `scale(${resolution.scale})`,
+                      transformOrigin: 'top left',
+                    }}
+                  >
+                    <iframe
+                      src={project.demo}
+                      className="absolute top-0 left-0 w-full h-full border-none"
+                      sandbox="allow-scripts allow-same-origin allow-forms allow-modals allow-popups allow-presentation"
+                      allow="camera; microphone; fullscreen; clipboard-read; clipboard-write"
+                      title={`Preview of ${project.title}`}
+                    ></iframe>
+                  </div>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   <div className="absolute top-4 right-4">
                     <span className="px-3 py-1 bg-blue-600 text-white text-sm font-medium rounded-full">
@@ -183,13 +220,13 @@ export default function Projetos({ isDark }: { isDark: boolean }) {
                     ))}
                   </div>
                   <div className="flex gap-4">
-                    <a
-                      href={project.demo}
+                    <button
+                      onClick={() => openDemo(project.demo)}
                       className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-cyan-400 transition-colors duration-200 font-medium"
                     >
                       <ExternalLink size={18} />
                       Ver Demo
-                    </a>
+                    </button>
                     <a
                       href={project.github}
                       className={`flex-1 inline-flex items-center justify-center gap-2 px-6 py-3 border rounded-xl transition-colors duration-200 font-medium ${
@@ -299,11 +336,15 @@ export default function Projetos({ isDark }: { isDark: boolean }) {
                   }`}
                 >
                   <div className="relative overflow-hidden">
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
-                    />
+                    <div className="w-full h-48 relative">
+                      <iframe
+                        src={project.demo}
+                        className="absolute top-0 left-0 w-full h-full border-none scale-[1.5] origin-top-left"
+                        sandbox="allow-scripts allow-same-origin allow-forms allow-modals allow-popups allow-presentation"
+                        allow="camera; microphone; fullscreen; clipboard-read; clipboard-write"
+                        title={`Preview of ${project.title}`}
+                      ></iframe>
+                    </div>
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   </div>
                   <div className="p-6">
@@ -341,13 +382,13 @@ export default function Projetos({ isDark }: { isDark: boolean }) {
                       )}
                     </div>
                     <div className="flex gap-2">
-                      <a
-                        href={project.demo}
+                      <button
+                        onClick={() => openDemo(project.demo)}
                         className="flex-1 inline-flex items-center justify-center gap-1 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-cyan-400 transition-colors duration-200 text-sm font-medium"
                       >
                         <ExternalLink size={14} />
                         Demo
-                      </a>
+                      </button>
                       <a
                         href={project.github}
                         className={`flex-1 inline-flex items-center justify-center gap-1 px-3 py-2 border rounded-lg transition-colors duration-200 text-sm font-medium ${

@@ -4,7 +4,14 @@ import { PrismaPlugin } from "@prisma/nextjs-monorepo-workaround-plugin";
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['storage.googleapis.com', 'picsum.photos'],
+    domains: [
+      'storage.googleapis.com',
+      'picsum.photos',
+      'alphabet-recorder.vercel.app',
+      'tropa-login.vercel.app',
+      'mfe-entrevista-lcek.vercel.app',
+      'localhost',
+    ],
   },
   webpack: (config, { isServer }) => {
     if (isServer) {

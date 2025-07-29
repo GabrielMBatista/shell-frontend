@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { defineCustomElements } from '@gabrielmbatista/ui-library-stencil/loader';
-import Loading from './loading';
+
 
 export function ClientOnly({ children }: { children: React.ReactNode }) {
   const [mounted, setMounted] = useState(false);
@@ -11,6 +11,6 @@ export function ClientOnly({ children }: { children: React.ReactNode }) {
     defineCustomElements(window);
   }, []);
 
-  if (!mounted) return <Loading />;
+  if (!mounted) return <ui-loading />;
   return <>{children}</>;
 }

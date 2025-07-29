@@ -82,6 +82,7 @@ export default function Home({ isDark }: { isDark: boolean }) {
                       ? 'text-white border-gray-600 hover:bg-gray-800'
                       : 'text-gray-800 border-gray-300 hover:bg-gray-50'
                   }`}
+                  onClick={() => window.open('/Resume_Gabriel_Marques.pdf', '_blank')}
                 >
                   <Download size={20} />
                   Download CV

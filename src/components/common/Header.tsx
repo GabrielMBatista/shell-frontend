@@ -2,6 +2,8 @@
 'use client';
 import React from 'react';
 import { Sun, Moon, Menu } from 'lucide-react';
+import { usePathname } from 'next/navigation';
+import { reopenGabsIAWidget } from 'Chatbot/GabsIAWidget';
 
 interface HeaderProps {
   isDark: boolean;
@@ -9,6 +11,10 @@ interface HeaderProps {
 }
 
 export default function Header({ isDark, setIsDark }: HeaderProps) {
+  const pathname = usePathname();
+
+  const isActive = (path: string) => pathname === path;
+
   return (
     <header
       className={`sticky top-0 z-50 border-b transition-colors duration-300 backdrop-blur-sm ${
@@ -18,33 +24,63 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center gap-4">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-r from-blue-600 to-purple-600"></div>
-            <span className={`text-xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>
-              Gabs IA
-            </span>
+            <button
+              onClick={reopenGabsIAWidget}
+              className="flex items-center gap-4 focus:outline-none"
+              title="Reabrir assistente Gabs.IA"
+            >
+              <div className="w-8 h-8 rounded-full bg-gradient-to-r from-blue-600 to-purple-600"></div>
+              <span className={`text-xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                Gabs IA
+              </span>
+            </button>
           </div>
           <nav className="hidden md:flex items-center gap-8">
             <a
               href="/"
-              className={`transition-colors ${isDark ? 'text-white hover:text-blue-400' : 'text-gray-900 hover:text-blue-600'}`}
+              className={`transition-colors ${
+                isActive('/home')
+                  ? 'text-blue-500 font-bold'
+                  : isDark
+                    ? 'text-gray-300 hover:text-blue-400'
+                    : 'text-gray-900 hover:text-blue-600'
+              }`}
             >
               Home
             </a>
             <a
               href="/projects"
-              className={`transition-colors ${isDark ? 'text-gray-300 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'}`}
+              className={`transition-colors ${
+                isActive('/projects')
+                  ? 'text-blue-500 font-bold'
+                  : isDark
+                    ? 'text-gray-300 hover:text-blue-400'
+                    : 'text-gray-600 hover:text-blue-600'
+              }`}
             >
               Projetos
             </a>
             <a
               href="/about"
-              className={`transition-colors ${isDark ? 'text-gray-300 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'}`}
+              className={`transition-colors ${
+                isActive('/about')
+                  ? 'text-blue-500 font-bold'
+                  : isDark
+                    ? 'text-gray-300 hover:text-blue-400'
+                    : 'text-gray-600 hover:text-blue-600'
+              }`}
             >
               Sobre
             </a>
             <a
               href="/contact"
-              className={`transition-colors ${isDark ? 'text-gray-300 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'}`}
+              className={`transition-colors ${
+                isActive('/contact')
+                  ? 'text-blue-500 font-bold'
+                  : isDark
+                    ? 'text-gray-300 hover:text-blue-400'
+                    : 'text-gray-600 hover:text-blue-600'
+              }`}
             >
               Contato
             </a>

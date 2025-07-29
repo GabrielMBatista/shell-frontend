@@ -120,7 +120,10 @@ export default function Sobre({ isDark }: { isDark: boolean }) {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4">
-                <button className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-blue-600 text-white rounded-xl hover:bg-cyan-400 transition-all duration-200 font-medium text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 cursor-pointer">
+                <button
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-blue-600 text-white rounded-xl hover:bg-cyan-400 transition-all duration-200 font-medium text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 cursor-pointer"
+                  onClick={() => window.open('/Resume_Gabriel_Marques.pdf', '_blank')}
+                >
                   <Download size={20} />
                   Download CV
                 </button>
