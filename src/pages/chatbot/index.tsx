@@ -1,4 +1,3 @@
-import Header from '@/components/common/header';
 import Loading from '@/utils/loading';
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
@@ -11,7 +10,6 @@ const RemoteApp = dynamic(() => import('Chatbot/Chatbot').then((mod) => mod.defa
 export default function ChatbotPage() {
   return (
     <Suspense fallback={<Loading />}>
-      <Header />
       <RemoteApp />
     </Suspense>
   );

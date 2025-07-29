@@ -1,17 +1,18 @@
+/* eslint-disable react/display-name */
 import React, { forwardRef } from 'react';
 
 interface ContactModalProps {
   onClose: () => void;
 }
 
-const ContactModal = forwardRef<HTMLUiModalElement, ContactModalProps>(({ onClose }, ref) => {
+const ContactModal = forwardRef<HTMLUiModalElement, ContactModalProps>(({ onClose }, ref: React.Ref<HTMLUiModalElement>) => {
   const copyEmailToClipboard = () => {
     navigator.clipboard.writeText('Gabbriel_gbl2@hotmail.com');
     alert('E-mail copiado para a área de transferência!');
   };
 
   return (
-    <ui-modal ref={ref} onClose={onClose}>
+    <ui-modal onClosed={onClose} {...(ref ? { ref } : {})}>
       <div className="flex flex-col gap-[var(--space-lg)] p-[var(--space-lg)] rounded-[var(--border-radius-lg)] bg-[var(--color-background)] text-center">
         <div>
           <h2 className="text-[var(--font-size-xl)] font-bold text-[var(--color-text)]">
