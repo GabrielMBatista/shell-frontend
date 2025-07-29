@@ -5,7 +5,7 @@ import { Providers } from '@/providers/providers';
 import { ClientOnly } from '@/utils/client-only';
 import Header from '@/components/common/Header';
 import Footer from '@/components/common/Footer';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   const GabsIA = dynamic(() => import('Chatbot/GabsIAWidget'), { ssr: false });
@@ -31,7 +31,9 @@ export default function MyApp({ Component, pageProps }: AppProps) {
           }`}
         >
           <Header isDark={isDark} setIsDark={setIsDark} />
-          <Component {...pageProps} isDark={isDark} />
+          <Suspense fallback={<ui-loading />}>
+            <Component {...pageProps} isDark={isDark} />
+          </Suspense>
           <Footer isDark={isDark} />
         </div>
         <GabsIA />
