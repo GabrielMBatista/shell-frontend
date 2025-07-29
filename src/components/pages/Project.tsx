@@ -372,7 +372,7 @@ export default function Projetos({ isDark }: { isDark: boolean }) {
         isDark={isDark}
         title="Gostou do que viu?"
         description="Vamos conversar sobre como posso ajudar no seu próximo projeto."
-        primaryLink={{ href: '/index.html?screen=Contato', label: 'Entrar em Contato' }}
+        primaryLink={{ href: '/contact', label: 'Entrar em Contato' }}
       />
     </div>
   );

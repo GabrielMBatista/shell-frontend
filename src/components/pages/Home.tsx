@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import Image from 'next/image';
 import gabrielPhoto from '@/assets/gabrielPhoto.jpg';
+import Link from 'next/link';
 
 export default function Home({ isDark }: { isDark: boolean }) {
   const fontFamily = useGoogleFont('Inter');
@@ -68,13 +69,13 @@ export default function Home({ isDark }: { isDark: boolean }) {
 
               {/* CTAs */}
               <div className="flex flex-col sm:flex-row gap-4">
-                <a
-                  href="/index.html?screen=Projetos"
+                <Link
+                  href="/projects"
                   className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-blue-600 text-white rounded-xl hover:bg-cyan-400 transition-all duration-200 font-medium text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                 >
                   Ver Projetos
                   <ArrowRight size={20} />
-                </a>
+                </Link>
                 <button
                   className={`inline-flex items-center justify-center gap-2 px-8 py-4 border rounded-xl transition-all duration-200 font-medium text-lg hover:shadow-lg transform hover:-translate-y-1 ${
                     isDark
