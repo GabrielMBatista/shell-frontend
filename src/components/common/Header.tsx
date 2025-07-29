@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import { Sun, Moon, Menu } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { reopenGabsIAWidget } from 'Chatbot/GabsIAWidget';
@@ -12,6 +12,7 @@ interface HeaderProps {
 
 export default function Header({ isDark, setIsDark }: HeaderProps) {
   const pathname = usePathname();
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // Estado para controlar o menu mobile
 
   const isActive = (path: string) => pathname === path;
 
@@ -97,12 +98,71 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
               {isDark ? <Sun size={20} /> : <Moon size={20} />}
             </button>
             <button
-              className={`p-2 rounded-lg md:hidden ${isDark ? 'text-white hover:bg-gray-700' : 'text-gray-600 hover:bg-gray-100'}`}
+              onClick={() => setIsMenuOpen(!isMenuOpen)} // Alterna o estado do menu
+              className={`p-2 rounded-lg md:hidden ${
+                isDark ? 'text-white hover:bg-gray-700' : 'text-gray-600 hover:bg-gray-100'
+              }`}
             >
               <Menu size={20} />
             </button>
           </div>
         </div>
+        {isMenuOpen && ( // Renderiza o menu suspenso no mobile
+          <div
+            className={`md:hidden mt-2 p-4 rounded-lg shadow-lg ${
+              isDark ? 'bg-gray-800 text-gray-300' : 'bg-white text-gray-900'
+            }`}
+          >
+            <a
+              href="/"
+              className={`block py-2 transition-colors ${
+                isActive('/home')
+                  ? 'text-blue-500 font-bold'
+                  : isDark
+                    ? 'hover:text-blue-400'
+                    : 'hover:text-blue-600'
+              }`}
+            >
+              Home
+            </a>
+            <a
+              href="/projects"
+              className={`block py-2 transition-colors ${
+                isActive('/projects')
+                  ? 'text-blue-500 font-bold'
+                  : isDark
+                    ? 'hover:text-blue-400'
+                    : 'hover:text-blue-600'
+              }`}
+            >
+              Projetos
+            </a>
+            <a
+              href="/about"
+              className={`block py-2 transition-colors ${
+                isActive('/about')
+                  ? 'text-blue-500 font-bold'
+                  : isDark
+                    ? 'hover:text-blue-400'
+                    : 'hover:text-blue-600'
+              }`}
+            >
+              Sobre
+            </a>
+            <a
+              href="/contact"
+              className={`block py-2 transition-colors ${
+                isActive('/contact')
+                  ? 'text-blue-500 font-bold'
+                  : isDark
+                    ? 'hover:text-blue-400'
+                    : 'hover:text-blue-600'
+              }`}
+            >
+              Contato
+            </a>
+          </div>
+        )}
       </div>
     </header>
   );
