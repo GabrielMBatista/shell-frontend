@@ -33,7 +33,14 @@ export default function Projetos({ isDark }: { isDark: boolean }) {
       description:
         'Sistema básico que usa a API da OpenAI para avaliar níveis técnicos, agilizando o processo de triagem.',
       category: 'fullstack',
-      technologies: ['Next.js', 'Web Audio API'],
+      technologies: [
+        'Next.js',
+        'TypeScript',
+        'TailwindCSS',
+        'OpenAI API',
+        'Speech-to-Text',
+        'Module Federation',
+      ],
       github: 'https://github.com/usuario/entrevista-ai',
       demo: 'https://mfe-entrevista-lcek.vercel.app/home',
       featured: true,
@@ -44,7 +51,14 @@ export default function Projetos({ isDark }: { isDark: boolean }) {
       description:
         'Teste técnico para uma vaga do LinkedIn com o intuito de desenvolver uma tela de login funcional.',
       category: 'frontend',
-      technologies: ['Next.js', 'Web Audio API'],
+      technologies: [
+        'Next.js',
+        'React 19',
+        'TypeScript',
+        'MongoDB',
+        'Styled Components',
+        'React Query',
+      ],
       github: 'https://github.com/usuario/tropa-login',
       demo: 'https://tropa-login.vercel.app',
       featured: true,
@@ -55,9 +69,27 @@ export default function Projetos({ isDark }: { isDark: boolean }) {
       description:
         'Teste técnico Gravador de áudio para treinar fonemas do alfabeto, com interface simples e prática.',
       category: 'frontend',
-      technologies: ['Next.js', 'Web Audio API'],
+      technologies: [
+        'React',
+        'React Mic',
+        'React Speech Recognition',
+        'React H5 Audio Player',
+        'Recorder.js',
+        'TypeScript',
+      ],
       github: 'https://github.com/usuario/alphabet-recorder',
       demo: 'https://alphabet-recorder.vercel.app',
+      featured: false,
+    },
+    {
+      id: 4,
+      title: 'UI Library - StencilJS',
+      description:
+        'Biblioteca de componentes web reutilizáveis criada com StencilJS e integrada ao Storybook.',
+      category: 'frontend',
+      technologies: ['StencilJS', 'Storybook', 'TypeScript', 'Web Components', 'Jest'],
+      github: 'https://github.com/GabrielMBatista/ui-library-stencil',
+      demo: 'https://ui-library-stencil.vercel.app',
       featured: false,
     },
   ].sort((a, b) => a.id - b.id);
@@ -148,7 +180,8 @@ export default function Projetos({ isDark }: { isDark: boolean }) {
             <p
               className={`text-xl max-w-3xl mx-auto ${isDark ? 'text-gray-400' : 'text-gray-600'}`}
             >
-              Uma seleção dos meus trabalhos mais recentes até os mais antigos, aplicações web completas incluindo APIs e interfaces modernas.
+              Uma seleção dos meus trabalhos mais recentes até os mais antigos, aplicações web
+              completas incluindo APIs e interfaces modernas.
             </p>
           </div>
         </div>
