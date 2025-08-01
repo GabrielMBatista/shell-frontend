@@ -259,7 +259,7 @@ export default function Home({ isDark }: { isDark: boolean }) {
                 Backend Development
               </h3>
               <p className={`mb-6 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                APIs robustas e escaláveis com arquitetura bem estruturada
+                APIs escaláveis com arquitetura bem estruturada
               </p>
               <div className="flex flex-wrap gap-2">
                 <span

@@ -28,7 +28,29 @@ export default function Projetos({ isDark }: { isDark: boolean }) {
 
   const projects = [
     {
-      id: 7,
+      id: 1,
+      title: 'Entrevista AI',
+      description:
+        'Sistema básico que usa a API da OpenAI para avaliar níveis técnicos, agilizando o processo de triagem.',
+      category: 'fullstack',
+      technologies: ['Next.js', 'Web Audio API'],
+      github: 'https://github.com/usuario/entrevista-ai',
+      demo: 'https://mfe-entrevista-lcek.vercel.app/home',
+      featured: true,
+    },
+    {
+      id: 2,
+      title: 'Tropa Login',
+      description:
+        'Teste técnico para uma vaga do LinkedIn com o intuito de desenvolver uma tela de login funcional.',
+      category: 'frontend',
+      technologies: ['Next.js', 'Web Audio API'],
+      github: 'https://github.com/usuario/tropa-login',
+      demo: 'https://tropa-login.vercel.app',
+      featured: true,
+    },
+    {
+      id: 3,
       title: 'Alphabet Recorder',
       description:
         'Teste técnico Gravador de áudio para treinar fonemas do alfabeto, com interface simples e prática.',
@@ -38,29 +60,7 @@ export default function Projetos({ isDark }: { isDark: boolean }) {
       demo: 'https://alphabet-recorder.vercel.app',
       featured: false,
     },
-    {
-      id: 8,
-      title: 'Tropa Login',
-      description:
-        'Teste técnico para uma vaga do LinkedIn com o intuito de desenvolver uma tela de login funcional.',
-      category: 'frontend',
-      technologies: ['Next.js', 'Web Audio API'],
-      github: 'https://github.com/usuario/tropa-login',
-      demo: 'https://tropa-login.vercel.app',
-      featured: false,
-    },
-    {
-      id: 9,
-      title: 'Entrevista AI',
-      description:
-        'Sistema básico que usa a API da OpenAI para avaliar níveis técnicos, agilizando o processo de triagem.',
-      category: 'fullstack',
-      technologies: ['Next.js', 'Web Audio API'],
-      github: 'https://github.com/usuario/entrevista-ai',
-      demo: 'https://mfe-entrevista-lcek.vercel.app/home',
-      featured: false,
-    },
-  ];
+  ].sort((a, b) => a.id - b.id);
 
   const categories = [
     { id: 'todos', name: 'Todos os Projetos', icon: Globe },
@@ -148,8 +148,7 @@ export default function Projetos({ isDark }: { isDark: boolean }) {
             <p
               className={`text-xl max-w-3xl mx-auto ${isDark ? 'text-gray-400' : 'text-gray-600'}`}
             >
-              Uma seleção dos meus trabalhos mais recentes, desde aplicações web completas até APIs
-              robustas e interfaces modernas.
+              Uma seleção dos meus trabalhos mais recentes até os mais antigos, aplicações web completas incluindo APIs e interfaces modernas.
             </p>
           </div>
         </div>
@@ -171,14 +170,14 @@ export default function Projetos({ isDark }: { isDark: boolean }) {
                   isDark ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200'
                 }`}
               >
-                <div className="relative overflow-hidden">
+                <div className="relative flex items-center justify-center overflow-hidden">
                   <div
-                    className="relative"
+                    className="relative flex items-center justify-center"
                     style={{
                       width: resolution.width,
                       height: resolution.height,
                       transform: `scale(${resolution.scale})`,
-                      transformOrigin: 'top left',
+                      transformOrigin: 'center',
                     }}
                   >
                     <iframe
@@ -298,16 +297,16 @@ export default function Projetos({ isDark }: { isDark: boolean }) {
       {/* All Projects */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between mb-8">
+          <div className="mb-8">
             <h2
               className={`text-2xl md:text-3xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}
             >
               Todos os Projetos
             </h2>
-            <span className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-              {filteredProjects.length} projeto{filteredProjects.length !== 1 ? 's' : ''} encontrado
-              {filteredProjects.length !== 1 ? 's' : ''}
-            </span>
+            <p className={`mt-2 text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+              Nota: Nem todos os projetos possuem responsividade e alguns foram desenvolvidos no
+              início da minha carreira.
+            </p>
           </div>
 
           {filteredProjects.length === 0 ? (
