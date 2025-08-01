@@ -1,6 +1,7 @@
 'use client';
 
 import { useGoogleFont } from '@/utils/fonts';
+import emailjs from '@emailjs/browser';
 
 import {
   Send,
@@ -41,15 +42,37 @@ export default function Contato({ isDark }: { isDark: boolean }) {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simular envio do formulário
+    // Verificar se as variáveis de ambiente estão definidas
+    if (
+      !process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID ||
+      !process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID ||
+      !process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
+    ) {
+      console.error('Erro: Variáveis de ambiente do EmailJS não estão definidas.');
+      setSubmitStatus('error');
+      setIsSubmitting(false);
+      return;
+    }
+
     try {
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      await emailjs.send(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
+        {
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+          time: new Date().toLocaleString('pt-BR'),
+        },
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY,
+      );
       setSubmitStatus('success');
       setFormData({ name: '', email: '', subject: '', message: '' });
+    } catch (error) {
+      console.error('Erro ao enviar mensagem:', error);
+      setSubmitStatus('error');
     } finally {
-      // catch (error) {
-      //   setSubmitStatus('error');
-      // }
       setIsSubmitting(false);
       setTimeout(() => setSubmitStatus(null), 5000);
     }

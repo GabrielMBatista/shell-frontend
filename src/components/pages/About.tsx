@@ -1,5 +1,6 @@
 'use client';
 import { useGoogleFont } from '@/utils/fonts';
+import { useState } from 'react';
 
 import {
   ArrowRight,
@@ -21,54 +22,145 @@ import gabrielPhoto from '@/assets/gabrielPhoto.jpg';
 
 export default function Sobre({ isDark }: { isDark: boolean }) {
   const fontFamily = useGoogleFont('Inter');
+  const [showAllSkills, setShowAllSkills] = useState(false);
+  const [showAllTimeline, setShowAllTimeline] = useState(false);
 
   const skills = [
     { name: 'React', level: 95, icon: Code, color: '#61DAFB' },
-    { name: 'TypeScript', level: 90, icon: Code, color: '#3178C6' },
-    { name: 'Node.js', level: 88, icon: Database, color: '#339933' },
-    { name: 'UI/UX Design', level: 85, icon: Palette, color: '#FF6B6B' },
-    { name: 'PostgreSQL', level: 82, icon: Database, color: '#336791' },
-    { name: 'Docker', level: 80, icon: Globe, color: '#2496ED' },
+    { name: 'JavaScript', level: 90, icon: Code, color: '#F7DF1E' },
+    { name: 'TypeScript', level: 80, icon: Code, color: '#3178C6' },
+    { name: 'Next.js', level: 75, icon: Code, color: '#000000' },
+    { name: 'PostgreSQL', level: 75, icon: Database, color: '#336791' },
+    { name: 'Node.js', level: 70, icon: Database, color: '#339933' },
+    { name: 'Redux.js', level: 70, icon: Code, color: '#764ABC' },
+    { name: 'Docker', level: 65, icon: Globe, color: '#2496ED' },
+    { name: 'API REST', level: 80, icon: Database, color: '#E34F26' },
+    { name: 'UI/UX Design', level: 60, icon: Palette, color: '#FF6B6B' },
+    { name: 'SASS', level: 70, icon: Palette, color: '#CD6799' },
+    { name: 'Git', level: 85, icon: Code, color: '#F1502F' },
+    { name: 'GitLab', level: 75, icon: Code, color: '#FC6D26' },
+    { name: 'HTML5', level: 90, icon: Code, color: '#E34F26' },
+    { name: 'CSS', level: 85, icon: Palette, color: '#1572B6' },
+    { name: 'SQL', level: 80, icon: Database, color: '#003B57' },
+    { name: 'Scrum', level: 70, icon: Globe, color: '#6DB33F' },
+    { name: 'Soft Skills', level: 75, icon: Globe, color: '#00CED1' },
+    { name: 'Inglês', level: 65, icon: Globe, color: '#4682B4' },
   ];
+
+  const visibleSkills = showAllSkills ? skills : skills.slice(0, 6);
 
   const timeline = [
     {
-      year: '2024',
-      title: 'Senior Full Stack Developer',
-      company: 'Tech Solutions Inc.',
+      year: '2008 - 2010',
+      title: 'Estagiário em Laboratório de Informática',
+      company: 'Acessa Escola SP',
       description:
-        'Liderando equipe de desenvolvimento, arquitetando soluções escaláveis e mentorando desenvolvedores júnior.',
+        'Responsável pela manutenção das salas de informática e apoio pedagógico a professores em projetos educacionais.',
       type: 'work',
     },
     {
-      year: '2023',
-      title: 'Certificação AWS Solutions Architect',
-      company: 'Amazon Web Services',
+      year: '2011',
+      title: 'Assistente Técnico Nível 1',
+      company: 'Connectcom Teleinformática',
       description:
-        'Certificação em arquitetura de soluções na nuvem, focando em escalabilidade e segurança.',
-      type: 'education',
+        'Suporte técnico remoto para clientes UOL. Diagnóstico de software, conexão e configuração de redes e dispositivos.',
+      type: 'work',
     },
     {
-      year: '2022',
-      title: 'Full Stack Developer',
-      company: 'StartupXYZ',
+      year: '2012 - 2013',
+      title: 'Assistente Técnico Nível 1',
+      company: 'Ctis',
       description:
-        'Desenvolvimento de aplicações web completas, desde o design até a implementação e deploy.',
+        'Atendimento técnico para escolas estaduais. Suporte em hardware, software e rede Intragov junto à FDE.',
+      type: 'work',
+    },
+    {
+      year: '2014 - 2015',
+      title: 'Assistente Técnico de Campo',
+      company: 'Spread (Hospital Einstein)',
+      description:
+        'Suporte técnico em unidades hospitalares. Organização de cabeamento, manutenção de hardware e softwares de TI.',
+      type: 'work',
+    },
+    {
+      year: '2015 - 2018',
+      title: 'Freelancer / Vendedor em Negócio Próprio',
+      company: 'Autônomo',
+      description:
+        'Manutenção de micros, vendas e controle de estoque em banca de jornal familiar. Atendimento direto ao cliente.',
+      type: 'work',
+    },
+    {
+      year: '2019 - 2020',
+      title: 'Expert em Interação de Suporte II',
+      company: 'Teleperformance',
+      description:
+        'Suporte técnico Apple. Atuação em software e hardware para dispositivos mobile e desktop, com foco na experiência do usuário.',
       type: 'work',
     },
     {
       year: '2021',
-      title: 'Bacharelado em Ciência da Computação',
-      company: 'Universidade Federal',
-      description: 'Formação sólida em algoritmos, estruturas de dados e engenharia de software.',
+      title: 'Bootcamp de Programação Web Full Stack',
+      company: 'Labenu',
+      description:
+        'Formação intensiva com foco em JavaScript, React, Node.js, TypeScript, SQL, testes automatizados, metodologias ágeis e empregabilidade. Desenvolvimento de projetos práticos com acompanhamento de soft skills.',
+      type: 'education',
+    },
+    {
+      year: '2021 - 2025',
+      title: 'Desenvolvedor JavaScript Jr.',
+      company: 'Meta',
+      description:
+        'Atuação com HTML5, CSS, SQL, React, Node.js e metodologias ágeis em múltiplos projetos remotos.',
+      type: 'work',
+    },
+    {
+      year: '2022 - 2025',
+      title: 'Desenvolvedor JavaScript | Mentor',
+      company: 'Meta',
+      description:
+        'Mentoria técnica para estagiários e JRs com foco em práticas ágeis, versionamento, APIs REST e acompanhamento via GitLab e Sonar.',
+      type: 'work',
+    },
+    {
+      year: '2025',
+      title: 'Desenvolvedor JavaScript Pleno',
+      company: 'Meta',
+      description:
+        'Atuação com Next.js e React.js em equipe remota. Desenvolvimento de soluções performáticas e escaláveis.',
+      type: 'work',
+    },
+    {
+      year: '2017 - 2023',
+      title: 'Graduação em Tecnologia da Informação (trancado)',
+      company: 'Universidade Cidade de São Paulo',
+      description:
+        'Curso superior com foco em redes, banco de dados, algoritmos e lógica. Trancado.',
+      type: 'education',
+    },
+    {
+      year: '2009 (trancado)',
+      title: 'Curso Técnico em Informática',
+      company: 'ETEC de Itaquera',
+      description: 'Curso técnico de informática com ênfase em programação e redes. Trancado.',
+      type: 'education',
+    },
+    {
+      year: '2000 - 2010',
+      title: 'Ensino Médio',
+      company: 'EE Luzia de Queiroz e Oliveira',
+      description: 'Ensino médio completo.',
       type: 'education',
     },
   ];
 
+  const sortedTimeline = [...timeline].sort((a, b) => b.year.localeCompare(a.year));
+  const visibleTimeline = showAllTimeline ? sortedTimeline : sortedTimeline.slice(0, 5);
+
   const stats = [
-    { number: '50+', label: 'Projetos Concluídos', icon: Briefcase },
-    { number: '3+', label: 'Anos de Experiência', icon: Calendar },
-    { number: '20+', label: 'Clientes Satisfeitos', icon: Users },
+    { number: '10+', label: 'Anos na Area de TI', icon: Briefcase },
+    { number: '4+', label: 'Anos de Experiência Como Desenvolvedor', icon: Calendar },
+    { number: '20+', label: 'Estagiarios e Jr Mentorados', icon: Users },
     { number: '1000+', label: 'Xícaras de Café', icon: Coffee },
   ];
 
@@ -113,7 +205,7 @@ export default function Sobre({ isDark }: { isDark: boolean }) {
                 <p
                   className={`text-lg leading-relaxed max-w-2xl ${isDark ? 'text-gray-400' : 'text-gray-600'}`}
                 >
-                  Com mais de 3 anos de experiência, combino conhecimento técnico sólido com visão
+                  Com mais de 4 anos de experiência, combino conhecimento técnico sólido com visão
                   de design para entregar soluções que realmente fazem a diferença. Especializado em
                   React, Node.js e arquiteturas modernas.
                 </p>
@@ -207,7 +299,7 @@ export default function Sobre({ isDark }: { isDark: boolean }) {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {skills.map((skill, index) => {
+            {visibleSkills.map((skill, index) => {
               const Icon = skill.icon;
               return (
                 <div
@@ -249,6 +341,17 @@ export default function Sobre({ isDark }: { isDark: boolean }) {
               );
             })}
           </div>
+
+          {!showAllSkills && (
+            <div className="text-center mt-8">
+              <button
+                onClick={() => setShowAllSkills(true)}
+                className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-cyan-400 transition-all duration-200 font-medium"
+              >
+                Ver Mais
+              </button>
+            </div>
+          )}
         </div>
       </section>
 
@@ -273,7 +376,7 @@ export default function Sobre({ isDark }: { isDark: boolean }) {
             ></div>
 
             <div className="space-y-8">
-              {timeline.map((item, index) => (
+              {visibleTimeline.map((item, index) => (
                 <div key={index} className="relative flex items-start">
                   {/* Timeline Dot */}
                   <div
@@ -327,6 +430,17 @@ export default function Sobre({ isDark }: { isDark: boolean }) {
                 </div>
               ))}
             </div>
+
+            {!showAllTimeline && (
+              <div className="text-center mt-8">
+                <button
+                  onClick={() => setShowAllTimeline(true)}
+                  className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-cyan-400 transition-all duration-200 font-medium"
+                >
+                  Ver Mais
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </section>
