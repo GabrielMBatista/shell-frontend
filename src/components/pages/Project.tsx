@@ -42,7 +42,7 @@ export default function Projetos({ isDark }: { isDark: boolean }) {
         'Module Federation',
       ],
       github: 'https://github.com/usuario/entrevista-ai',
-      demo: 'https://mfe-entrevista-lcek.vercel.app/home',
+      demo: 'https://mfe-entrevista.vercel.app/home',
       featured: true,
     },
     {

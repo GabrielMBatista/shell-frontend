@@ -12,8 +12,7 @@ interface HeaderProps {
 
 export default function Header({ isDark, setIsDark }: HeaderProps) {
   const pathname = usePathname();
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // Estado para controlar o menu mobile
-
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const isActive = (path: string) => pathname === path;
 
   return (
