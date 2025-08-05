@@ -12,7 +12,9 @@ const nextConfig = {
       'mfe-entrevista-lcek.vercel.app',
       'localhost',
     ],
+    formats: ['image/avif', 'image/webp'],
   },
+  compress: true,
   webpack: (config, { isServer }) => {
     if (isServer) {
       config.plugins.push(new PrismaPlugin());

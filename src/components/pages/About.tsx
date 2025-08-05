@@ -1,7 +1,7 @@
 'use client';
 import { useGoogleFont } from '@/utils/fonts';
 import { useState } from 'react';
-
+import Image from 'next/image';
 import {
   ArrowRight,
   Download,
@@ -17,7 +17,6 @@ import {
   Globe,
 } from 'lucide-react';
 import Link from 'next/link';
-import Image from 'next/image';
 import gabrielPhoto from '@/assets/gabrielPhoto.jpg';
 
 export default function Sobre({ isDark }: { isDark: boolean }) {
@@ -169,11 +168,9 @@ export default function Sobre({ isDark }: { isDark: boolean }) {
       className={`min-h-screen transition-colors duration-300 ${isDark ? 'bg-gray-900' : 'bg-gray-50'}`}
       style={{ fontFamily }}
     >
-      {/* Hero Section */}
       <section className="py-16 lg:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Content */}
             <div className="space-y-8">
               <div className="space-y-4">
                 <div
@@ -186,7 +183,6 @@ export default function Sobre({ isDark }: { isDark: boolean }) {
                   <MapPin size={16} />
                   São Paulo, Brasil
                 </div>
-
                 <h1
                   className={`text-4xl md:text-6xl font-bold leading-tight ${isDark ? 'text-white' : 'text-gray-900'}`}
                 >
@@ -195,13 +191,11 @@ export default function Sobre({ isDark }: { isDark: boolean }) {
                     Gabriel Marques
                   </span>
                 </h1>
-
                 <p
                   className={`text-xl md:text-2xl font-medium ${isDark ? 'text-gray-300' : 'text-gray-600'}`}
                 >
                   Desenvolvedor Full Stack apaixonado por criar experiências digitais excepcionais
                 </p>
-
                 <p
                   className={`text-lg leading-relaxed max-w-2xl ${isDark ? 'text-gray-400' : 'text-gray-600'}`}
                 >
@@ -210,7 +204,6 @@ export default function Sobre({ isDark }: { isDark: boolean }) {
                   React, Node.js e arquiteturas modernas.
                 </p>
               </div>
-
               <div className="flex flex-col sm:flex-row gap-4">
                 <button
                   className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-blue-600 text-white rounded-xl hover:bg-cyan-400 transition-all duration-200 font-medium text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 cursor-pointer"
@@ -232,8 +225,6 @@ export default function Sobre({ isDark }: { isDark: boolean }) {
                 </Link>
               </div>
             </div>
-
-            {/* Avatar/Stats */}
             <div className="relative">
               <div className="relative z-10 mb-8">
                 <div
@@ -246,12 +237,11 @@ export default function Sobre({ isDark }: { isDark: boolean }) {
                     alt="Gabriel Marques"
                     width={320}
                     height={320}
+                    priority={true}
                     className="w-full h-full rounded-full object-cover"
                   />
                 </div>
               </div>
-
-              {/* Stats Grid */}
               <div className="grid grid-cols-2 gap-4">
                 {stats.map((stat, index) => {
                   const Icon = stat.icon;
@@ -281,8 +271,6 @@ export default function Sobre({ isDark }: { isDark: boolean }) {
           </div>
         </div>
       </section>
-
-      {/* Skills Section */}
       <section className={`py-20 border-t ${isDark ? 'border-gray-800' : 'border-gray-200'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
@@ -297,7 +285,6 @@ export default function Sobre({ isDark }: { isDark: boolean }) {
               Tecnologias e ferramentas que domino para criar soluções completas e eficientes
             </p>
           </div>
-
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {visibleSkills.map((skill, index) => {
               const Icon = skill.icon;
@@ -341,7 +328,6 @@ export default function Sobre({ isDark }: { isDark: boolean }) {
               );
             })}
           </div>
-
           {!showAllSkills && (
             <div className="text-center mt-8">
               <button
@@ -354,8 +340,6 @@ export default function Sobre({ isDark }: { isDark: boolean }) {
           )}
         </div>
       </section>
-
-      {/* Timeline Section */}
       <section className={`py-20 ${isDark ? 'bg-gray-800' : 'bg-white'}`}>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
@@ -368,17 +352,13 @@ export default function Sobre({ isDark }: { isDark: boolean }) {
               Uma linha do tempo da minha experiência profissional e educacional
             </p>
           </div>
-
           <div className="relative">
-            {/* Timeline Line */}
             <div
               className={`absolute left-8 top-0 bottom-0 w-0.5 ${isDark ? 'bg-gray-700' : 'bg-gray-300'}`}
             ></div>
-
             <div className="space-y-8">
               {visibleTimeline.map((item, index) => (
                 <div key={index} className="relative flex items-start">
-                  {/* Timeline Dot */}
                   <div
                     className={`flex-shrink-0 w-16 h-16 rounded-full flex items-center justify-center ${
                       item.type === 'work' ? 'bg-blue-600' : 'bg-purple-600'
@@ -390,8 +370,6 @@ export default function Sobre({ isDark }: { isDark: boolean }) {
                       <GraduationCap size={24} className="text-white" />
                     )}
                   </div>
-
-                  {/* Content */}
                   <div
                     className={`ml-8 p-6 rounded-xl flex-1 transition-all duration-300 hover:scale-105 cursor-pointer ${
                       isDark
@@ -430,7 +408,6 @@ export default function Sobre({ isDark }: { isDark: boolean }) {
                 </div>
               ))}
             </div>
-
             {!showAllTimeline && (
               <div className="text-center mt-8">
                 <button
@@ -444,8 +421,6 @@ export default function Sobre({ isDark }: { isDark: boolean }) {
           </div>
         </div>
       </section>
-
-      {/* CTA Section */}
       <section className={`py-20 border-t ${isDark ? 'border-gray-800' : 'border-gray-200'}`}>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2

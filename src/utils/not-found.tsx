@@ -18,7 +18,6 @@ const NotFoundContent = () => {
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
 
-  // Prevent hydration mismatch
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -27,7 +26,6 @@ const NotFoundContent = () => {
 
   return (
     <div className="min-h-screen w-full flex flex-col items-center justify-center px-4 bg-[var(--background)] text-[var(--foreground)] overflow-hidden relative">
-      {/* Animated background particles */}
       <div className="absolute inset-0 pointer-events-none">
         {[...Array(8)].map((_, i) => (
           <motion.div
@@ -54,14 +52,12 @@ const NotFoundContent = () => {
         ))}
       </div>
 
-      {/* Main content */}
       <motion.div
         className="relative z-10 text-center space-y-8"
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        {/* 404 Text with Glitch Effect */}
         <motion.h1
           className="text-8xl md:text-9xl font-bold font-poppins tracking-tighter bg-gradient-to-b from-[var(--primary)] to-[var(--accent)] bg-clip-text text-transparent relative"
           initial={{ scale: 0.8 }}
@@ -85,7 +81,6 @@ const NotFoundContent = () => {
           </motion.span>
         </motion.h1>
 
-        {/* Error Message */}
         <motion.div
           className="space-y-4"
           initial={{ opacity: 0 }}
@@ -101,7 +96,6 @@ const NotFoundContent = () => {
           </p>
         </motion.div>
 
-        {/* Alert Icon */}
         <motion.div
           className="flex justify-center"
           initial={{ scale: 0, rotate: -10 }}
@@ -113,7 +107,6 @@ const NotFoundContent = () => {
           </div>
         </motion.div>
 
-        {/* Action Buttons */}
         <motion.div
           className="flex flex-col sm:flex-row justify-center gap-4"
           initial={{ opacity: 0, y: 20 }}
@@ -136,7 +129,6 @@ const NotFoundContent = () => {
           </button>
         </motion.div>
 
-        {/* Documentation Link */}
         <motion.div
           className="text-sm text-[var(--muted-foreground)]"
           initial={{ opacity: 0 }}

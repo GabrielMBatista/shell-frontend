@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useGoogleFont } from '@/utils/fonts';
 import { Github, ExternalLink, Search, Code, Smartphone, Globe, Database, Zap } from 'lucide-react';
 import CTASection from '@/components/common/CTASection';
-import { resolutions } from '@/utils/resolutions'; // Importar resoluções
+import { resolutions } from '@/utils/resolutions';
 
 export default function Projetos({ isDark }: { isDark: boolean }) {
   const fontFamily = useGoogleFont('Inter');
@@ -41,7 +41,7 @@ export default function Projetos({ isDark }: { isDark: boolean }) {
         'Speech-to-Text',
         'Module Federation',
       ],
-      github: 'https://github.com/usuario/entrevista-ai',
+      github: 'https://github.com/GabrielMBatista/mfe-entrevista',
       demo: 'https://mfe-entrevista.vercel.app/home',
       featured: true,
     },
@@ -59,7 +59,7 @@ export default function Projetos({ isDark }: { isDark: boolean }) {
         'Styled Components',
         'React Query',
       ],
-      github: 'https://github.com/usuario/tropa-login',
+      github: 'https://github.com/GabrielMBatista/tropa-login',
       demo: 'https://tropa-login.vercel.app',
       featured: true,
     },
@@ -77,7 +77,7 @@ export default function Projetos({ isDark }: { isDark: boolean }) {
         'Recorder.js',
         'TypeScript',
       ],
-      github: 'https://github.com/usuario/alphabet-recorder',
+      github: 'https://github.com/GabrielMBatista/alphabet-recorder',
       demo: 'https://alphabet-recorder.vercel.app',
       featured: false,
     },
@@ -90,6 +90,17 @@ export default function Projetos({ isDark }: { isDark: boolean }) {
       technologies: ['StencilJS', 'Storybook', 'TypeScript', 'Web Components', 'Jest'],
       github: 'https://github.com/GabrielMBatista/ui-library-stencil',
       demo: 'https://ui-library-stencil.vercel.app',
+      featured: false,
+    },
+    {
+      id: 5,
+      title: 'SSE Manager - Node.js',
+      description:
+        'Biblioteca backend desenvolvida em Node.js e TypeScript para comunicação em tempo real via Server-Sent Events (SSE), com gerenciamento eficiente de múltiplos clientes e envio seletivo de mensagens.',
+      category: 'backend',
+      technologies: ['Node.js', 'TypeScript', 'Express', 'Jest'],
+      github: 'https://github.com/GabrielMBatista/see-manager',
+      demo: '',
       featured: false,
     },
   ].sort((a, b) => a.id - b.id);
@@ -118,7 +129,6 @@ export default function Projetos({ isDark }: { isDark: boolean }) {
       className={`min-h-screen transition-colors duration-300 ${isDark ? 'bg-gray-900' : 'bg-gray-50'}`}
       style={{ fontFamily }}
     >
-      {/* Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 overflow-hidden">
           <div
@@ -130,7 +140,6 @@ export default function Projetos({ isDark }: { isDark: boolean }) {
               maxHeight: '90vh',
             }}
           >
-            {/* Header */}
             <div className="sticky top-0 left-0 right-0 bg-gray-100 border-b border-gray-300 flex items-center justify-between px-4 py-2 z-10">
               <select
                 value={selectedResolution}
@@ -150,8 +159,6 @@ export default function Projetos({ isDark }: { isDark: boolean }) {
                 ✕
               </button>
             </div>
-
-            {/* Iframe */}
             <iframe
               src={demoUrl}
               className="w-full h-[calc(100%-40px)] rounded-b-lg"
@@ -165,7 +172,6 @@ export default function Projetos({ isDark }: { isDark: boolean }) {
         </div>
       )}
 
-      {/* Hero Section */}
       <section className="py-16 lg:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
@@ -187,7 +193,6 @@ export default function Projetos({ isDark }: { isDark: boolean }) {
         </div>
       </section>
 
-      {/* Featured Projects */}
       <section className="pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2
@@ -261,6 +266,8 @@ export default function Projetos({ isDark }: { isDark: boolean }) {
                     </button>
                     <a
                       href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className={`flex-1 inline-flex items-center justify-center gap-2 px-6 py-3 border rounded-xl transition-colors duration-200 font-medium ${
                         isDark
                           ? 'text-white border-gray-600 hover:bg-gray-700'
@@ -278,11 +285,9 @@ export default function Projetos({ isDark }: { isDark: boolean }) {
         </div>
       </section>
 
-      {/* Filters and Search */}
       <section className={`py-8 border-t ${isDark ? 'border-gray-800' : 'border-gray-200'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row gap-6 items-center justify-between">
-            {/* Search */}
             <div className="relative flex-1 max-w-md">
               <Search
                 size={20}
@@ -300,8 +305,6 @@ export default function Projetos({ isDark }: { isDark: boolean }) {
                 }`}
               />
             </div>
-
-            {/* Category Filters */}
             <div className="flex flex-wrap gap-2">
               {categories.map((category) => {
                 const Icon = category.icon;
@@ -327,7 +330,6 @@ export default function Projetos({ isDark }: { isDark: boolean }) {
         </div>
       </section>
 
-      {/* All Projects */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-8">
@@ -358,84 +360,150 @@ export default function Projetos({ isDark }: { isDark: boolean }) {
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredProjects.map((project) => (
-                <div
-                  key={project.id}
-                  className={`group rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-2 ${
-                    isDark
-                      ? 'bg-gray-800 border border-gray-700'
-                      : 'bg-white border border-gray-200'
-                  }`}
-                >
-                  <div className="relative overflow-hidden">
-                    <div className="w-full h-48 relative">
-                      <iframe
-                        src={project.demo}
-                        className="absolute top-0 left-0 w-full h-full border-none scale-[1.5] origin-top-left"
-                        sandbox="allow-scripts allow-same-origin allow-forms allow-modals allow-popups allow-presentation"
-                        allow="camera; microphone; fullscreen; clipboard-read; clipboard-write"
-                        title={`Preview of ${project.title}`}
-                      ></iframe>
-                    </div>
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  </div>
-                  <div className="p-6">
-                    <h3
-                      className={`text-xl font-bold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}
-                    >
-                      {project.title}
-                    </h3>
-                    <p
-                      className={`mb-4 text-sm leading-relaxed ${isDark ? 'text-gray-400' : 'text-gray-600'}`}
-                    >
-                      {project.description.length > 120
-                        ? `${project.description.substring(0, 120)}...`
-                        : project.description}
-                    </p>
-                    <div className="flex flex-wrap gap-1 mb-4">
-                      {project.technologies.slice(0, 3).map((tech, index) => (
-                        <span
-                          key={index}
-                          className={`px-2 py-1 text-xs rounded-full ${
-                            isDark ? 'bg-gray-700 text-gray-300' : 'bg-gray-100 text-gray-700'
-                          }`}
+              {filteredProjects.map((project) => {
+                const hasDemo = !!project.demo;
+
+                return (
+                  <div
+                    key={project.id}
+                    className={`group rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-2 ${
+                      isDark
+                        ? 'bg-gray-800 border border-gray-700'
+                        : 'bg-white border border-gray-200'
+                    }`}
+                  >
+                    {hasDemo ? (
+                      // Layout padrão com demo (iframe)
+                      <>
+                        <div className="relative overflow-hidden">
+                          <div className="w-full h-48 relative">
+                            <iframe
+                              src={project.demo}
+                              className="absolute top-0 left-0 w-full h-full border-none scale-[1.5] origin-top-left"
+                              sandbox="allow-scripts allow-same-origin allow-forms allow-modals allow-popups allow-presentation"
+                              allow="camera; microphone; fullscreen; clipboard-read; clipboard-write"
+                              title={`Preview of ${project.title}`}
+                            ></iframe>
+                          </div>
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        </div>
+                        <div className="p-6">
+                          <h3
+                            className={`text-xl font-bold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}
+                          >
+                            {project.title}
+                          </h3>
+                          <p
+                            className={`mb-4 text-sm leading-relaxed ${isDark ? 'text-gray-400' : 'text-gray-600'}`}
+                          >
+                            {project.description.length > 120
+                              ? `${project.description.substring(0, 120)}...`
+                              : project.description}
+                          </p>
+                          <div className="flex flex-wrap gap-1 mb-4">
+                            {project.technologies.slice(0, 3).map((tech, index) => (
+                              <span
+                                key={index}
+                                className={`px-2 py-1 text-xs rounded-full ${
+                                  isDark ? 'bg-gray-700 text-gray-300' : 'bg-gray-100 text-gray-700'
+                                }`}
+                              >
+                                {tech}
+                              </span>
+                            ))}
+                            {project.technologies.length > 3 && (
+                              <span
+                                className={`px-2 py-1 text-xs rounded-full ${
+                                  isDark ? 'bg-gray-700 text-gray-300' : 'bg-gray-100 text-gray-700'
+                                }`}
+                              >
+                                +{project.technologies.length - 3}
+                              </span>
+                            )}
+                          </div>
+                          <div className="flex gap-2">
+                            <button
+                              onClick={() => openDemo(project.demo!)}
+                              className="flex-1 inline-flex items-center justify-center gap-1 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-cyan-400 transition-colors duration-200 text-sm font-medium"
+                            >
+                              <ExternalLink size={14} />
+                              Demo
+                            </button>
+                            <a
+                              href={project.github}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className={`flex-1 inline-flex items-center justify-center gap-1 px-3 py-2 border rounded-lg transition-colors duration-200 text-sm font-medium ${
+                                isDark
+                                  ? 'text-white border-gray-600 hover:bg-gray-700'
+                                  : 'text-gray-800 border-gray-300 hover:bg-gray-50'
+                              }`}
+                            >
+                              <Github size={14} />
+                              Código
+                            </a>
+                          </div>
+                        </div>
+                      </>
+                    ) : (
+                      // Novo layout sem demo
+                      <div className="p-6">
+                        <h3
+                          className={`text-xl font-bold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}
                         >
-                          {tech}
-                        </span>
-                      ))}
-                      {project.technologies.length > 3 && (
-                        <span
-                          className={`px-2 py-1 text-xs rounded-full ${
-                            isDark ? 'bg-gray-700 text-gray-300' : 'bg-gray-100 text-gray-700'
-                          }`}
+                          {project.title}
+                        </h3>
+                        <p
+                          className={`mb-4 text-sm leading-relaxed ${isDark ? 'text-gray-400' : 'text-gray-600'}`}
                         >
-                          +{project.technologies.length - 3}
-                        </span>
-                      )}
-                    </div>
-                    <div className="flex gap-2">
-                      <button
-                        onClick={() => openDemo(project.demo)}
-                        className="flex-1 inline-flex items-center justify-center gap-1 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-cyan-400 transition-colors duration-200 text-sm font-medium"
-                      >
-                        <ExternalLink size={14} />
-                        Demo
-                      </button>
-                      <a
-                        href={project.github}
-                        className={`flex-1 inline-flex items-center justify-center gap-1 px-3 py-2 border rounded-lg transition-colors duration-200 text-sm font-medium ${
-                          isDark
-                            ? 'text-white border-gray-600 hover:bg-gray-700'
-                            : 'text-gray-800 border-gray-300 hover:bg-gray-50'
-                        }`}
-                      >
-                        <Github size={14} />
-                        Código
-                      </a>
-                    </div>
+                          {project.description}
+                        </p>
+                        <div className="mb-4">
+                          <h4
+                            className={`text-sm font-semibold mb-2 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}
+                          >
+                            Principais Características:
+                          </h4>
+                          <ul
+                            className={`list-disc pl-5 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}
+                          >
+                            <li>Gerenciamento eficiente de conexões SSE</li>
+                            <li>Envio de mensagens em tempo real</li>
+                            <li>Fácil integração com aplicações Node.js</li>
+                          </ul>
+                        </div>
+                        <div className="flex flex-wrap gap-1 mb-4">
+                          {project.technologies.map((tech, index) => (
+                            <span
+                              key={index}
+                              className={`px-2 py-1 text-xs rounded-full ${
+                                isDark ? 'bg-gray-700 text-gray-300' : 'bg-gray-100 text-gray-700'
+                              }`}
+                            >
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                        <div className="flex gap-2">
+                          <a
+                            href={project.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={`flex-1 inline-flex items-center justify-center gap-1 px-3 py-2 border rounded-lg transition-colors duration-200 text-sm font-medium ${
+                              isDark
+                                ? 'text-white border-gray-600 hover:bg-gray-700'
+                                : 'text-gray-800 border-gray-300 hover:bg-gray-50'
+                            }`}
+                          >
+                            <Github size={14} />
+                            Código
+                          </a>
+                        </div>
+                      </div>
+                    )}
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           )}
         </div>

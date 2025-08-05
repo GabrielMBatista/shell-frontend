@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import { useGoogleFont } from '@/utils/fonts';
-import CTASection from '@/components/common/CTASection';
+import dynamic from 'next/dynamic';
 import {
   ArrowRight,
   Download,
@@ -17,6 +17,8 @@ import {
 import Image from 'next/image';
 import gabrielPhoto from '@/assets/gabrielPhoto.jpg';
 import Link from 'next/link';
+
+const CTASection = dynamic(() => import('@/components/common/CTASection'), { ssr: false });
 
 export default function Home({ isDark }: { isDark: boolean }) {
   const fontFamily = useGoogleFont('Inter');
@@ -154,6 +156,7 @@ export default function Home({ isDark }: { isDark: boolean }) {
                     alt="Gabriel Marques"
                     width={320}
                     height={320}
+                    priority={true}
                     className="w-full h-full rounded-full object-cover"
                   />
                 </div>

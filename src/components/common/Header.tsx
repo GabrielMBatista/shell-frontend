@@ -1,8 +1,8 @@
-/* eslint-disable @next/next/no-html-link-for-pages */
 'use client';
 import React, { useState } from 'react';
 import { Sun, Moon, Menu } from 'lucide-react';
 import { usePathname } from 'next/navigation';
+import Link from 'next/link';
 import { reopenGabsIAWidget } from 'Chatbot/GabsIAWidget';
 
 interface HeaderProps {
@@ -36,7 +36,7 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
             </button>
           </div>
           <nav className="hidden md:flex items-center gap-8">
-            <a
+            <Link
               href="/"
               className={`transition-colors ${
                 isActive('/home')
@@ -47,8 +47,8 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
               }`}
             >
               Home
-            </a>
-            <a
+            </Link>
+            <Link
               href="/projects"
               className={`transition-colors ${
                 isActive('/projects')
@@ -59,8 +59,8 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
               }`}
             >
               Projetos
-            </a>
-            <a
+            </Link>
+            <Link
               href="/about"
               className={`transition-colors ${
                 isActive('/about')
@@ -71,8 +71,8 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
               }`}
             >
               Sobre
-            </a>
-            <a
+            </Link>
+            <Link
               href="/contact"
               className={`transition-colors ${
                 isActive('/contact')
@@ -83,7 +83,7 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
               }`}
             >
               Contato
-            </a>
+            </Link>
           </nav>
           <div className="flex items-center gap-4">
             <button
@@ -112,7 +112,7 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
               isDark ? 'bg-gray-800 text-gray-300' : 'bg-white text-gray-900'
             }`}
           >
-            <a
+            <Link
               href="/"
               className={`block py-2 transition-colors ${
                 isActive('/home')
@@ -123,8 +123,8 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
               }`}
             >
               Home
-            </a>
-            <a
+            </Link>
+            <Link
               href="/projects"
               className={`block py-2 transition-colors ${
                 isActive('/projects')
@@ -135,8 +135,8 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
               }`}
             >
               Projetos
-            </a>
-            <a
+            </Link>
+            <Link
               href="/about"
               className={`block py-2 transition-colors ${
                 isActive('/about')
@@ -147,8 +147,8 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
               }`}
             >
               Sobre
-            </a>
-            <a
+            </Link>
+            <Link
               href="/contact"
               className={`block py-2 transition-colors ${
                 isActive('/contact')
@@ -159,7 +159,7 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
               }`}
             >
               Contato
-            </a>
+            </Link>
           </div>
         )}
       </div>

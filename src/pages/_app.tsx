@@ -6,6 +6,9 @@ import { ClientOnly } from '@/utils/client-only';
 import Header from '@/components/common/Header';
 import Footer from '@/components/common/Footer';
 import { useState, useEffect, Suspense } from 'react';
+import { Inter } from 'next/font/google';
+
+const inter = Inter({ subsets: ['latin'], display: 'swap' });
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   const GabsIA = dynamic(() => import('Chatbot/GabsIAWidget'), { ssr: false });
@@ -28,7 +31,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         <div
           className={`min-h-screen transition-colors duration-300 ${
             isDark ? 'bg-gray-900' : 'bg-gray-50'
-          }`}
+          } ${inter.className}`}
         >
           <Header isDark={isDark} setIsDark={setIsDark} />
           <Suspense fallback={<ui-loading />}>

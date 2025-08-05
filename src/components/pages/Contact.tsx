@@ -2,6 +2,7 @@
 
 import { useGoogleFont } from '@/utils/fonts';
 import emailjs from '@emailjs/browser';
+import dynamic from 'next/dynamic';
 
 import {
   Send,
@@ -18,6 +19,8 @@ import {
   FileText,
 } from 'lucide-react';
 import { useState } from 'react';
+
+const FAQSection = dynamic(() => import('@/components/common/FAQSection'), { ssr: false });
 
 export default function Contato({ isDark }: { isDark: boolean }) {
   const fontFamily = useGoogleFont('Inter');
@@ -393,42 +396,7 @@ export default function Contato({ isDark }: { isDark: boolean }) {
       </section>
 
       {/* FAQ Section */}
-      <section
-        className={`py-20 border-t ${isDark ? 'border-gray-800 bg-gray-800' : 'border-gray-200 bg-white'}`}
-      >
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2
-              className={`text-3xl md:text-4xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}
-            >
-              Perguntas Frequentes
-            </h2>
-            <p className={`text-lg ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-              Algumas respostas rápidas para dúvidas comuns
-            </p>
-          </div>
-
-          <div className="space-y-6">
-            {faqs.map((faq, index) => (
-              <div
-                key={index}
-                className={`p-6 rounded-xl transition-all duration-300 hover:scale-105 cursor-pointer ${
-                  isDark
-                    ? 'bg-gray-700 border border-gray-600'
-                    : 'bg-gray-50 border border-gray-200'
-                }`}
-              >
-                <h3 className={`text-lg font-bold mb-3 ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                  {faq.question}
-                </h3>
-                <p className={`leading-relaxed ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                  {faq.answer}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <FAQSection faqs={faqs} isDark={isDark} />
     </div>
   );
 }
