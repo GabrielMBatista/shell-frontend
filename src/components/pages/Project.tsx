@@ -1,38 +1,65 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useGoogleFont } from '@/utils/fonts';
-import { Github, ExternalLink, Search, Code, Smartphone, Globe, Database, Zap } from 'lucide-react';
+import {
+  Github,
+  ExternalLink,
+  Search,
+  Code,
+  Smartphone,
+  Globe,
+  Database,
+  Zap,
+  LucideIcon,
+} from 'lucide-react';
 import CTASection from '@/components/common/CTASection';
 import { resolutions } from '@/utils/resolutions';
+import { trackClarityEvent, trackPageView, trackProjectInteraction } from '@/utils/analytics';
 
-export default function Projetos({ isDark }: { isDark: boolean }) {
+interface Project {
+  id: number;
+  title: string;
+  description: string;
+  category: 'frontend' | 'backend' | 'fullstack' | 'mobile';
+  technologies: string[];
+  github: string;
+  demo: string;
+  featured: boolean;
+}
+
+interface Category {
+  id: string;
+  name: string;
+  icon: LucideIcon;
+}
+
+interface ProjectsProps {
+  isDark: boolean;
+}
+
+export default function Projetos({ isDark }: ProjectsProps) {
   const fontFamily = useGoogleFont('Inter');
-  const [activeFilter, setActiveFilter] = useState('todos');
-  const [searchTerm, setSearchTerm] = useState('');
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [demoUrl, setDemoUrl] = useState('');
+  const [activeFilter, setActiveFilter] = useState<string>('todos');
+  const [searchTerm, setSearchTerm] = useState<string>('');
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [demoUrl, setDemoUrl] = useState<string>('');
   const [selectedResolution, setSelectedResolution] =
     useState<keyof typeof resolutions>('Laptop (720p)');
 
   const resolution = resolutions[selectedResolution];
 
-  const openDemo = (url: string) => {
-    setDemoUrl(url);
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
+  const closeModal = (): void => {
     setIsModalOpen(false);
     setDemoUrl('');
   };
 
-  const projects = [
+  const projects: Project[] = [
     {
       id: 1,
       title: 'Entrevista AI',
       description:
         'Sistema básico que usa a API da OpenAI para avaliar níveis técnicos, agilizando o processo de triagem.',
-      category: 'fullstack',
+      category: 'fullstack' as const,
       technologies: [
         'Next.js',
         'TypeScript',
@@ -50,7 +77,7 @@ export default function Projetos({ isDark }: { isDark: boolean }) {
       title: 'Tropa Login',
       description:
         'Teste técnico para uma vaga do LinkedIn com o intuito de desenvolver uma tela de login funcional.',
-      category: 'frontend',
+      category: 'frontend' as const,
       technologies: [
         'Next.js',
         'React 19',
@@ -68,7 +95,7 @@ export default function Projetos({ isDark }: { isDark: boolean }) {
       title: 'Alphabet Recorder',
       description:
         'Teste técnico Gravador de áudio para treinar fonemas do alfabeto, com interface simples e prática.',
-      category: 'frontend',
+      category: 'frontend' as const,
       technologies: [
         'React',
         'React Mic',
@@ -86,7 +113,7 @@ export default function Projetos({ isDark }: { isDark: boolean }) {
       title: 'UI Library - StencilJS',
       description:
         'Biblioteca de componentes web reutilizáveis criada com StencilJS e integrada ao Storybook.',
-      category: 'frontend',
+      category: 'frontend' as const,
       technologies: ['StencilJS', 'Storybook', 'TypeScript', 'Web Components', 'Jest'],
       github: 'https://github.com/GabrielMBatista/ui-library-stencil',
       demo: 'https://ui-library-stencil.vercel.app',
@@ -97,7 +124,7 @@ export default function Projetos({ isDark }: { isDark: boolean }) {
       title: 'SSE Manager - Node.js',
       description:
         'Biblioteca backend desenvolvida em Node.js e TypeScript para comunicação em tempo real via Server-Sent Events (SSE), com gerenciamento eficiente de múltiplos clientes e envio seletivo de mensagens.',
-      category: 'backend',
+      category: 'backend' as const,
       technologies: ['Node.js', 'TypeScript', 'Express', 'Jest'],
       github: 'https://github.com/GabrielMBatista/see-manager',
       demo: '',
@@ -105,7 +132,7 @@ export default function Projetos({ isDark }: { isDark: boolean }) {
     },
   ].sort((a, b) => a.id - b.id);
 
-  const categories = [
+  const categories: Category[] = [
     { id: 'todos', name: 'Todos os Projetos', icon: Globe },
     { id: 'frontend', name: 'Frontend', icon: Code },
     { id: 'backend', name: 'Backend', icon: Database },
@@ -113,16 +140,60 @@ export default function Projetos({ isDark }: { isDark: boolean }) {
     { id: 'mobile', name: 'Mobile', icon: Smartphone },
   ];
 
-  const filteredProjects = projects.filter((project) => {
-    const matchesCategory = activeFilter === 'todos' || project.category === activeFilter;
-    const matchesSearch =
+  const filteredProjects: Project[] = projects.filter((project) => {
+    const matchesCategory: boolean = activeFilter === 'todos' || project.category === activeFilter;
+    const matchesSearch: boolean =
       project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       project.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
       project.technologies.some((tech) => tech.toLowerCase().includes(searchTerm.toLowerCase()));
     return matchesCategory && matchesSearch;
   });
 
-  const featuredProjects = projects.filter((project) => project.featured);
+  const featuredProjects: Project[] = projects.filter((project) => project.featured);
+
+  useEffect(() => {
+    // Rastrear visualização da página de projetos
+    trackPageView('projects', {
+      totalProjects: projects.length,
+      featuredProjects: featuredProjects.length,
+    });
+  }, [projects.length, featuredProjects.length]);
+
+  const handleFilterChange = (filterId: string): void => {
+    setActiveFilter(filterId);
+    trackProjectInteraction('filter', 'filter', {
+      filterType: filterId,
+      previousFilter: activeFilter,
+    });
+  };
+
+  const handleSearchChange = (value: string): void => {
+    setSearchTerm(value);
+    if (value.length > 2) {
+      trackClarityEvent('search_projects', {
+        searchTerm: value,
+        resultsCount: filteredProjects.length,
+      });
+    }
+  };
+
+  const handleProjectClick = (project: Project, action: 'github' | 'demo'): void => {
+    trackProjectInteraction(project.id, action === 'github' ? 'click_github' : 'click_demo', {
+      projectTitle: project.title,
+      projectCategory: project.category,
+      technologies: project.technologies.join(','),
+    });
+  };
+
+  const openModal = (project: Project): void => {
+    setDemoUrl(project.demo);
+    setIsModalOpen(true);
+    trackProjectInteraction(project.id, 'view', {
+      projectTitle: project.title,
+      projectCategory: project.category,
+      viewType: 'modal',
+    });
+  };
 
   return (
     <div
@@ -258,7 +329,10 @@ export default function Projetos({ isDark }: { isDark: boolean }) {
                   </div>
                   <div className="flex gap-4">
                     <button
-                      onClick={() => openDemo(project.demo)}
+                      onClick={() => {
+                        handleProjectClick(project, 'demo');
+                        openModal(project);
+                      }}
                       className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-cyan-400 transition-colors duration-200 font-medium"
                     >
                       <ExternalLink size={18} />
@@ -268,6 +342,7 @@ export default function Projetos({ isDark }: { isDark: boolean }) {
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
+                      onClick={() => handleProjectClick(project, 'github')}
                       className={`flex-1 inline-flex items-center justify-center gap-2 px-6 py-3 border rounded-xl transition-colors duration-200 font-medium ${
                         isDark
                           ? 'text-white border-gray-600 hover:bg-gray-700'
@@ -297,7 +372,7 @@ export default function Projetos({ isDark }: { isDark: boolean }) {
                 type="text"
                 placeholder="Buscar projetos..."
                 value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
+                onChange={(e) => handleSearchChange(e.target.value)}
                 className={`w-full pl-10 pr-4 py-3 border rounded-xl transition-all duration-200 outline-none focus:ring-2 focus:ring-blue-200 ${
                   isDark
                     ? 'bg-gray-800 border-gray-600 text-white focus:border-blue-500'
@@ -311,7 +386,7 @@ export default function Projetos({ isDark }: { isDark: boolean }) {
                 return (
                   <button
                     key={category.id}
-                    onClick={() => setActiveFilter(category.id)}
+                    onClick={() => handleFilterChange(category.id)}
                     className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl transition-all duration-200 font-medium ${
                       activeFilter === category.id
                         ? 'bg-blue-600 text-white shadow-lg'
@@ -423,7 +498,10 @@ export default function Projetos({ isDark }: { isDark: boolean }) {
                           </div>
                           <div className="flex gap-2">
                             <button
-                              onClick={() => openDemo(project.demo!)}
+                              onClick={() => {
+                                handleProjectClick(project, 'demo');
+                                openModal(project);
+                              }}
                               className="flex-1 inline-flex items-center justify-center gap-1 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-cyan-400 transition-colors duration-200 text-sm font-medium"
                             >
                               <ExternalLink size={14} />
@@ -433,6 +511,7 @@ export default function Projetos({ isDark }: { isDark: boolean }) {
                               href={project.github}
                               target="_blank"
                               rel="noopener noreferrer"
+                              onClick={() => handleProjectClick(project, 'github')}
                               className={`flex-1 inline-flex items-center justify-center gap-1 px-3 py-2 border rounded-lg transition-colors duration-200 text-sm font-medium ${
                                 isDark
                                   ? 'text-white border-gray-600 hover:bg-gray-700'
@@ -489,6 +568,7 @@ export default function Projetos({ isDark }: { isDark: boolean }) {
                             href={project.github}
                             target="_blank"
                             rel="noopener noreferrer"
+                            onClick={() => handleProjectClick(project, 'github')}
                             className={`flex-1 inline-flex items-center justify-center gap-1 px-3 py-2 border rounded-lg transition-colors duration-200 text-sm font-medium ${
                               isDark
                                 ? 'text-white border-gray-600 hover:bg-gray-700'

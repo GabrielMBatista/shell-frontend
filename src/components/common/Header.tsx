@@ -23,8 +23,8 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* <div className="flex items-center gap-4">
-            <button
+          <div className="flex items-center gap-4">
+            {/* <button
               onClick={reopenGabsIAWidget}
               className="flex items-center gap-4 focus:outline-none"
               title="Reabrir assistente Gabs.IA"
@@ -33,8 +33,8 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
               <span className={`text-xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>
                 Gabs IA
               </span>
-            </button>
-          </div> */}
+            </button> */}
+          </div>
           <nav className="hidden md:flex items-center gap-8">
             <Link
               href="/"
