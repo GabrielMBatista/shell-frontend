@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Sun, Moon, Menu } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { reopenGabsIAWidget } from 'Chatbot/GabsIAWidget';
+// import { reopenGabsIAWidget } from 'Chatbot/GabsIAWidget';
 
 interface HeaderProps {
   isDark: boolean;
@@ -23,7 +23,7 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <div className="flex items-center gap-4">
+          {/* <div className="flex items-center gap-4">
             <button
               onClick={reopenGabsIAWidget}
               className="flex items-center gap-4 focus:outline-none"
@@ -34,7 +34,7 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
                 Gabs IA
               </span>
             </button>
-          </div>
+          </div> */}
           <nav className="hidden md:flex items-center gap-8">
             <Link
               href="/"
