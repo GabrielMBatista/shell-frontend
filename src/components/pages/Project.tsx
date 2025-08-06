@@ -21,7 +21,7 @@ export default function Projetos({ isDark }: ProjectsProps) {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [demoUrl, setDemoUrl] = useState<string>('');
   const [selectedResolution, setSelectedResolution] =
-    useState<keyof typeof resolutions>('Laptop (720p)');
+    useState<keyof typeof resolutions>('Responsive');
   const [pageStartTime] = useState<number>(Date.now());
   const [scrollDepthTracked, setScrollDepthTracked] = useState<Set<number>>(new Set());
 
