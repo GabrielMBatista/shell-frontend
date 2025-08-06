@@ -1,14 +1,29 @@
 import { useCallback } from 'react';
-import { trackClarityEvent, trackPageView, trackUserInteraction } from '@/utils/analytics';
-
-interface ClarityEventData {
-  [key: string]: string | number | boolean;
-}
+import {
+  trackClarityEvent,
+  trackDetailedPageView,
+  trackUserInteraction,
+  trackScrollDepth,
+  trackTimeSpent,
+  trackConversionFunnel,
+  trackPerformanceMetrics,
+  trackErrorEvent,
+} from '@/utils/analytics';
+import type { ClarityEventData, PageSection, ErrorType, ConversionStep } from '@/types/analytics';
 
 interface UseClarityReturn {
   trackEvent: (eventName: string, eventData?: ClarityEventData) => void;
-  trackPage: (pageName: string, additionalData?: ClarityEventData) => void;
+  trackPage: (pageName: string, additionalData?: ClarityEventData, section?: PageSection) => void;
   trackInteraction: (action: string, element: string, additionalData?: ClarityEventData) => void;
+  trackScroll: (depth: number, pageName: string) => void;
+  trackTime: (pageName: string, timeSpent: number, section?: PageSection) => void;
+  trackConversion: (
+    step: ConversionStep,
+    projectId?: string | number,
+    additionalData?: ClarityEventData,
+  ) => void;
+  trackPerformance: (pageName: string) => void;
+  trackError: (errorType: ErrorType, errorMessage: string, errorStack?: string) => void;
 }
 
 export const useClarity = (): UseClarityReturn => {
@@ -16,9 +31,12 @@ export const useClarity = (): UseClarityReturn => {
     trackClarityEvent(eventName, eventData);
   }, []);
 
-  const trackPage = useCallback((pageName: string, additionalData?: ClarityEventData): void => {
-    trackPageView(pageName, additionalData);
-  }, []);
+  const trackPage = useCallback(
+    (pageName: string, additionalData?: ClarityEventData, section?: PageSection): void => {
+      trackDetailedPageView(pageName, additionalData, section);
+    },
+    [],
+  );
 
   const trackInteraction = useCallback(
     (action: string, element: string, additionalData?: ClarityEventData): void => {
@@ -27,9 +45,47 @@ export const useClarity = (): UseClarityReturn => {
     [],
   );
 
+  const trackScroll = useCallback((depth: number, pageName: string): void => {
+    trackScrollDepth(depth, pageName);
+  }, []);
+
+  const trackTime = useCallback(
+    (pageName: string, timeSpent: number, section?: PageSection): void => {
+      trackTimeSpent(pageName, timeSpent, section);
+    },
+    [],
+  );
+
+  const trackConversion = useCallback(
+    (
+      step: ConversionStep,
+      projectId?: string | number,
+      additionalData?: ClarityEventData,
+    ): void => {
+      trackConversionFunnel(step, projectId, additionalData);
+    },
+    [],
+  );
+
+  const trackPerformance = useCallback((pageName: string): void => {
+    trackPerformanceMetrics(pageName);
+  }, []);
+
+  const trackError = useCallback(
+    (errorType: ErrorType, errorMessage: string, errorStack?: string): void => {
+      trackErrorEvent(errorType, errorMessage, errorStack);
+    },
+    [],
+  );
+
   return {
     trackEvent,
     trackPage,
     trackInteraction,
+    trackScroll,
+    trackTime,
+    trackConversion,
+    trackPerformance,
+    trackError,
   };
 };

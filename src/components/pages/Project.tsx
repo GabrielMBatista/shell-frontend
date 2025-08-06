@@ -1,41 +1,18 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import { useGoogleFont } from '@/utils/fonts';
-import {
-  Github,
-  ExternalLink,
-  Search,
-  Code,
-  Smartphone,
-  Globe,
-  Database,
-  Zap,
-  LucideIcon,
-} from 'lucide-react';
+import { Github, ExternalLink, Search, Code, Smartphone, Globe, Database, Zap } from 'lucide-react';
 import CTASection from '@/components/common/CTASection';
 import { resolutions } from '@/utils/resolutions';
-import { trackClarityEvent, trackPageView, trackProjectInteraction } from '@/utils/analytics';
-
-interface Project {
-  id: number;
-  title: string;
-  description: string;
-  category: 'frontend' | 'backend' | 'fullstack' | 'mobile';
-  technologies: string[];
-  github: string;
-  demo: string;
-  featured: boolean;
-}
-
-interface Category {
-  id: string;
-  name: string;
-  icon: LucideIcon;
-}
-
-interface ProjectsProps {
-  isDark: boolean;
-}
+import {
+    trackDetailedPageView,
+  trackProjectDetailedInteraction,
+  trackScrollDepth,
+  trackTimeSpent,
+  trackConversionFunnel,
+  trackPerformanceMetrics,
+} from '@/utils/analytics';
+import type { Project, Category, ProjectsProps } from '@/types/projects';
 
 export default function Projetos({ isDark }: ProjectsProps) {
   const fontFamily = useGoogleFont('Inter');
@@ -45,6 +22,8 @@ export default function Projetos({ isDark }: ProjectsProps) {
   const [demoUrl, setDemoUrl] = useState<string>('');
   const [selectedResolution, setSelectedResolution] =
     useState<keyof typeof resolutions>('Laptop (720p)');
+  const [pageStartTime] = useState<number>(Date.now());
+  const [scrollDepthTracked, setScrollDepthTracked] = useState<Set<number>>(new Set());
 
   const resolution = resolutions[selectedResolution];
 
@@ -152,47 +131,146 @@ export default function Projetos({ isDark }: ProjectsProps) {
   const featuredProjects: Project[] = projects.filter((project) => project.featured);
 
   useEffect(() => {
-    // Rastrear visualização da página de projetos
-    trackPageView('projects', {
+    // Rastreamento avançado da página
+    trackDetailedPageView('projects', {
       totalProjects: projects.length,
       featuredProjects: featuredProjects.length,
+      isDarkMode: isDark,
     });
-  }, [projects.length, featuredProjects.length]);
+
+    // Rastrear métricas de performance
+    trackPerformanceMetrics('projects');
+
+    // Rastrear entrada no funil de conversão
+    trackConversionFunnel('page_load');
+
+    // Rastrear scroll depth
+    const handleScroll = () => {
+      const scrollPercent = Math.round(
+        (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100,
+      );
+
+      // Rastrear marcos de scroll (25%, 50%, 75%, 100%)
+      [25, 50, 75, 100].forEach((depth) => {
+        if (scrollPercent >= depth && !scrollDepthTracked.has(depth)) {
+          trackScrollDepth(depth, 'projects');
+          setScrollDepthTracked((prev) => new Set(prev).add(depth));
+        }
+      });
+    };
+
+    // Rastrear tempo gasto ao sair da página
+    const handleBeforeUnload = () => {
+      const timeSpent = (Date.now() - pageStartTime) / 1000;
+      trackTimeSpent('projects', timeSpent);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, [isDark, pageStartTime, projects.length, featuredProjects.length, scrollDepthTracked]);
 
   const handleFilterChange = (filterId: string): void => {
     setActiveFilter(filterId);
-    trackProjectInteraction('filter', 'filter', {
-      filterType: filterId,
-      previousFilter: activeFilter,
-    });
+
+    // Analytics detalhado
+    trackProjectDetailedInteraction(
+      'filter',
+      'filter',
+      {
+        filterType: filterId,
+        previousFilter: activeFilter,
+        resultsAfterFilter: projects.filter((p) => filterId === 'todos' || p.category === filterId)
+          .length,
+      },
+      {
+        position: 0,
+        totalVisible: filteredProjects.length,
+        filterActive: filterId,
+      },
+    );
   };
 
   const handleSearchChange = (value: string): void => {
     setSearchTerm(value);
+
     if (value.length > 2) {
-      trackClarityEvent('search_projects', {
+      const resultsCount = projects.filter((project) => {
+        const matchesCategory = activeFilter === 'todos' || project.category === activeFilter;
+        const matchesSearch =
+          project.title.toLowerCase().includes(value.toLowerCase()) ||
+          project.description.toLowerCase().includes(value.toLowerCase()) ||
+          project.technologies.some((tech) => tech.toLowerCase().includes(value.toLowerCase()));
+        return matchesCategory && matchesSearch;
+      }).length;
+
+      trackProjectDetailedInteraction('search', 'search', {
         searchTerm: value,
-        resultsCount: filteredProjects.length,
+        resultsCount,
+        activeFilter,
+        searchLength: value.length,
       });
     }
   };
 
-  const handleProjectClick = (project: Project, action: 'github' | 'demo'): void => {
-    trackProjectInteraction(project.id, action === 'github' ? 'click_github' : 'click_demo', {
+  const handleProjectClick = (
+    project: Project,
+    action: 'github' | 'demo',
+    position: number,
+  ): void => {
+    // Analytics básico
+    trackProjectDetailedInteraction(
+      project.id,
+      action === 'github' ? 'click_github' : 'click_demo',
+      {
+        projectTitle: project.title,
+        projectCategory: project.category,
+        technologies: project.technologies.join(','),
+        featured: project.featured,
+      },
+      {
+        position,
+        totalVisible: filteredProjects.length,
+        filterActive: activeFilter,
+        searchTerm: searchTerm || undefined,
+      },
+    );
+
+    // Rastrear funil de conversão
+    trackConversionFunnel(action === 'github' ? 'github_visit' : 'demo_open', project.id, {
       projectTitle: project.title,
       projectCategory: project.category,
-      technologies: project.technologies.join(','),
     });
   };
 
-  const openModal = (project: Project): void => {
+  const openModal = (project: Project, position: number): void => {
     setDemoUrl(project.demo);
     setIsModalOpen(true);
-    trackProjectInteraction(project.id, 'view', {
-      projectTitle: project.title,
-      projectCategory: project.category,
-      viewType: 'modal',
-    });
+
+    // Analytics detalhado
+    trackProjectDetailedInteraction(
+      project.id,
+      'view',
+      {
+        projectTitle: project.title,
+        projectCategory: project.category,
+        viewType: 'modal',
+        featured: project.featured,
+      },
+      {
+        position,
+        totalVisible: filteredProjects.length,
+        filterActive: activeFilter,
+        searchTerm: searchTerm || undefined,
+      },
+    );
+
+    // Rastrear visualização no funil
+    trackConversionFunnel('project_view', project.id);
   };
 
   return (
@@ -330,8 +408,8 @@ export default function Projetos({ isDark }: ProjectsProps) {
                   <div className="flex gap-4">
                     <button
                       onClick={() => {
-                        handleProjectClick(project, 'demo');
-                        openModal(project);
+                        handleProjectClick(project, 'demo', 0);
+                        openModal(project, 0);
                       }}
                       className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-cyan-400 transition-colors duration-200 font-medium"
                     >
@@ -342,7 +420,7 @@ export default function Projetos({ isDark }: ProjectsProps) {
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      onClick={() => handleProjectClick(project, 'github')}
+                      onClick={() => handleProjectClick(project, 'github', 0)}
                       className={`flex-1 inline-flex items-center justify-center gap-2 px-6 py-3 border rounded-xl transition-colors duration-200 font-medium ${
                         isDark
                           ? 'text-white border-gray-600 hover:bg-gray-700'
@@ -435,8 +513,9 @@ export default function Projetos({ isDark }: ProjectsProps) {
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredProjects.map((project) => {
+              {filteredProjects.map((project, index) => {
                 const hasDemo = !!project.demo;
+                const position = index + 1;
 
                 return (
                   <div
@@ -499,8 +578,8 @@ export default function Projetos({ isDark }: ProjectsProps) {
                           <div className="flex gap-2">
                             <button
                               onClick={() => {
-                                handleProjectClick(project, 'demo');
-                                openModal(project);
+                                handleProjectClick(project, 'demo', position);
+                                openModal(project, position);
                               }}
                               className="flex-1 inline-flex items-center justify-center gap-1 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-cyan-400 transition-colors duration-200 text-sm font-medium"
                             >
@@ -511,7 +590,7 @@ export default function Projetos({ isDark }: ProjectsProps) {
                               href={project.github}
                               target="_blank"
                               rel="noopener noreferrer"
-                              onClick={() => handleProjectClick(project, 'github')}
+                              onClick={() => handleProjectClick(project, 'github', position)}
                               className={`flex-1 inline-flex items-center justify-center gap-1 px-3 py-2 border rounded-lg transition-colors duration-200 text-sm font-medium ${
                                 isDark
                                   ? 'text-white border-gray-600 hover:bg-gray-700'
@@ -568,7 +647,7 @@ export default function Projetos({ isDark }: ProjectsProps) {
                             href={project.github}
                             target="_blank"
                             rel="noopener noreferrer"
-                            onClick={() => handleProjectClick(project, 'github')}
+                            onClick={() => handleProjectClick(project, 'github', position)}
                             className={`flex-1 inline-flex items-center justify-center gap-1 px-3 py-2 border rounded-lg transition-colors duration-200 text-sm font-medium ${
                               isDark
                                 ? 'text-white border-gray-600 hover:bg-gray-700'

@@ -24,6 +24,6 @@
     ],
     "types": ["@gabrielmbatista/ui-library-stencil"]
   },
-  "include": ["next-env.d.ts", "next.config.js", ".next/types/**/*.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "next.config.js", ".next/types/**/*.ts", "**/*.ts","**/*.d.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
 }
