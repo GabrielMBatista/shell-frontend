@@ -5,7 +5,7 @@ import { Github, ExternalLink, Search, Code, Smartphone, Globe, Database, Zap } 
 import CTASection from '@/components/common/CTASection';
 import { resolutions } from '@/utils/resolutions';
 import {
-    trackDetailedPageView,
+  trackDetailedPageView,
   trackProjectDetailedInteraction,
   trackScrollDepth,
   trackTimeSpent,
@@ -131,18 +131,25 @@ export default function Projetos({ isDark }: ProjectsProps) {
   const featuredProjects: Project[] = projects.filter((project) => project.featured);
 
   useEffect(() => {
-    // Rastreamento avançado da página
-    trackDetailedPageView('projects', {
-      totalProjects: projects.length,
-      featuredProjects: featuredProjects.length,
-      isDarkMode: isDark,
-    });
+    // Aguarda o carregamento do Clarity antes de rastrear
+    const interval = setInterval(() => {
+      if (typeof window !== 'undefined' && typeof window.clarity === 'function') {
+        // Rastreamento avançado da página
+        trackDetailedPageView('projects', {
+          totalProjects: projects.length,
+          featuredProjects: featuredProjects.length,
+          isDarkMode: isDark,
+        });
 
-    // Rastrear métricas de performance
-    trackPerformanceMetrics('projects');
+        // Rastrear métricas de performance
+        trackPerformanceMetrics('projects');
 
-    // Rastrear entrada no funil de conversão
-    trackConversionFunnel('page_load');
+        // Rastrear entrada no funil de conversão
+        trackConversionFunnel('page_load');
+
+        clearInterval(interval);
+      }
+    }, 300);
 
     // Rastrear scroll depth
     const handleScroll = () => {
@@ -169,6 +176,7 @@ export default function Projetos({ isDark }: ProjectsProps) {
     window.addEventListener('beforeunload', handleBeforeUnload);
 
     return () => {
+      clearInterval(interval);
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('beforeunload', handleBeforeUnload);
     };

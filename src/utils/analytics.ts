@@ -11,24 +11,25 @@ import type {
 } from '@/types/analytics';
 
 export const trackClarityEvent = (eventName: string, eventData?: ClarityEventData): void => {
-  if (typeof window !== 'undefined' && window.clarity?.event) {
+  if (
+    typeof window !== 'undefined' &&
+    typeof window.clarity === 'function' &&
+    typeof window.clarity.event === 'function'
+  ) {
     window.clarity.event(eventName, {
       ...eventData,
       timestamp: new Date().toISOString(),
-      userAgent: navigator.userAgent,
+      userAgent: typeof navigator !== 'undefined' ? navigator.userAgent : '',
     });
   }
 };
 
 export const trackPageView = (pageName: string, additionalData?: ClarityEventData): void => {
-  if (typeof window !== 'undefined' && window.clarity) {
-    // Força o rastreamento de página para SPAs
+  if (typeof window !== 'undefined' && typeof window.clarity === 'function') {
     window.clarity('trackPageView');
-
-    // Envia evento customizado de navegação
     trackClarityEvent('page_view', {
       page: pageName,
-      url: window.location.href,
+      url: typeof window !== 'undefined' ? window.location.href : '',
       ...additionalData,
     });
   }
@@ -63,24 +64,22 @@ export const trackDetailedPageView = (
   additionalData?: ClarityEventData,
   sectionViewed?: PageSection,
 ): void => {
-  if (typeof window !== 'undefined' && window.clarity) {
+  if (typeof window !== 'undefined' && typeof window.clarity === 'function') {
     window.clarity('trackPageView');
-
     const sessionData: UserSessionData = {
       sessionId: generateSessionId(),
       timestamp: new Date().toISOString(),
-      userAgent: navigator.userAgent,
+      userAgent: typeof navigator !== 'undefined' ? navigator.userAgent : '',
       viewport: {
-        width: window.innerWidth,
-        height: window.innerHeight,
+        width: typeof window !== 'undefined' ? window.innerWidth : 0,
+        height: typeof window !== 'undefined' ? window.innerHeight : 0,
       },
-      referrer: document.referrer,
+      referrer: typeof document !== 'undefined' ? document.referrer : '',
       ...extractUTMParams(),
     };
-
     trackClarityEvent('detailed_page_view', {
       page: pageName,
-      url: window.location.href,
+      url: typeof window !== 'undefined' ? window.location.href : '',
       section: sectionViewed || 'page_load',
       sessionId: sessionData.sessionId,
       timestamp: sessionData.timestamp,
@@ -101,7 +100,7 @@ export const trackScrollDepth = (depth: number, pageName: string): void => {
     page: pageName,
     scrollDepth: depth,
     timestamp: new Date().toISOString(),
-    viewport: `${window.innerWidth}x${window.innerHeight}`,
+    viewport: typeof window !== 'undefined' ? `${window.innerWidth}x${window.innerHeight}` : '',
   });
 };
 
@@ -158,9 +157,9 @@ export const trackErrorEvent = (
 ): void => {
   trackClarityEvent('error_tracking', {
     errorType,
-    errorMessage: errorMessage.substring(0, 200), // Limitar tamanho
+    errorMessage: errorMessage.substring(0, 200),
     errorStack: errorStack?.substring(0, 500) || '',
-    page: window.location.pathname,
+    page: typeof window !== 'undefined' ? window.location.pathname : '',
     timestamp: new Date().toISOString(),
   });
 };
@@ -173,20 +172,21 @@ export const trackPerformanceMetrics = (pageName: string): void => {
       )[0] as PerformanceNavigationTiming;
       const paint = performance.getEntriesByType('paint');
       const metrics: PerformanceMetrics = {
-        loadTime: navigation.loadEventEnd - navigation.loadEventStart,
+        loadTime: navigation ? navigation.loadEventEnd - navigation.loadEventStart : 0,
         firstContentfulPaint:
           paint.find((p) => p.name === 'first-contentful-paint')?.startTime || 0,
         connectionType:
-          (navigator as NavigatorWithConnection).connection?.effectiveType || 'unknown',
-        largestContentfulPaint: 0, // Seria necessário usar PerformanceObserver
-        cumulativeLayoutShift: 0, // Seria necessário usar PerformanceObserver
+          typeof navigator !== 'undefined' && (navigator as NavigatorWithConnection).connection
+            ? (navigator as NavigatorWithConnection).connection?.effectiveType || 'unknown'
+            : 'unknown',
+        largestContentfulPaint: 0,
+        cumulativeLayoutShift: 0,
       };
 
       trackClarityEvent('performance_metrics', {
         page: pageName,
         ...metrics,
-        connectionType:
-          (navigator as NavigatorWithConnection).connection?.effectiveType || 'unknown',
+        connectionType: metrics.connectionType,
       });
     }, 2000);
   }
@@ -198,6 +198,7 @@ const generateSessionId = (): string => {
 };
 
 const extractUTMParams = (): { utmSource?: string; utmMedium?: string; utmCampaign?: string } => {
+  if (typeof window === 'undefined') return {};
   const urlParams = new URLSearchParams(window.location.search);
   return {
     utmSource: urlParams.get('utm_source') || undefined,
@@ -226,6 +227,7 @@ const getFunnelPosition = (step: string): number => {
 };
 
 const getSessionTime = (): number => {
+  if (typeof window === 'undefined' || typeof sessionStorage === 'undefined') return 0;
   const startTime = sessionStorage.getItem('sessionStartTime');
   if (!startTime) {
     sessionStorage.setItem('sessionStartTime', Date.now().toString());

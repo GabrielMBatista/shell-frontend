@@ -23,7 +23,7 @@ export async function middleware(request: NextRequest) {
     raw: true,
   });
 
-  console.log('[Middleware] Token:', token);
+  // console.log('[Middleware] Token:', token);
 
   const isAuthenticated = !!token;
 
@@ -40,5 +40,7 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/((?!api|_next|.*\\..*).*)'],
+  matcher: [
+    '/((?!api|_next|_static|_vercel|favicon.ico|sitemap.xml|robots.txt|.*\\.js|.*\\.css|.*\\.png|.*\\.jpg|.*\\.jpeg|.*\\.gif|.*\\.svg|.*\\.ico|.*\\.woff|.*\\.woff2|.*\\.ttf|.*\\.eot|scripts\\.clarity\\.ms).*)',
+  ],
 };

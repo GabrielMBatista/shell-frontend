@@ -31,57 +31,55 @@ const ErrorClient = ({ statusCode, message }: ErrorClientProps) => {
 
   return (
     <div
-      className={`min-h-screen flex items-center justify-center bg-gradient-to-br from-[var(--color-surface)] to-[var(--color-surface-dark)] p-[var(--space-md)] transition-opacity duration-700 ${
+      className={`min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-300 p-6 transition-opacity duration-700 ${
         isVisible ? 'opacity-100' : 'opacity-0'
       }`}
     >
-      <div className="max-w-md w-full bg-[var(--color-background)] rounded-[var(--border-radius-lg)] shadow-[var(--shadow-lg)] overflow-hidden">
-        <div className="bg-gradient-to-r from-[var(--color-secondary)] to-[var(--color-primary)] p-[var(--space-lg)] flex justify-center">
+      <div className="max-w-md w-full bg-white rounded-2xl shadow-lg overflow-hidden">
+        <div className="bg-gradient-to-r from-purple-600 to-blue-600 p-8 flex justify-center">
           <div className="relative">
-            <div className="absolute inset-0 bg-[var(--color-background)] opacity-20 rounded-full animate-ping"></div>
-            <AlertCircle size={80} className="text-[var(--color-on-surface-dark)] relative z-10" />
+            <div className="absolute inset-0 bg-white opacity-20 rounded-full animate-ping"></div>
+            <AlertCircle size={80} className="text-white relative z-10" />
           </div>
         </div>
 
-        <div className="p-[var(--space-lg)] md:p-[var(--space-xl)]">
-          <h2 className="text-[var(--font-size-lg)] md:text-[var(--font-size-xl)] font-bold text-[var(--color-text)] mb-[var(--space-sm)] text-center">
-            Oops! Something went wrong
+        <div className="p-8 md:p-12">
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2 text-center">
+            Oops! Algo deu errado
           </h2>
 
-          <div className="bg-[var(--color-danger)]/10 border-l-4 border-[var(--color-danger)] p-[var(--space-md)] my-[var(--space-md)] rounded-[var(--border-radius-sm)]">
-            <p className="text-[var(--font-size-sm)] md:text-[var(--font-size-md)] text-[var(--color-danger)] font-medium">
-              {message || 'An unexpected error occurred.'}
+          <div className="bg-red-100 border-l-4 border-red-500 p-4 my-4 rounded-lg">
+            <p className="text-sm md:text-base text-red-600 font-medium">
+              {message || 'Ocorreu um erro inesperado.'}
             </p>
           </div>
 
-          <p className="text-[var(--color-text)]/70 mb-[var(--space-lg)] text-center">
-            Don&#39;t worry, we&#39;ve logged this error and our team is working on it.
+          <p className="text-gray-500 mb-8 text-center">
+            Não se preocupe, o erro foi registrado e nossa equipe está trabalhando nisso.
           </p>
 
-          <div className="flex flex-col md:flex-row gap-[var(--space-sm)] justify-center">
+          <div className="flex flex-col md:flex-row gap-2 justify-center">
             <button
               onClick={handleReset}
-              className="flex items-center justify-center gap-[var(--space-sm)] px-[var(--space-lg)] py-[var(--space-md)] bg-[var(--color-primary)] text-[var(--color-on-surface-dark)] font-medium rounded-[var(--border-radius-sm)] hover:bg-[var(--color-primary-hover)] transition-colors"
+              className="flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
             >
               <RefreshCw size={18} className={`${isRotating ? 'animate-spin' : ''}`} />
-              Try Again
+              Tentar novamente
             </button>
 
             <button
               onClick={() => (window.location.href = '/')}
-              className="flex items-center justify-center gap-[var(--space-sm)] px-[var(--space-lg)] py-[var(--space-md)] border border-[var(--color-border)] text-[var(--color-text)] font-medium rounded-[var(--border-radius-sm)] hover:bg-[var(--color-hover)] transition-colors"
+              className="flex items-center justify-center gap-2 px-6 py-3 border border-gray-300 text-gray-800 font-medium rounded-lg hover:bg-gray-100 transition-colors"
             >
-              Go Home
+              Ir para Home
               <ArrowRight size={18} />
             </button>
           </div>
         </div>
 
-        <div className="bg-[var(--color-surface)] px-[var(--space-lg)] py-[var(--space-md)] flex justify-between items-center border-t border-[var(--color-border)]">
-          <p className="text-[var(--font-size-sm)] text-[var(--color-text)]/50">
-            Error Code: {statusCode || 500}
-          </p>
-          <p className="text-[var(--font-size-sm)] text-[var(--color-text)]/50">{currentTime}</p>
+        <div className="bg-gray-50 px-6 py-4 flex justify-between items-center border-t border-gray-200">
+          <p className="text-sm text-gray-400">Código do erro: {statusCode || 500}</p>
+          <p className="text-sm text-gray-400">{currentTime}</p>
         </div>
       </div>
     </div>
