@@ -93,12 +93,14 @@ export const trackProjectInteraction = (
 export const trackDetailedPageView = async (
   page: string,
   details?: Record<string, unknown>,
+  section?: PageSection,
 ): Promise<void> => {
   try {
     const clarityLoaded = await waitForClarity();
     if (clarityLoaded && typeof window.clarity === 'function') {
-          (window.clarity as (event: string, name: string, data: Record<string, unknown>) => void)('event', 'detailed_page_view', {
+      (window.clarity as (event: string, name: string, data: Record<string, unknown>) => void)('event', 'detailed_page_view', {
         page,
+        section,
         ...details,
         timestamp: new Date().toISOString(),
         url: window.location.href,
