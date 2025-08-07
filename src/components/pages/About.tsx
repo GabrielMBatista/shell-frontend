@@ -18,8 +18,11 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import gabrielPhoto from '@/assets/gabrielPhoto.jpg';
+import { usePageTitle } from '@/hooks/usePageTitle';
 
 export default function Sobre({ isDark }: { isDark: boolean }) {
+  usePageTitle('Sobre');
+
   const fontFamily = useGoogleFont('Inter');
   const [showAllSkills, setShowAllSkills] = useState(false);
   const [showAllTimeline, setShowAllTimeline] = useState(false);

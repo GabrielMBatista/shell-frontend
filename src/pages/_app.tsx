@@ -1,5 +1,4 @@
 import '@/styles/globals.css';
-// import dynamic from 'next/dynamic';
 import type { AppProps } from 'next/app';
 import { Providers } from '@/providers/providers';
 import { ClientOnly } from '@/utils/client-only';
@@ -7,19 +6,6 @@ import Header from '@/components/common/Header';
 import Footer from '@/components/common/Footer';
 import { useState, useEffect, Suspense } from 'react';
 import { Inter } from 'next/font/google';
-
-// Declaração de tipos para o Clarity
-declare global {
-  interface Window {
-    clarity: {
-      (command: string, ...args: unknown[]): void;
-      event: (eventName: string, eventData?: Record<string, unknown>) => void;
-      trackPageView: () => void;
-      q?: [string, ...unknown[]][];
-    };
-    sendClarityEvent?: (eventName: string, eventData?: Record<string, unknown>) => void;
-  }
-}
 
 const inter = Inter({ subsets: ['latin'], display: 'swap' });
 

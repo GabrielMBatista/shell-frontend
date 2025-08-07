@@ -5,16 +5,18 @@ import { Github, ExternalLink, Search, Code, Smartphone, Globe, Database, Zap } 
 import CTASection from '@/components/common/CTASection';
 import { resolutions } from '@/utils/resolutions';
 import {
-  trackDetailedPageView,
   trackProjectDetailedInteraction,
   trackScrollDepth,
   trackTimeSpent,
   trackConversionFunnel,
   trackPerformanceMetrics,
+  trackPageView,
 } from '@/utils/analytics';
 import type { Project, Category, ProjectsProps } from '@/types/projects';
+import { usePageTitle } from '@/hooks/usePageTitle';
 
 export default function Projetos({ isDark }: ProjectsProps) {
+  usePageTitle('Projetos');
   const fontFamily = useGoogleFont('Inter');
   const [activeFilter, setActiveFilter] = useState<string>('todos');
   const [searchTerm, setSearchTerm] = useState<string>('');
@@ -66,7 +68,7 @@ export default function Projetos({ isDark }: ProjectsProps) {
         'React Query',
       ],
       github: 'https://github.com/GabrielMBatista/tropa-login',
-      demo: 'https://tropa-login.vercel.app',
+      demo: 'https://tropa-login.vercel.app/login',
       featured: true,
     },
     {
@@ -131,11 +133,13 @@ export default function Projetos({ isDark }: ProjectsProps) {
   const featuredProjects: Project[] = projects.filter((project) => project.featured);
 
   useEffect(() => {
-    // Aguarda o carregamento do Clarity antes de rastrear
-    const interval = setInterval(() => {
-      if (typeof window !== 'undefined' && typeof window.clarity === 'function') {
-        // Rastreamento avançado da página
-        trackDetailedPageView('projects', {
+    const initializeAnalytics = async (): Promise<void> => {
+      try {
+        // Aguardar um momento para garantir que o Clarity tenha carregado
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+
+        // Usar trackPageView
+        await trackPageView('projects', {
           totalProjects: projects.length,
           featuredProjects: featuredProjects.length,
           isDarkMode: isDark,
@@ -145,12 +149,17 @@ export default function Projetos({ isDark }: ProjectsProps) {
         trackPerformanceMetrics('projects');
 
         // Rastrear entrada no funil de conversão
-        trackConversionFunnel('page_load');
-
-        clearInterval(interval);
+        await trackConversionFunnel('page_load');
+      } catch (error: unknown) {
+        const errorMessage = error instanceof Error ? error.message : 'Unknown setup error';
+        console.warn('Error setting up analytics:', errorMessage);
       }
-    }, 300);
+    };
 
+    initializeAnalytics();
+  }, [isDark, projects.length, featuredProjects.length]);
+
+  useEffect(() => {
     // Rastrear scroll depth
     const handleScroll = () => {
       const scrollPercent = Math.round(
@@ -176,7 +185,6 @@ export default function Projetos({ isDark }: ProjectsProps) {
     window.addEventListener('beforeunload', handleBeforeUnload);
 
     return () => {
-      clearInterval(interval);
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('beforeunload', handleBeforeUnload);
     };

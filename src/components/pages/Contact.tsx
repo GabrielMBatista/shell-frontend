@@ -19,10 +19,13 @@ import {
   FileText,
 } from 'lucide-react';
 import { useState } from 'react';
+import { usePageTitle } from '@/hooks/usePageTitle';
 
 const FAQSection = dynamic(() => import('@/components/common/FAQSection'), { ssr: false });
 
 export default function Contato({ isDark }: { isDark: boolean }) {
+  usePageTitle('Contato');
+
   const fontFamily = useGoogleFont('Inter');
   const [formData, setFormData] = useState({
     name: '',

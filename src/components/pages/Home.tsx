@@ -17,10 +17,12 @@ import {
 import Image from 'next/image';
 import gabrielPhoto from '@/assets/gabrielPhoto.jpg';
 import Link from 'next/link';
+import { usePageTitle } from '@/hooks/usePageTitle';
 
 const CTASection = dynamic(() => import('@/components/common/CTASection'), { ssr: false });
 
 export default function Home({ isDark }: { isDark: boolean }) {
+  usePageTitle('Home');
   const fontFamily = useGoogleFont('Inter');
 
   return (

@@ -1,10 +1,8 @@
 declare global {
   interface Window {
-    clarity: {
-      (command: string, ...args: unknown[]): void;
+    clarity?: {
       event: (eventName: string, eventData?: Record<string, unknown>) => void;
-      trackPageView: () => void;
-      q?: [string, ...unknown[]][];
+      q?: unknown[];
     };
     sendClarityEvent?: (eventName: string, eventData?: Record<string, unknown>) => void;
   }

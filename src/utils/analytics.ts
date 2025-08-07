@@ -4,34 +4,65 @@ import type {
   PageSection,
   PerformanceMetrics,
   NavigatorWithConnection,
-  UserSessionData,
   ProjectInteractionContext,
   ErrorType,
   ConversionStep,
 } from '@/types/analytics';
 
-export const trackClarityEvent = (eventName: string, eventData?: ClarityEventData): void => {
-  if (
-    typeof window !== 'undefined' &&
-    typeof window.clarity === 'function' &&
-    typeof window.clarity.event === 'function'
-  ) {
-    window.clarity.event(eventName, {
-      ...eventData,
-      timestamp: new Date().toISOString(),
-      userAgent: typeof navigator !== 'undefined' ? navigator.userAgent : '',
-    });
+// Função para aguardar o carregamento do Clarity
+const waitForClarity = (): Promise<boolean> => {
+  return new Promise((resolve) => {
+    let attempts = 0;
+    const maxAttempts = 30; // 3 segundos máximo
+
+    const checkClarity = () => {
+      attempts++;
+      if (typeof window !== 'undefined' && window.clarity && typeof window.clarity === 'function') {
+        resolve(true);
+      } else if (attempts < maxAttempts) {
+        setTimeout(checkClarity, 100);
+      } else {
+        resolve(false);
+      }
+    };
+
+    checkClarity();
+  });
+};
+
+export const trackClarityEvent = async (
+  eventName: string,
+  eventData?: ClarityEventData,
+): Promise<void> => {
+  try {
+    const clarityLoaded = await waitForClarity();
+    if (clarityLoaded && window.clarity?.event) {
+      window.clarity.event(eventName, {
+        ...eventData,
+        timestamp: new Date().toISOString(),
+        userAgent: typeof navigator !== 'undefined' ? navigator.userAgent : '',
+      });
+    }
+  } catch (error: unknown) {
+    console.warn('Clarity event error:', error);
   }
 };
 
-export const trackPageView = (pageName: string, additionalData?: ClarityEventData): void => {
-  if (typeof window !== 'undefined' && typeof window.clarity === 'function') {
-    window.clarity('trackPageView');
-    trackClarityEvent('page_view', {
-      page: pageName,
-      url: typeof window !== 'undefined' ? window.location.href : '',
-      ...additionalData,
-    });
+export const trackPageView = async (
+  pageName: string,
+  additionalData?: ClarityEventData,
+): Promise<void> => {
+  try {
+    const clarityLoaded = await waitForClarity();
+    if (clarityLoaded && typeof window.clarity === 'function') {
+      await trackClarityEvent('page_view', {
+        page: pageName,
+        url: window.location.href,
+        ...additionalData,
+      });
+    }
+  } catch (error: unknown) {
+    console.warn('Page view tracking error:', error);
   }
 };
 
@@ -59,44 +90,28 @@ export const trackProjectInteraction = (
   });
 };
 
-export const trackDetailedPageView = (
-  pageName: string,
-  additionalData?: ClarityEventData,
-  sectionViewed?: PageSection,
-): void => {
-  if (typeof window !== 'undefined' && typeof window.clarity === 'function') {
-    window.clarity('trackPageView');
-    const sessionData: UserSessionData = {
-      sessionId: generateSessionId(),
-      timestamp: new Date().toISOString(),
-      userAgent: typeof navigator !== 'undefined' ? navigator.userAgent : '',
-      viewport: {
-        width: typeof window !== 'undefined' ? window.innerWidth : 0,
-        height: typeof window !== 'undefined' ? window.innerHeight : 0,
-      },
-      referrer: typeof document !== 'undefined' ? document.referrer : '',
-      ...extractUTMParams(),
-    };
-    trackClarityEvent('detailed_page_view', {
-      page: pageName,
-      url: typeof window !== 'undefined' ? window.location.href : '',
-      section: sectionViewed || 'page_load',
-      sessionId: sessionData.sessionId,
-      timestamp: sessionData.timestamp,
-      userAgent: sessionData.userAgent,
-      viewportWidth: sessionData.viewport.width,
-      viewportHeight: sessionData.viewport.height,
-      referrer: sessionData.referrer,
-      utmSource: sessionData.utmSource ?? '',
-      utmMedium: sessionData.utmMedium ?? '',
-      utmCampaign: sessionData.utmCampaign ?? '',
-      ...additionalData,
-    });
+export const trackDetailedPageView = async (
+  page: string,
+  details?: Record<string, unknown>,
+): Promise<void> => {
+  try {
+    const clarityLoaded = await waitForClarity();
+    if (clarityLoaded && typeof window.clarity === 'function') {
+          (window.clarity as (event: string, name: string, data: Record<string, unknown>) => void)('event', 'detailed_page_view', {
+        page,
+        ...details,
+        timestamp: new Date().toISOString(),
+        url: window.location.href,
+        pathname: window.location.pathname,
+      });
+    }
+  } catch (error: unknown) {
+    console.warn('Detailed page view tracking error:', error);
   }
 };
 
-export const trackScrollDepth = (depth: number, pageName: string): void => {
-  trackClarityEvent('scroll_depth', {
+export const trackScrollDepth = async (depth: number, pageName: string): Promise<void> => {
+  await trackClarityEvent('scroll_depth', {
     page: pageName,
     scrollDepth: depth,
     timestamp: new Date().toISOString(),
@@ -190,21 +205,6 @@ export const trackPerformanceMetrics = (pageName: string): void => {
       });
     }, 2000);
   }
-};
-
-// Funções auxiliares
-const generateSessionId = (): string => {
-  return `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-};
-
-const extractUTMParams = (): { utmSource?: string; utmMedium?: string; utmCampaign?: string } => {
-  if (typeof window === 'undefined') return {};
-  const urlParams = new URLSearchParams(window.location.search);
-  return {
-    utmSource: urlParams.get('utm_source') || undefined,
-    utmMedium: urlParams.get('utm_medium') || undefined,
-    utmCampaign: urlParams.get('utm_campaign') || undefined,
-  };
 };
 
 const categorizeEngagement = (timeSpent: number): string => {
