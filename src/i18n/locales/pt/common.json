@@ -1,6 +1,239 @@
 {
   "Home": {
     "title": "Portfólio Gabriel",
-    "description": "Next.js + Tailwind + Shadcn + Next-Intl funcionando!"
+    "description": "Next.js + Tailwind + Shadcn + Next-Intl funcionando!",
+    "badge": {
+      "available": "Disponível para novos projetos"
+    },
+    "greeting": "Olá, eu sou",
+    "name": "Gabriel Marques",
+    "role": "Desenvolvedor Full Stack | Entusiasta em IA",
+    "intro": "Transformo ideias em experiências digitais excepcionais. Especializado em React, Node.js e design de interfaces modernas que conectam pessoas e tecnologia.",
+    "ctas": {
+      "viewProjects": "Ver Projetos",
+      "downloadCV": "Download CV"
+    },
+    "connect": "Conecte-se:",
+    "skills": {
+      "title": "Especialidades",
+      "subtitle": "Tecnologias e ferramentas que domino para criar soluções completas",
+      "frontend": {
+        "title": "Frontend Development",
+        "desc": "Interfaces modernas e responsivas com as melhores práticas de UX/UI"
+      },
+      "backend": {
+        "title": "Backend Development",
+        "desc": "APIs escaláveis com arquitetura bem estruturada"
+      },
+      "critical": {
+        "title": "Pensamento Crítico e Resolução de Problemas",
+        "desc": "Capacidade de decompor desafios técnicos complexos em soluções eficientes e elegantes, sempre com foco em qualidade e clareza."
+      }
+    },
+    "finalCTA": {
+      "title": "Vamos trabalhar juntos?",
+      "description": "Estou sempre aberto a discutir novos projetos, ideias criativas ou oportunidades de colaboração.",
+      "primary": "Entrar em Contato",
+      "secondary": "Saiba Mais Sobre Mim"
+    }
+  },
+  "Header": {
+    "tooltip": {
+      "reopenAssistant": "Reabrir assistente Gabs.IA"
+    },
+    "nav": {
+      "home": "Home",
+      "projects": "Projetos",
+      "about": "Sobre",
+      "contact": "Contato"
+    },
+    "lang": {
+      "toggle": "Alterar idioma",
+      "pt-br": "Português (Brasil)",
+      "en-en": "English",
+      "short": {
+        "pt-br": "PT",
+        "en-en": "EN"
+      }
+    }
+  },
+  "Footer": {
+    "copyright": "© 2025 Gabriel Marques. Todos os direitos reservados."
+  },
+  "NotFound": {
+    "title": "Oops, Página não encontrada",
+    "description": "A página que você procura parece ter desaparecido. Vamos te colocar de volta no caminho!",
+    "buttons": {
+      "backHome": "Voltar para a Home",
+      "goBack": "Voltar"
+    },
+    "help": {
+      "prefix": "Precisa de ajuda? Visite nossa",
+      "documentation": "documentação",
+      "suffix": "."
+    }
+  },
+  "Projects": {
+    "pageTitle": "Projetos",
+    "header": {
+      "titlePrefix": "Meus",
+      "titleHighlight": "Projetos",
+      "subtitle": "Uma seleção dos meus trabalhos mais recentes até os mais antigos, aplicações web completas incluindo APIs e interfaces modernas."
+    },
+    "featured": {
+      "title": "Projetos em Destaque",
+      "badge": "Destaque"
+    },
+    "search": {
+      "placeholder": "Buscar projetos..."
+    },
+    "categories": {
+      "todos": "Todos os Projetos",
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "fullstack": "Full Stack",
+      "mobile": "Mobile"
+    },
+    "all": {
+      "title": "Todos os Projetos",
+      "note": "Nota: Nem todos os projetos possuem responsividade e alguns foram desenvolvidos no início da minha carreira."
+    },
+    "empty": {
+      "title": "Nenhum projeto encontrado",
+      "subtitle": "Tente ajustar os filtros ou termo de busca"
+    },
+    "buttons": {
+      "viewDemo": "Ver Demo",
+      "demo": "Demo",
+      "code": "Código"
+    }
+  },
+  "Contact": {
+    "pageTitle": "Contato",
+    "hero": {
+      "titlePrefix": "Entre em",
+      "titleHighlight": "Contato",
+      "subtitle": "Tem um projeto em mente? Vamos conversar sobre como posso ajudar a transformar suas ideias em realidade digital."
+    },
+    "info": {
+      "email": {
+        "title": "Email",
+        "description": "Respondo em até 24 horas"
+      },
+      "phone": {
+        "title": "Telefone",
+        "description": "Seg-Sex, 9h às 18h"
+      },
+      "location": {
+        "title": "Localização",
+        "value": "São Paulo, SP",
+        "description": "Disponível para trabalho remoto"
+      }
+    },
+    "form": {
+      "title": "Envie uma Mensagem",
+      "subtitle": "Preencha o formulário abaixo e entrarei em contato o mais breve possível",
+      "labels": {
+        "name": "Nome Completo",
+        "email": "Email",
+        "subject": "Assunto",
+        "message": "Mensagem"
+      },
+      "placeholders": {
+        "name": "Seu nome completo",
+        "email": "seu@email.com",
+        "subject": "Sobre o que você gostaria de conversar?",
+        "message": "Conte-me mais sobre seu projeto, prazos, orçamento e qualquer detalhe relevante..."
+      },
+      "status": {
+        "success": "Mensagem enviada com sucesso! Entrarei em contato em breve.",
+        "error": "Erro ao enviar mensagem. Tente novamente."
+      },
+      "buttons": {
+        "sending": "Enviando...",
+        "send": "Enviar Mensagem"
+      }
+    },
+    "social": {
+      "title": "Ou me encontre nas redes sociais",
+      "subtitle": "Siga meu trabalho e conecte-se comigo nas plataformas abaixo"
+    }
+  },
+  "About": {
+    "pageTitle": "Sobre",
+    "hero": {
+      "locationBadge": "São Paulo, Brasil",
+      "title": "Sobre",
+      "highlightName": "Gabriel Marques",
+      "role": "Desenvolvedor Full Stack apaixonado por criar experiências digitais excepcionais",
+      "description": "Com mais de 4 anos de experiência, combino conhecimento técnico sólido com visão de design para entregar soluções que realmente fazem a diferença. Especializado em React, Node.js e arquiteturas modernas."
+    },
+    "ctas": {
+      "downloadCV": "Download CV",
+      "contact": "Entrar em Contato",
+      "viewProjects": "Ver Meus Projetos"
+    },
+    "stats": {
+      "yearsInIT": "Anos na Area de TI",
+      "yearsAsDev": "Anos de Experiência Como Desenvolvedor",
+      "mentees": "Estagiarios e Jr Mentorados",
+      "coffees": "Xícaras de Café"
+    },
+    "skills": {
+      "title": "Habilidades Técnicas",
+      "subtitle": "Tecnologias e ferramentas que domino para criar soluções completas e eficientes",
+      "showMore": "Ver Mais"
+    },
+    "timeline": {
+      "title": "Minha Jornada",
+      "subtitle": "Uma linha do tempo da minha experiência profissional e educacional",
+      "types": {
+        "work": "Experiência Profissional",
+        "education": "Educação"
+      },
+      "showMore": "Ver Mais"
+    },
+    "finalCTA": {
+      "title": "Vamos trabalhar juntos?",
+      "subtitle": "Estou sempre aberto a discutir novos projetos, ideias criativas ou oportunidades de colaboração."
+    }
+  },
+  "UI": {
+    "Card": {
+      "featured": "Destaque",
+      "buttons": {
+        "demo": "Demo",
+        "code": "Código"
+      }
+    },
+    "ContactModal": {
+      "title": "Vamos conversar?",
+      "description": "Escolha a melhor forma de entrar em contato comigo",
+      "links": {
+        "linkedin": "LinkedIn",
+        "github": "GitHub",
+        "whatsapp": "WhatsApp"
+      },
+      "email": {
+        "label": "📧 Gabbriel_gbl2@hotmail.com",
+        "copy": "Copiar e-mail 📋",
+        "copiedAlert": "E-mail copiado para a área de transferência!"
+      },
+      "note": "Retorno garantido em até 24h — ou sua mensagem de volta! 😄"
+    }
+  },
+  "Error": {
+    "title": "Oops! Algo deu errado",
+    "defaultMessage": "Ocorreu um erro inesperado.",
+    "reassurance": "Não se preocupe, o erro foi registrado e nossa equipe está trabalhando nisso.",
+    "buttons": {
+      "retry": "Tentar novamente",
+      "goHome": "Ir para Home"
+    },
+    "codePrefix": "Código do erro:"
+  },
+  "FAQ": {
+    "title": "Perguntas Frequentes",
+    "subtitle": "Algumas respostas rápidas para dúvidas comuns"
   }
 }

@@ -1,31 +1,44 @@
 'use client';
 
 import { createContext, useContext, useState, useEffect, useCallback, ReactNode } from 'react';
-import pt from '../i18n/locales/pt/common.json';
-import en from '../i18n/locales/en/common.json';
+import { detectLocale } from '@/utils/locale';
+import type { Locale } from '@/i18n';
+import { messages as resources } from '@/i18n/messages';
+import type { Messages } from '@/i18n/messages';
 
-type Messages = Record<string, Record<string, string>>;
-
-const resources: Record<string, Messages> = { pt, en };
+const getFromPath = (obj: unknown, path: string): unknown => {
+  if (!obj) return undefined;
+  return path.split('.').reduce((acc: unknown, part: string) => {
+    if (acc && typeof acc === 'object') return (acc as Record<string, unknown>)[part];
+    return undefined;
+  }, obj);
+};
 
 interface I18nContextProps {
-  locale: string;
+  locale: Locale;
   t: (namespace: string, key: string) => string;
-  changeLocale: (newLocale: string) => void;
+  changeLocale: (newLocale: Locale) => void;
 }
 
 const I18nContext = createContext<I18nContextProps | undefined>(undefined);
 
 export const I18nProvider = ({ children }: { children: ReactNode }) => {
-  const [locale, setLocale] = useState<string>('pt');
+  const [locale, setLocale] = useState<Locale>('pt-br');
 
   useEffect(() => {
-    const stored = localStorage.getItem('locale') || 'pt';
-    setLocale(stored);
-    document.documentElement.lang = stored;
+    const stored = (localStorage.getItem('locale') || '').toLowerCase();
+    let initial: Locale;
+
+    if (stored === 'pt' || stored === 'pt-br') initial = 'pt-br';
+    else if (stored === 'en' || stored === 'en-us' || stored === 'en-en') initial = 'en-en';
+    else initial = detectLocale() as Locale;
+
+    setLocale(initial);
+    localStorage.setItem('locale', initial);
+    document.documentElement.lang = initial;
   }, []);
 
-  const changeLocale = useCallback((newLocale: string) => {
+  const changeLocale = useCallback((newLocale: Locale) => {
     setLocale(newLocale);
     localStorage.setItem('locale', newLocale);
     document.documentElement.lang = newLocale;
@@ -33,14 +46,19 @@ export const I18nProvider = ({ children }: { children: ReactNode }) => {
 
   const t = useCallback(
     (namespace: string, key: string) => {
-      const value = resources[locale]?.[namespace]?.[key];
-      return value || key;
+      const current = getFromPath(resources[locale]?.[namespace as keyof Messages], key);
+      if (typeof current === 'string') return current;
+      const fallback = getFromPath(resources['pt-br']?.[namespace as keyof Messages], key);
+      return typeof fallback === 'string' ? fallback : key;
     },
     [locale],
   );
 
   return (
-    <I18nContext.Provider value={{ locale, t, changeLocale }}>{children}</I18nContext.Provider>
+    <I18nContext.Provider value={{ locale, t, changeLocale }}>
+      {/* força re-montagem da subárvore ao trocar o idioma */}
+      <div key={locale}>{children}</div>
+    </I18nContext.Provider>
   );
 };
 

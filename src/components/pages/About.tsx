@@ -19,9 +19,11 @@ import {
 import Link from 'next/link';
 import gabrielPhoto from '@/assets/gabrielPhoto.jpg';
 import { usePageTitle } from '@/hooks/usePageTitle';
+import { useTranslation } from '@/hooks/useTranslation';
 
 export default function Sobre({ isDark }: { isDark: boolean }) {
-  usePageTitle('Sobre');
+  const { t } = useTranslation('common');
+  usePageTitle(t('About.pageTitle'));
 
   const fontFamily = useGoogleFont('Inter');
   const [showAllSkills, setShowAllSkills] = useState(false);
@@ -160,10 +162,10 @@ export default function Sobre({ isDark }: { isDark: boolean }) {
   const visibleTimeline = showAllTimeline ? sortedTimeline : sortedTimeline.slice(0, 5);
 
   const stats = [
-    { number: '10+', label: 'Anos na Area de TI', icon: Briefcase },
-    { number: '4+', label: 'Anos de Experiência Como Desenvolvedor', icon: Calendar },
-    { number: '20+', label: 'Estagiarios e Jr Mentorados', icon: Users },
-    { number: '1000+', label: 'Xícaras de Café', icon: Coffee },
+    { number: '10+', label: t('About.stats.yearsInIT'), icon: Briefcase },
+    { number: '4+', label: t('About.stats.yearsAsDev'), icon: Calendar },
+    { number: '20+', label: t('About.stats.mentees'), icon: Users },
+    { number: '1000+', label: t('About.stats.coffees'), icon: Coffee },
   ];
 
   return (
@@ -184,27 +186,25 @@ export default function Sobre({ isDark }: { isDark: boolean }) {
                   }`}
                 >
                   <MapPin size={16} />
-                  São Paulo, Brasil
+                  {t('About.hero.locationBadge')}
                 </div>
                 <h1
                   className={`text-4xl md:text-6xl font-bold leading-tight ${isDark ? 'text-white' : 'text-gray-900'}`}
                 >
-                  Sobre
+                  {t('About.hero.title')}
                   <span className="block bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                    Gabriel Marques
+                    {t('About.hero.highlightName')}
                   </span>
                 </h1>
                 <p
                   className={`text-xl md:text-2xl font-medium ${isDark ? 'text-gray-300' : 'text-gray-600'}`}
                 >
-                  Desenvolvedor Full Stack apaixonado por criar experiências digitais excepcionais
+                  {t('About.hero.role')}
                 </p>
                 <p
                   className={`text-lg leading-relaxed max-w-2xl ${isDark ? 'text-gray-400' : 'text-gray-600'}`}
                 >
-                  Com mais de 4 anos de experiência, combino conhecimento técnico sólido com visão
-                  de design para entregar soluções que realmente fazem a diferença. Especializado em
-                  React, Node.js e arquiteturas modernas.
+                  {t('About.hero.description')}
                 </p>
               </div>
               <div className="flex flex-col sm:flex-row gap-4">
@@ -213,7 +213,7 @@ export default function Sobre({ isDark }: { isDark: boolean }) {
                   onClick={() => window.open('/Resume_Gabriel_Marques.pdf', '_blank')}
                 >
                   <Download size={20} />
-                  Download CV
+                  {t('About.ctas.downloadCV')}
                 </button>
                 <Link
                   href="/contact"
@@ -223,7 +223,7 @@ export default function Sobre({ isDark }: { isDark: boolean }) {
                       : 'text-gray-800 border-gray-300 hover:bg-gray-50'
                   }`}
                 >
-                  Entrar em Contato
+                  {t('About.ctas.contact')}
                   <ArrowRight size={20} />
                 </Link>
               </div>
@@ -280,12 +280,12 @@ export default function Sobre({ isDark }: { isDark: boolean }) {
             <h2
               className={`text-3xl md:text-4xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}
             >
-              Habilidades Técnicas
+              {t('About.skills.title')}
             </h2>
             <p
               className={`text-lg max-w-2xl mx-auto ${isDark ? 'text-gray-400' : 'text-gray-600'}`}
             >
-              Tecnologias e ferramentas que domino para criar soluções completas e eficientes
+              {t('About.skills.subtitle')}
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -337,7 +337,7 @@ export default function Sobre({ isDark }: { isDark: boolean }) {
                 onClick={() => setShowAllSkills(true)}
                 className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-cyan-400 transition-all duration-200 font-medium"
               >
-                Ver Mais
+                {t('About.skills.showMore')}
               </button>
             </div>
           )}
@@ -349,10 +349,10 @@ export default function Sobre({ isDark }: { isDark: boolean }) {
             <h2
               className={`text-3xl md:text-4xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}
             >
-              Minha Jornada
+              {t('About.timeline.title')}
             </h2>
             <p className={`text-lg ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-              Uma linha do tempo da minha experiência profissional e educacional
+              {t('About.timeline.subtitle')}
             </p>
           </div>
           <div className="relative">
@@ -391,7 +391,9 @@ export default function Sobre({ isDark }: { isDark: boolean }) {
                         {item.year}
                       </span>
                       <span className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                        {item.type === 'work' ? 'Experiência Profissional' : 'Educação'}
+                        {item.type === 'work'
+                          ? t('About.timeline.types.work')
+                          : t('About.timeline.types.education')}
                       </span>
                     </div>
                     <h3
@@ -417,7 +419,7 @@ export default function Sobre({ isDark }: { isDark: boolean }) {
                   onClick={() => setShowAllTimeline(true)}
                   className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-cyan-400 transition-all duration-200 font-medium"
                 >
-                  Ver Mais
+                  {t('About.timeline.showMore')}
                 </button>
               </div>
             )}
@@ -429,18 +431,17 @@ export default function Sobre({ isDark }: { isDark: boolean }) {
           <h2
             className={`text-3xl md:text-4xl font-bold mb-6 ${isDark ? 'text-white' : 'text-gray-900'}`}
           >
-            Vamos trabalhar juntos?
+            {t('About.finalCTA.title')}
           </h2>
           <p className={`text-lg mb-8 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-            Estou sempre aberto a discutir novos projetos, ideias criativas ou oportunidades de
-            colaboração.
+            {t('About.finalCTA.subtitle')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/contact"
               className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-blue-600 text-white rounded-xl hover:bg-cyan-400 transition-all duration-200 font-medium text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 cursor-pointer"
             >
-              Entrar em Contato
+              {t('About.ctas.contact')}
               <ArrowRight size={20} />
             </Link>
             <Link
@@ -451,7 +452,7 @@ export default function Sobre({ isDark }: { isDark: boolean }) {
                   : 'text-gray-800 border-gray-300 hover:bg-gray-50'
               }`}
             >
-              Ver Meus Projetos
+              {t('About.ctas.viewProjects')}
             </Link>
           </div>
         </div>

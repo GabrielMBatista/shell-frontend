@@ -18,12 +18,14 @@ import Image from 'next/image';
 import gabrielPhoto from '@/assets/gabrielPhoto.jpg';
 import Link from 'next/link';
 import { usePageTitle } from '@/hooks/usePageTitle';
+import { useTranslation } from '@/hooks/useTranslation';
 
 const CTASection = dynamic(() => import('@/components/common/CTASection'), { ssr: false });
 
 export default function Home({ isDark }: { isDark: boolean }) {
   usePageTitle('Home');
   const fontFamily = useGoogleFont('Inter');
+  const { t } = useTranslation('common');
 
   return (
     <div
@@ -45,29 +47,28 @@ export default function Home({ isDark }: { isDark: boolean }) {
                   }`}
                 >
                   <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                  Disponível para novos projetos
+                  {t('Home.badge.available')}
                 </div>
 
                 <h1
                   className={`text-4xl md:text-6xl lg:text-7xl font-bold leading-tight ${isDark ? 'text-white' : 'text-gray-900'}`}
                 >
-                  Olá, eu sou
+                  {t('Home.greeting')}
                   <span className="block bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                    Gabriel Marques
+                    {t('Home.name')}
                   </span>
                 </h1>
 
                 <p
                   className={`text-xl md:text-2xl font-medium ${isDark ? 'text-gray-300' : 'text-gray-600'}`}
                 >
-                  Desenvolvedor Full Stack | Entusiasta em IA
+                  {t('Home.role')}
                 </p>
 
                 <p
                   className={`text-lg leading-relaxed max-w-2xl ${isDark ? 'text-gray-400' : 'text-gray-600'}`}
                 >
-                  Transformo ideias em experiências digitais excepcionais. Especializado em React,
-                  Node.js e design de interfaces modernas que conectam pessoas e tecnologia.
+                  {t('Home.intro')}
                 </p>
               </div>
 
@@ -77,7 +78,7 @@ export default function Home({ isDark }: { isDark: boolean }) {
                   href="/projects"
                   className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-blue-600 text-white rounded-xl hover:bg-cyan-400 transition-all duration-200 font-medium text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                 >
-                  Ver Projetos
+                  {t('Home.ctas.viewProjects')}
                   <ArrowRight size={20} />
                 </Link>
                 <button
@@ -89,7 +90,7 @@ export default function Home({ isDark }: { isDark: boolean }) {
                   onClick={() => window.open('/Resume_Gabriel_Marques.pdf', '_blank')}
                 >
                   <Download size={20} />
-                  Download CV
+                  {t('Home.ctas.downloadCV')}
                 </button>
               </div>
 
@@ -98,7 +99,7 @@ export default function Home({ isDark }: { isDark: boolean }) {
                 <span
                   className={`text-sm font-medium ${isDark ? 'text-gray-400' : 'text-gray-600'}`}
                 >
-                  Conecte-se:
+                  {t('Home.connect')}
                 </span>
                 <div className="flex gap-3">
                   <a
@@ -203,12 +204,12 @@ export default function Home({ isDark }: { isDark: boolean }) {
             <h2
               className={`text-3xl md:text-4xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}
             >
-              Especialidades
+              {t('Home.skills.title')}
             </h2>
             <p
               className={`text-lg max-w-2xl mx-auto ${isDark ? 'text-gray-400' : 'text-gray-600'}`}
             >
-              Tecnologias e ferramentas que domino para criar soluções completas
+              {t('Home.skills.subtitle')}
             </p>
           </div>
 
@@ -225,10 +226,10 @@ export default function Home({ isDark }: { isDark: boolean }) {
                 <Code size={24} className="text-white" />
               </div>
               <h3 className={`text-xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                Frontend Development
+                {t('Home.skills.frontend.title')}
               </h3>
               <p className={`mb-6 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                Interfaces modernas e responsivas com as melhores práticas de UX/UI
+                {t('Home.skills.frontend.desc')}
               </p>
               <div className="flex flex-wrap gap-2">
                 <span
@@ -261,10 +262,10 @@ export default function Home({ isDark }: { isDark: boolean }) {
                 <Smartphone size={24} className="text-white" />
               </div>
               <h3 className={`text-xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                Backend Development
+                {t('Home.skills.backend.title')}
               </h3>
               <p className={`mb-6 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                APIs escaláveis com arquitetura bem estruturada
+                {t('Home.skills.backend.desc')}
               </p>
               <div className="flex flex-wrap gap-2">
                 <span
@@ -297,11 +298,10 @@ export default function Home({ isDark }: { isDark: boolean }) {
                 <Brain size={24} className="text-white" />
               </div>
               <h3 className={`text-xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                Pensamento Crítico e Resolução de Problemas
+                {t('Home.skills.critical.title')}
               </h3>
               <p className={`mb-6 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                Capacidade de decompor desafios técnicos complexos em soluções eficientes e
-                elegantes, sempre com foco em qualidade e clareza.
+                {t('Home.skills.critical.desc')}
               </p>
               <div className="flex flex-wrap gap-2">
                 <span
@@ -327,10 +327,10 @@ export default function Home({ isDark }: { isDark: boolean }) {
 
       <CTASection
         isDark={isDark}
-        title="Vamos trabalhar juntos?"
-        description="Estou sempre aberto a discutir novos projetos, ideias criativas ou oportunidades de colaboração."
-        primaryLink={{ href: '/contact', label: 'Entrar em Contato' }}
-        secondaryLink={{ href: '/about', label: 'Saiba Mais Sobre Mim' }}
+        title={t('Home.finalCTA.title')}
+        description={t('Home.finalCTA.description')}
+        primaryLink={{ href: '/contact', label: t('Home.finalCTA.primary') }}
+        secondaryLink={{ href: '/about', label: t('Home.finalCTA.secondary') }}
       />
     </div>
   );

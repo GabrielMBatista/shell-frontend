@@ -1,7 +1,239 @@
 {
-    "Home": {
-      "title": "Gabriel's Portfolio",
-      "description": "Next.js + Tailwind + Shadcn + Next-Intl working!"
+  "Home": {
+    "title": "Gabriel's Portfolio",
+    "description": "Next.js + Tailwind + Shadcn + Next-Intl working!",
+    "badge": {
+      "available": "Available for new projects"
+    },
+    "greeting": "Hello, I am",
+    "name": "Gabriel Marques",
+    "role": "Full Stack Developer | AI Enthusiast",
+    "intro": "I turn ideas into exceptional digital experiences. Specialized in React, Node.js, and modern interface design that connects people and technology.",
+    "ctas": {
+      "viewProjects": "View Projects",
+      "downloadCV": "Download CV"
+    },
+    "connect": "Connect:",
+    "skills": {
+      "title": "Specialties",
+      "subtitle": "Technologies and tools I master to build complete solutions",
+      "frontend": {
+        "title": "Frontend Development",
+        "desc": "Modern and responsive interfaces with the best UX/UI practices"
+      },
+      "backend": {
+        "title": "Backend Development",
+        "desc": "Scalable APIs with well-structured architecture"
+      },
+      "critical": {
+        "title": "Critical Thinking and Problem Solving",
+        "desc": "Ability to break down complex technical challenges into efficient, elegant solutions, always focusing on quality and clarity."
+      }
+    },
+    "finalCTA": {
+      "title": "Shall we work together?",
+      "description": "I'm always open to discuss new projects, creative ideas, or collaboration opportunities.",
+      "primary": "Get in Touch",
+      "secondary": "Learn More About Me"
     }
+  },
+  "Header": {
+    "tooltip": {
+      "reopenAssistant": "Reopen Gabs.IA assistant"
+    },
+    "nav": {
+      "home": "Home",
+      "projects": "Projects",
+      "about": "About",
+      "contact": "Contact"
+    },
+    "lang": {
+      "toggle": "Change language",
+      "pt-br": "Portuguese (Brazil)",
+      "en-en": "English",
+      "short": {
+        "pt-br": "PT",
+        "en-en": "EN"
+      }
+    }
+  },
+  "Footer": {
+    "copyright": "© 2025 Gabriel Marques. All rights reserved."
+  },
+  "NotFound": {
+    "title": "Oops, Page Not Found",
+    "description": "The page you're looking for seems to have vanished. Let's get you back on track!",
+    "buttons": {
+      "backHome": "Back to Home",
+      "goBack": "Go Back"
+    },
+    "help": {
+      "prefix": "Need help? Visit our",
+      "documentation": "documentation",
+      "suffix": "."
+    }
+  },
+  "Projects": {
+    "pageTitle": "Projects",
+    "header": {
+      "titlePrefix": "My",
+      "titleHighlight": "Projects",
+      "subtitle": "A selection from my latest to older works, complete web applications including APIs and modern interfaces."
+    },
+    "featured": {
+      "title": "Featured Projects",
+      "badge": "Featured"
+    },
+    "search": {
+      "placeholder": "Search projects..."
+    },
+    "categories": {
+      "todos": "All Projects",
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "fullstack": "Full Stack",
+      "mobile": "Mobile"
+    },
+    "all": {
+      "title": "All Projects",
+      "note": "Note: Not all projects are responsive and some were developed at the beginning of my career."
+    },
+    "empty": {
+      "title": "No projects found",
+      "subtitle": "Try adjusting the filters or search term"
+    },
+    "buttons": {
+      "viewDemo": "View Demo",
+      "demo": "Demo",
+      "code": "Code"
+    }
+  },
+  "Contact": {
+    "pageTitle": "Contact",
+    "hero": {
+      "titlePrefix": "Get in",
+      "titleHighlight": "Touch",
+      "subtitle": "Have a project in mind? Let's talk about how I can help turn your ideas into digital reality."
+    },
+    "info": {
+      "email": {
+        "title": "Email",
+        "description": "I respond within 24 hours"
+      },
+      "phone": {
+        "title": "Phone",
+        "description": "Mon–Fri, 9am to 6pm"
+      },
+      "location": {
+        "title": "Location",
+        "value": "São Paulo, SP",
+        "description": "Available for remote work"
+      }
+    },
+    "form": {
+      "title": "Send a Message",
+      "subtitle": "Fill out the form below and I'll get back to you as soon as possible",
+      "labels": {
+        "name": "Full Name",
+        "email": "Email",
+        "subject": "Subject",
+        "message": "Message"
+      },
+      "placeholders": {
+        "name": "Your full name",
+        "email": "your@email.com",
+        "subject": "What would you like to talk about?",
+        "message": "Tell me more about your project, timelines, budget, and any relevant details..."
+      },
+      "status": {
+        "success": "Message sent successfully! I will get back to you soon.",
+        "error": "Error sending message. Please try again."
+      },
+      "buttons": {
+        "sending": "Sending...",
+        "send": "Send Message"
+      }
+    },
+    "social": {
+      "title": "Or find me on social media",
+      "subtitle": "Follow my work and connect with me on the platforms below"
+    }
+  },
+  "About": {
+    "pageTitle": "About",
+    "hero": {
+      "locationBadge": "São Paulo, Brazil",
+      "title": "About",
+      "highlightName": "Gabriel Marques",
+      "role": "Full Stack Developer passionate about creating exceptional digital experiences",
+      "description": "With over 4 years of experience, I combine solid technical knowledge with design vision to deliver solutions that truly make a difference. Specialized in React, Node.js, and modern architectures."
+    },
+    "ctas": {
+      "downloadCV": "Download CV",
+      "contact": "Get in Touch",
+      "viewProjects": "View My Projects"
+    },
+    "stats": {
+      "yearsInIT": "Years in IT",
+      "yearsAsDev": "Years of Experience as a Developer",
+      "mentees": "Interns and Juniors Mentored",
+      "coffees": "Cups of Coffee"
+    },
+    "skills": {
+      "title": "Technical Skills",
+      "subtitle": "Technologies and tools I master to create complete and efficient solutions",
+      "showMore": "See more"
+    },
+    "timeline": {
+      "title": "My Journey",
+      "subtitle": "A timeline of my professional and educational experience",
+      "types": {
+        "work": "Professional Experience",
+        "education": "Education"
+      },
+      "showMore": "See more"
+    },
+    "finalCTA": {
+      "title": "Shall we work together?",
+      "subtitle": "I'm always open to discuss new projects, creative ideas, or collaboration opportunities."
+    }
+  },
+  "UI": {
+    "Card": {
+      "featured": "Featured",
+      "buttons": {
+        "demo": "Demo",
+        "code": "Code"
+      }
+    },
+    "ContactModal": {
+      "title": "Shall we talk?",
+      "description": "Choose the best way to get in touch with me",
+      "links": {
+        "linkedin": "LinkedIn",
+        "github": "GitHub",
+        "whatsapp": "WhatsApp"
+      },
+      "email": {
+        "label": "📧 Gabbriel_gbl2@hotmail.com",
+        "copy": "Copy email 📋",
+        "copiedAlert": "Email copied to clipboard!"
+      },
+      "note": "Guaranteed reply within 24h — or your message back! 😄"
+    }
+  },
+  "Error": {
+    "title": "Oops! Something went wrong",
+    "defaultMessage": "An unexpected error occurred.",
+    "reassurance": "Don't worry, the error was logged and our team is working on it.",
+    "buttons": {
+      "retry": "Try again",
+      "goHome": "Go to Home"
+    },
+    "codePrefix": "Error code:"
+  },
+  "FAQ": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Some quick answers to common doubts"
   }
-  
+}

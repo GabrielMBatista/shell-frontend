@@ -6,6 +6,7 @@ import Header from '@/components/common/Header';
 import Footer from '@/components/common/Footer';
 import { useState, useEffect, Suspense } from 'react';
 import { Inter } from 'next/font/google';
+import dynamic from 'next/dynamic';
 
 const inter = Inter({ subsets: ['latin'], display: 'swap' });
 
@@ -16,15 +17,21 @@ interface MyAppProps extends AppProps {
   };
 }
 
+// Tipo local para posição (top/left/right/bottom)
+type DockPos = Partial<{ top: number; left: number; right: number; bottom: number }>;
+
 export default function MyApp({ Component, pageProps }: MyAppProps) {
-  // const GabsIA = dynamic(() => import('Chatbot/GabsIAWidget'), { ssr: false });
+  const GabsIA = dynamic<import('Chatbot/GabsIAWidget').GabsIAWidgetProps>(
+    () => import('Chatbot/GabsIAWidget').then((m) => m.default),
+    { ssr: false },
+  );
   const [isDark, setIsDark] = useState<boolean>(false);
+  // Posição do widget (fallback: canto inferior direito)
+  const [widgetPos, setWidgetPos] = useState<DockPos>({ bottom: 24, right: 24 });
 
   useEffect(() => {
     const savedTheme: string | null = localStorage.getItem('isDark');
-    if (savedTheme !== null) {
-      setIsDark(savedTheme === 'true');
-    }
+    if (savedTheme !== null) setIsDark(savedTheme === 'true');
   }, []);
 
   useEffect(() => {
@@ -63,6 +70,27 @@ export default function MyApp({ Component, pageProps }: MyAppProps) {
     }
   }, []);
 
+  useEffect(() => {
+    // Centraliza o widget na div âncora do Header
+    const compute = () => {
+      const el = document.getElementById('gabs-header-anchor');
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const size = 64; // tamanho do avatar do widget
+      const top = Math.round(rect.top + rect.height / 2 - size / 2);
+      const left = Math.round(rect.left + rect.width / 2 - size / 2);
+      setWidgetPos({ top, left });
+    };
+    const raf = requestAnimationFrame(compute);
+    window.addEventListener('resize', compute);
+    window.addEventListener('orientationchange', compute);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener('resize', compute);
+      window.removeEventListener('orientationchange', compute);
+    };
+  }, []);
+
   return (
     <Providers session={pageProps.session}>
       <ClientOnly>
@@ -77,7 +105,7 @@ export default function MyApp({ Component, pageProps }: MyAppProps) {
           </Suspense>
           <Footer isDark={isDark} />
         </div>
-        {/* <GabsIA /> */}
+        <GabsIA tourEnabled fixedPosition={widgetPos} />
       </ClientOnly>
     </Providers>
   );

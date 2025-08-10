@@ -1,9 +1,11 @@
 'use client';
 import React, { useState } from 'react';
-import { Sun, Moon, Menu } from 'lucide-react';
+import { Sun, Moon, Menu, Globe } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-// import { reopenGabsIAWidget } from 'Chatbot/GabsIAWidget';
+import { reopenGabsIAWidget } from 'Chatbot/GabsIAWidget';
+import { useTranslation } from '@/hooks/useTranslation';
+import { locales, type Locale } from '@/i18n'; // + importe os locales disponíveis
 
 interface HeaderProps {
   isDark: boolean;
@@ -15,6 +17,8 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const isActive = (path: string) => pathname === path;
 
+  const { t, locale, changeLocale } = useTranslation('common');
+
   return (
     <header
       className={`sticky top-0 z-50 border-b transition-colors duration-300 backdrop-blur-sm ${
@@ -23,17 +27,14 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <div className="flex items-center gap-4">
-            {/* <button
+          <div id="gabs-header-anchor" className="flex items-center gap-4">
+            <button
               onClick={reopenGabsIAWidget}
               className="flex items-center gap-4 focus:outline-none"
-              title="Reabrir assistente Gabs.IA"
+              title={t('Header.tooltip.reopenAssistant')}
             >
               <div className="w-8 h-8 rounded-full bg-gradient-to-r from-blue-600 to-purple-600"></div>
-              <span className={`text-xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                Gabs IA
-              </span>
-            </button> */}
+            </button>
           </div>
           <nav className="hidden md:flex items-center gap-8">
             <Link
@@ -46,7 +47,7 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
                     : 'text-gray-900 hover:text-blue-600'
               }`}
             >
-              Home
+              {t('Header.nav.home')}
             </Link>
             <Link
               href="/projects"
@@ -58,7 +59,7 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
                     : 'text-gray-600 hover:text-blue-600'
               }`}
             >
-              Projetos
+              {t('Header.nav.projects')}
             </Link>
             <Link
               href="/about"
@@ -70,7 +71,7 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
                     : 'text-gray-600 hover:text-blue-600'
               }`}
             >
-              Sobre
+              {t('Header.nav.about')}
             </Link>
             <Link
               href="/contact"
@@ -82,10 +83,34 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
                     : 'text-gray-600 hover:text-blue-600'
               }`}
             >
-              Contato
+              {t('Header.nav.contact')}
             </Link>
           </nav>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
+            {/* Select de idioma (compacto) */}
+            <div
+              className={`flex items-center gap-1 p-1 rounded-md transition-all duration-200 ${
+                isDark ? 'bg-gray-700 text-gray-200' : 'bg-gray-100 text-gray-700'
+              }`}
+              title={t('Header.lang.toggle')}
+            >
+              <Globe size={16} />
+              <select
+                value={locale}
+                onChange={(e) => changeLocale(e.target.value as Locale)}
+                aria-label={t('Header.lang.toggle')}
+                className={`bg-transparent outline-none text-[11px] font-semibold px-1 py-0.5 ${
+                  isDark ? 'text-gray-200' : 'text-gray-700'
+                }`}
+              >
+                {locales.map((l) => (
+                  <option key={l} value={l}>
+                    {t(`Header.lang.short.${l}`)}
+                  </option>
+                ))}
+              </select>
+            </div>
+            {/* Botão de tema */}
             <button
               onClick={() => setIsDark(!isDark)}
               className={`p-2 rounded-lg transition-all duration-200 ${
@@ -97,7 +122,7 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
               {isDark ? <Sun size={20} /> : <Moon size={20} />}
             </button>
             <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)} // Alterna o estado do menu
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
               className={`p-2 rounded-lg md:hidden ${
                 isDark ? 'text-white hover:bg-gray-700' : 'text-gray-600 hover:bg-gray-100'
               }`}
@@ -106,7 +131,7 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
             </button>
           </div>
         </div>
-        {isMenuOpen && ( // Renderiza o menu suspenso no mobile
+        {isMenuOpen && (
           <div
             className={`md:hidden mt-2 p-4 rounded-lg shadow-lg ${
               isDark ? 'bg-gray-800 text-gray-300' : 'bg-white text-gray-900'
@@ -122,7 +147,7 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
                     : 'hover:text-blue-600'
               }`}
             >
-              Home
+              {t('Header.nav.home')}
             </Link>
             <Link
               href="/projects"
@@ -134,7 +159,7 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
                     : 'hover:text-blue-600'
               }`}
             >
-              Projetos
+              {t('Header.nav.projects')}
             </Link>
             <Link
               href="/about"
@@ -146,7 +171,7 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
                     : 'hover:text-blue-600'
               }`}
             >
-              Sobre
+              {t('Header.nav.about')}
             </Link>
             <Link
               href="/contact"
@@ -158,7 +183,7 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
                     : 'hover:text-blue-600'
               }`}
             >
-              Contato
+              {t('Header.nav.contact')}
             </Link>
           </div>
         )}

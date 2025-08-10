@@ -20,11 +20,13 @@ import {
 } from 'lucide-react';
 import { useState } from 'react';
 import { usePageTitle } from '@/hooks/usePageTitle';
+import { useTranslation } from '@/hooks/useTranslation';
 
 const FAQSection = dynamic(() => import('@/components/common/FAQSection'), { ssr: false });
 
 export default function Contato({ isDark }: { isDark: boolean }) {
-  usePageTitle('Contato');
+  const { t } = useTranslation('common');
+  usePageTitle(t('Contact.pageTitle'));
 
   const fontFamily = useGoogleFont('Inter');
   const [formData, setFormData] = useState({
@@ -84,29 +86,33 @@ export default function Contato({ isDark }: { isDark: boolean }) {
     }
   };
 
+  // Ajuste: adicionar id para não depender do texto traduzido
   const contactInfo = [
     {
+      id: 'email',
       icon: Mail,
-      title: 'Email',
+      title: t('Contact.info.email.title'),
       value: 'gabbriel_gbl2@hotmail.com',
-      description: 'Respondo em até 24 horas',
+      description: t('Contact.info.email.description'),
       href: 'mailto:gabbriel_gbl2@hotmail.com',
     },
     {
+      id: 'phone',
       icon: Phone,
-      title: 'Telefone',
+      title: t('Contact.info.phone.title'),
       value: '+55 (11) 95122-2379',
-      description: 'Seg-Sex, 9h às 18h',
+      description: t('Contact.info.phone.description'),
       href: 'https://wa.me/5511951222379?text=Ol%C3%A1%2C%20vi%20seu%20portf%C3%B3lio%20e%20gostaria%20de%20conversar!',
     },
     {
+      id: 'location',
       icon: MapPin,
-      title: 'Localização',
-      value: 'São Paulo, SP',
-      description: 'Disponível para trabalho remoto',
+      title: t('Contact.info.location.title'),
+      value: t('Contact.info.location.value'),
+      description: t('Contact.info.location.description'),
       href: '#',
     },
-  ];
+  ] as const;
 
   const socialLinks = [
     { icon: Github, href: 'https://github.com/GabrielMBatista', label: 'GitHub', color: '#333' },
@@ -146,16 +152,15 @@ export default function Contato({ isDark }: { isDark: boolean }) {
             <h1
               className={`text-4xl md:text-6xl font-bold mb-6 ${isDark ? 'text-white' : 'text-gray-900'}`}
             >
-              Entre em{' '}
+              {t('Contact.hero.titlePrefix')}{' '}
               <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                Contato
+                {t('Contact.hero.titleHighlight')}
               </span>
             </h1>
             <p
               className={`text-xl max-w-3xl mx-auto ${isDark ? 'text-gray-400' : 'text-gray-600'}`}
             >
-              Tem um projeto em mente? Vamos conversar sobre como posso ajudar a transformar suas
-              ideias em realidade digital.
+              {t('Contact.hero.subtitle')}
             </p>
           </div>
         </div>
@@ -171,8 +176,8 @@ export default function Contato({ isDark }: { isDark: boolean }) {
                 <a
                   key={index}
                   href={info.href}
-                  target={info.title === 'Telefone' ? '_blank' : '_self'}
-                  rel={info.title === 'Telefone' ? 'noopener noreferrer' : undefined}
+                  target={info.id === 'phone' ? '_blank' : '_self'}
+                  rel={info.id === 'phone' ? 'noopener noreferrer' : undefined}
                   className={`group p-8 rounded-2xl transition-all duration-300 hover:shadow-xl hover:-translate-y-2 cursor-pointer ${
                     isDark
                       ? 'bg-gray-800 border border-gray-700'
@@ -209,10 +214,10 @@ export default function Contato({ isDark }: { isDark: boolean }) {
             <h2
               className={`text-3xl md:text-4xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}
             >
-              Envie uma Mensagem
+              {t('Contact.form.title')}
             </h2>
             <p className={`text-lg ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-              Preencha o formulário abaixo e entrarei em contato o mais breve possível
+              {t('Contact.form.subtitle')}
             </p>
           </div>
 
@@ -228,8 +233,8 @@ export default function Contato({ isDark }: { isDark: boolean }) {
               {submitStatus === 'success' ? <CheckCircle size={20} /> : <AlertCircle size={20} />}
               <span>
                 {submitStatus === 'success'
-                  ? 'Mensagem enviada com sucesso! Entrarei em contato em breve.'
-                  : 'Erro ao enviar mensagem. Tente novamente.'}
+                  ? t('Contact.form.status.success')
+                  : t('Contact.form.status.error')}
               </span>
             </div>
           )}
@@ -241,7 +246,7 @@ export default function Contato({ isDark }: { isDark: boolean }) {
                   className={`block text-sm font-medium mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}
                 >
                   <User size={16} className="inline mr-2" />
-                  Nome Completo
+                  {t('Contact.form.labels.name')}
                 </label>
                 <input
                   type="text"
@@ -254,7 +259,7 @@ export default function Contato({ isDark }: { isDark: boolean }) {
                       ? 'bg-gray-700 border-gray-600 text-white focus:border-blue-500'
                       : 'bg-white border-gray-300 text-gray-900 focus:border-blue-500'
                   }`}
-                  placeholder="Seu nome completo"
+                  placeholder={t('Contact.form.placeholders.name')}
                 />
               </div>
               <div>
@@ -262,7 +267,7 @@ export default function Contato({ isDark }: { isDark: boolean }) {
                   className={`block text-sm font-medium mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}
                 >
                   <Mail size={16} className="inline mr-2" />
-                  Email
+                  {t('Contact.form.labels.email')}
                 </label>
                 <input
                   type="email"
@@ -275,7 +280,7 @@ export default function Contato({ isDark }: { isDark: boolean }) {
                       ? 'bg-gray-700 border-gray-600 text-white focus:border-blue-500'
                       : 'bg-white border-gray-300 text-gray-900 focus:border-blue-500'
                   }`}
-                  placeholder="seu@email.com"
+                  placeholder={t('Contact.form.placeholders.email')}
                 />
               </div>
             </div>
@@ -285,7 +290,7 @@ export default function Contato({ isDark }: { isDark: boolean }) {
                 className={`block text-sm font-medium mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}
               >
                 <FileText size={16} className="inline mr-2" />
-                Assunto
+                {t('Contact.form.labels.subject')}
               </label>
               <input
                 type="text"
@@ -298,7 +303,7 @@ export default function Contato({ isDark }: { isDark: boolean }) {
                     ? 'bg-gray-700 border-gray-600 text-white focus:border-blue-500'
                     : 'bg-white border-gray-300 text-gray-900 focus:border-blue-500'
                 }`}
-                placeholder="Sobre o que você gostaria de conversar?"
+                placeholder={t('Contact.form.placeholders.subject')}
               />
             </div>
 
@@ -307,7 +312,7 @@ export default function Contato({ isDark }: { isDark: boolean }) {
                 className={`block text-sm font-medium mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}
               >
                 <MessageSquare size={16} className="inline mr-2" />
-                Mensagem
+                {t('Contact.form.labels.message')}
               </label>
               <textarea
                 name="message"
@@ -320,7 +325,7 @@ export default function Contato({ isDark }: { isDark: boolean }) {
                     ? 'bg-gray-700 border-gray-600 text-white focus:border-blue-500'
                     : 'bg-white border-gray-300 text-gray-900 focus:border-blue-500'
                 }`}
-                placeholder="Conte-me mais sobre seu projeto, prazos, orçamento e qualquer detalhe relevante..."
+                placeholder={t('Contact.form.placeholders.message')}
               />
             </div>
 
@@ -336,12 +341,12 @@ export default function Contato({ isDark }: { isDark: boolean }) {
               {isSubmitting ? (
                 <>
                   <Clock size={20} className="animate-spin" />
-                  Enviando...
+                  {t('Contact.form.buttons.sending')}
                 </>
               ) : (
                 <>
                   <Send size={20} />
-                  Enviar Mensagem
+                  {t('Contact.form.buttons.send')}
                 </>
               )}
             </button>
@@ -355,10 +360,10 @@ export default function Contato({ isDark }: { isDark: boolean }) {
           <h2
             className={`text-2xl md:text-3xl font-bold mb-6 ${isDark ? 'text-white' : 'text-gray-900'}`}
           >
-            Ou me encontre nas redes sociais
+            {t('Contact.social.title')}
           </h2>
           <p className={`text-lg mb-8 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-            Siga meu trabalho e conecte-se comigo nas plataformas abaixo
+            {t('Contact.social.subtitle')}
           </p>
 
           <div className="flex justify-center gap-6">
