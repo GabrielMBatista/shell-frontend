@@ -3,9 +3,9 @@ import React, { useState } from 'react';
 import { Sun, Moon, Menu, Globe } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { reopenGabsIAWidget } from 'Chatbot/GabsIAWidget';
+// import { reopenGabsIAWidget } from 'Chatbot/GabsIAWidget';
 import { useTranslation } from '@/hooks/useTranslation';
-import { locales, type Locale } from '@/i18n'; // + importe os locales disponíveis
+import { locales, type Locale } from '@/i18n';
 
 interface HeaderProps {
   isDark: boolean;
@@ -28,13 +28,13 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div id="gabs-header-anchor" className="flex items-center gap-4">
-            <button
+            {/* <button
               onClick={reopenGabsIAWidget}
               className="flex items-center gap-4 focus:outline-none"
               title={t('Header.tooltip.reopenAssistant')}
             >
               <div className="w-8 h-8 rounded-full bg-gradient-to-r from-blue-600 to-purple-600"></div>
-            </button>
+            </button> */}
           </div>
           <nav className="hidden md:flex items-center gap-8">
             <Link
