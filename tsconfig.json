@@ -15,8 +15,7 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
-      "chat-store": ["./src/store/chat-store"]
+      "@/*": ["./src/*"]
     },
     "plugins": [
       {

@@ -29,15 +29,13 @@ const nextConfig = {
         exposes: {
           './Error': './src/pages/_error.tsx',
           './Providers': './src/providers/providers.tsx',
-          './chat-store': './src/store/chat-store.ts',
         },
         shared: {
           'react-dom': { singleton: true, requiredVersion: false },
           'next-intl': { singleton: true, requiredVersion: false },
-          'chat-store': { singleton: true, eager: true },
           // '@gabrielmbatista/ui-library-stencil': {
           //   singleton: true,
-          //   eager: true,
+          //   eager: true, 
           //   requiredVersion: false,
           // },
           // 'next-auth': { singleton: true },
