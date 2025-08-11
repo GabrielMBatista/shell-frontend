@@ -19,6 +19,7 @@ import gabrielPhoto from '@/assets/gabrielPhoto.jpg';
 import Link from 'next/link';
 import { usePageTitle } from '@/hooks/usePageTitle';
 import { useTranslation } from '@/hooks/useTranslation';
+import HighlightWrapper from '../common/HighlightWrapper';
 
 const CTASection = dynamic(() => import('@/components/common/CTASection'), { ssr: false });
 
@@ -215,13 +216,7 @@ export default function Home({ isDark }: { isDark: boolean }) {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Frontend */}
-            <div
-              className={`p-8 rounded-2xl transition-all duration-200 hover:shadow-xl hover:-translate-y-2 ${
-                isDark
-                  ? 'bg-gray-800 border border-gray-700'
-                  : 'bg-white border border-gray-200 shadow-lg'
-              }`}
-            >
+            <HighlightWrapper dataGabsText="frontend" isDark={isDark}>
               <div className="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center mb-6">
                 <Code size={24} className="text-white" />
               </div>
@@ -248,16 +243,10 @@ export default function Home({ isDark }: { isDark: boolean }) {
                   Tailwind
                 </span>
               </div>
-            </div>
+            </HighlightWrapper>
 
             {/* Backend */}
-            <div
-              className={`p-8 rounded-2xl transition-all duration-200 hover:shadow-xl hover:-translate-y-2 ${
-                isDark
-                  ? 'bg-gray-800 border border-gray-700'
-                  : 'bg-white border border-gray-200 shadow-lg'
-              }`}
-            >
+            <HighlightWrapper dataGabsText="backend" isDark={isDark}>
               <div className="w-12 h-12 bg-purple-600 rounded-xl flex items-center justify-center mb-6">
                 <Smartphone size={24} className="text-white" />
               </div>
@@ -284,16 +273,10 @@ export default function Home({ isDark }: { isDark: boolean }) {
                   Docker
                 </span>
               </div>
-            </div>
+            </HighlightWrapper>
 
             {/* Design */}
-            <div
-              className={`p-8 rounded-2xl transition-all duration-200 hover:shadow-xl hover:-translate-y-2 ${
-                isDark
-                  ? 'bg-gray-800 border border-gray-700'
-                  : 'bg-white border border-gray-200 shadow-lg'
-              }`}
-            >
+            <HighlightWrapper dataGabsText="design" isDark={isDark}>
               <div className="w-12 h-12 bg-green-600 rounded-xl flex items-center justify-center mb-6">
                 <Brain size={24} className="text-white" />
               </div>
@@ -320,7 +303,7 @@ export default function Home({ isDark }: { isDark: boolean }) {
                   Estratégia
                 </span>
               </div>
-            </div>
+            </HighlightWrapper>
           </div>
         </div>
       </section>

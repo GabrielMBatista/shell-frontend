@@ -369,6 +369,7 @@ export default function Projetos({ isDark }: ProjectsProps) {
             {featuredProjects.map((project) => (
               <div
                 key={project.id}
+                data-gabs={`featured-project-${project.id}`}
                 className={`group rounded-2xl overflow-hidden shadow-xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 ${
                   isDark ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200'
                 }`}
@@ -423,6 +424,7 @@ export default function Projetos({ isDark }: ProjectsProps) {
                   </div>
                   <div className="flex gap-4">
                     <button
+                      data-gabs={`view-details-${project.id}`}
                       onClick={() => {
                         handleProjectClick(project, 'demo', 0);
                         openModal(project, 0);
@@ -434,6 +436,7 @@ export default function Projetos({ isDark }: ProjectsProps) {
                     </button>
                     <a
                       href={project.github}
+                      data-gabs={`github-link-${project.id}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={() => handleProjectClick(project, 'github', 0)}
@@ -536,6 +539,7 @@ export default function Projetos({ isDark }: ProjectsProps) {
                 return (
                   <div
                     key={project.id}
+                    data-gabs={`project-${project.id}`}
                     className={`group rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-2 ${
                       isDark
                         ? 'bg-gray-800 border border-gray-700'
@@ -593,6 +597,7 @@ export default function Projetos({ isDark }: ProjectsProps) {
                           </div>
                           <div className="flex gap-2">
                             <button
+                              data-gabs={`view-details-${project.id}`}
                               onClick={() => {
                                 handleProjectClick(project, 'demo', position);
                                 openModal(project, position);
@@ -604,6 +609,7 @@ export default function Projetos({ isDark }: ProjectsProps) {
                             </button>
                             <a
                               href={project.github}
+                              data-gabs={`github-link-${project.id}`}
                               target="_blank"
                               rel="noopener noreferrer"
                               onClick={() => handleProjectClick(project, 'github', position)}
@@ -661,6 +667,7 @@ export default function Projetos({ isDark }: ProjectsProps) {
                         <div className="flex gap-2">
                           <a
                             href={project.github}
+                            data-gabs={`github-link-${project.id}`}
                             target="_blank"
                             rel="noopener noreferrer"
                             onClick={() => handleProjectClick(project, 'github', position)}

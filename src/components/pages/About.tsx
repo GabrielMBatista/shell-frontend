@@ -251,6 +251,7 @@ export default function Sobre({ isDark }: { isDark: boolean }) {
                   return (
                     <div
                       key={index}
+                      data-gabs={`stat-${stat.label}`}
                       className={`text-center p-6 rounded-xl transition-all duration-300 hover:scale-105 cursor-pointer ${
                         isDark
                           ? 'bg-gray-800 border border-gray-700'
