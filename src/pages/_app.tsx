@@ -11,6 +11,7 @@ import { useWidgetPosition } from '@/hooks/useWidgetPosition';
 import { useClarity } from '@/hooks/useClarity';
 import { GabsIAWidget } from '@/components/common/GabsIAWidget';
 import { isEnvTrue } from '@/utils/env';
+import { Analytics } from '@vercel/analytics/react';
 
 const inter = Inter({ subsets: ['latin'], display: 'swap' });
 
@@ -36,6 +37,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
           <Footer isDark={isDark} />
         </div>
         {isChatbotEnabled && <GabsIAWidget fixedPosition={widgetPos} />}
+        <Analytics />
       </ClientOnly>
     </Providers>
   );
