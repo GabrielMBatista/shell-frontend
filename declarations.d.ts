@@ -10,3 +10,4 @@ declare module 'Chatbot/GabsIAWidget';
 // ───────────────────────────────────────────────
 declare module 'Dashboard/Dashboard';
 declare module 'Dashboard/App';
+declare module 'chat-store';

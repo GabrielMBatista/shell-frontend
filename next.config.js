@@ -1,5 +1,6 @@
 import { NextFederationPlugin } from '@module-federation/nextjs-mf';
 import { PrismaPlugin } from "@prisma/nextjs-monorepo-workaround-plugin";
+import path from 'path';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -19,6 +20,10 @@ const nextConfig = {
     if (isServer) {
       config.plugins.push(new PrismaPlugin());
     }
+    config.resolve.alias = {
+      ...(config.resolve.alias || {}),
+      'chat-store': path.resolve(__dirname, './src/store/chat-store.ts'),
+    };
     config.plugins.push(
       new NextFederationPlugin({
         name: 'shell',
@@ -29,13 +34,19 @@ const nextConfig = {
         exposes: {
           './Error': './src/pages/_error.tsx',
           './Providers': './src/providers/providers.tsx',
+          './chat-store': './src/store/chat-store.ts',
         },
         shared: {
           'react-dom': { singleton: true, requiredVersion: false },
           'next-intl': { singleton: true, requiredVersion: false },
+          'chat-store': {
+            singleton: true,
+            eager: true,
+            import: path.resolve(__dirname, './src/store/chat-store.ts'),
+          },
           // '@gabrielmbatista/ui-library-stencil': {
           //   singleton: true,
-          //   eager: true, 
+          //   eager: true,
           //   requiredVersion: false,
           // },
           // 'next-auth': { singleton: true },
