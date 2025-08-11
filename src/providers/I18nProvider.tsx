@@ -56,7 +56,6 @@ export const I18nProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <I18nContext.Provider value={{ locale, t, changeLocale }}>
-      {/* força re-montagem da subárvore ao trocar o idioma */}
       <div key={locale}>{children}</div>
     </I18nContext.Provider>
   );

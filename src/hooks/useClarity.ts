@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import {
   trackClarityEvent,
   trackDetailedPageView,
@@ -27,6 +27,37 @@ interface UseClarityReturn {
 }
 
 export const useClarity = (): UseClarityReturn => {
+  useEffect(() => {
+    if (
+      typeof window !== 'undefined' &&
+      !window.clarity &&
+      process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID
+    ) {
+      const script: HTMLScriptElement = document.createElement('script');
+      script.type = 'text/javascript';
+      script.innerHTML = `
+        (function(c,l,a,r,i,t,y){
+          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/${process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID}";
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script");
+      `;
+      document.head.appendChild(script);
+    }
+
+    if (typeof window !== 'undefined') {
+      window.sendClarityEvent = (eventName: string, eventData?: Record<string, unknown>): void => {
+        if (window.clarity?.event) {
+          window.clarity.event(eventName, {
+            ...eventData,
+            timestamp: new Date().toISOString(),
+            source: 'shell',
+          });
+        }
+      };
+    }
+  }, []);
+
   const trackEvent = useCallback((eventName: string, eventData?: ClarityEventData): void => {
     trackClarityEvent(eventName, eventData);
   }, []);
