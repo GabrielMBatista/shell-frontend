@@ -10,4 +10,8 @@ declare module 'Chatbot/GabsIAWidget';
 // ───────────────────────────────────────────────
 declare module 'Dashboard/Dashboard';
 declare module 'Dashboard/App';
-declare module 'chat-store';
+declare module 'chat-store' {
+  export * from './src/store/chat-store';
+  const useChatStore: typeof import('./src/store/chat-store').default;
+  export default useChatStore;
+}

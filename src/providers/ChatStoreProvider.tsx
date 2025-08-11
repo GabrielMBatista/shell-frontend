@@ -2,10 +2,10 @@
 
 import { ReactNode, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import useChatStore from 'chat-store';
+import useChatStore, { ChatStoreState } from 'chat-store';
 
 export function ChatStoreProvider({ children }: { children: ReactNode }) {
-  const hydrate = useChatStore((s) => s.hydrate);
+  const hydrate = useChatStore((s: ChatStoreState) => s.hydrate);
   const router = useRouter();
 
   useEffect(() => {

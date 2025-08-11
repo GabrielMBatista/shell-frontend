@@ -16,7 +16,7 @@ interface ConversationsMap {
   [id: string]: ChatMessage[];
 }
 
-interface ChatStoreState {
+export interface ChatStoreState {
   conversationId: string | null;
   messages: ChatMessage[];
   status: ChatStatus;
