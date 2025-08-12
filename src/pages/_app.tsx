@@ -4,7 +4,7 @@ import { Providers } from '@/providers/providers';
 import { ClientOnly } from '@/utils/client-only';
 import Header from '@/components/common/Header';
 import Footer from '@/components/common/Footer';
-import { Suspense, lazy } from 'react';
+import { Suspense } from 'react';
 import { Inter } from 'next/font/google';
 import { useTheme } from '@/hooks/useTheme';
 import { useWidgetPosition } from '@/hooks/useWidgetPosition';
