@@ -1,0 +1,66 @@
+{
+  "pageTitle": "Projects",
+  "hero": {
+    "title": "My Projects",
+    "highlight": "Highlights",
+    "subtitle": "Explore the projects I developed using modern technologies."
+  },
+  "categories": {
+    "all": "All Projects",
+    "frontend": "Frontend",
+    "backend": "Backend",
+    "fullstack": "Full Stack",
+    "mobile": "Mobile"
+  },
+  "featured": {
+    "title": "Featured Projects",
+    "label": "Featured",
+    "demo": "View Demo",
+    "code": "Code"
+  },
+  "all": {
+    "title": "All Projects",
+    "note": "Here are all the projects I have developed.",
+    "demo": "View Demo",
+    "code": "Code",
+    "features": {
+      "item1": "Efficient management of SSE connections",
+      "item2": "Real-time message sending",
+      "item3": "Easy integration with Node.js applications"
+    }
+  },
+  "noResults": {
+    "title": "No projects found",
+    "subtitle": "Try adjusting the filters or search term."
+  },
+  "search": {
+    "placeholder": "Search projects..."
+  },
+  "cta": {
+    "title": "Interested in working with me?",
+    "description": "Get in touch so we can discuss how I can help with your project.",
+    "primary": "Contact Me"
+  },
+  "items": {
+    "1": {
+      "title": "AI Interview",
+      "description": "Basic system using OpenAI API to evaluate technical levels, streamlining the screening process."
+    },
+    "2": {
+      "title": "Tropa Login",
+      "description": "Technical test for a LinkedIn job to develop a functional login screen."
+    },
+    "3": {
+      "title": "Alphabet Recorder",
+      "description": "Technical test Audio recorder to train alphabet phonemes with a simple and practical interface."
+    },
+    "4": {
+      "title": "UI Library - StencilJS",
+      "description": "Reusable web component library created with StencilJS and integrated with Storybook."
+    },
+    "5": {
+      "title": "SSE Manager - Node.js",
+      "description": "Backend library developed in Node.js and TypeScript for real-time communication via Server-Sent Events (SSE), with efficient management of multiple clients and selective message sending."
+    }
+  }
+}

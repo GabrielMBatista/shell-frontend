@@ -1,0 +1,20 @@
+{
+  "faq": {
+    "title": "Perguntas Frequentes",
+    "subtitle": "Algumas respostas rápidas para dúvidas comuns",
+    "items": [
+      {
+        "question": "Qual é o seu tempo de resposta?",
+        "answer": "Geralmente respondo emails em até 24 horas durante dias úteis."
+      },
+      {
+        "question": "Você trabalha com projetos remotos?",
+        "answer": "Sim! Trabalho com clientes do mundo todo de forma 100% remota."
+      },
+      {
+        "question": "Quais tipos de projeto você aceita?",
+        "answer": "Aceito projetos de desenvolvimento web, mobile e consultoria em tecnologia."
+      }
+    ]
+  }
+}

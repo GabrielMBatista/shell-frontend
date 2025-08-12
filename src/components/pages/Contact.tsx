@@ -127,16 +127,16 @@ export default function Contato({ isDark }: { isDark: boolean }) {
 
   const faqs = [
     {
-      question: 'Qual é o seu tempo de resposta?',
-      answer: 'Geralmente respondo emails em até 24 horas durante dias úteis.',
+      question: t('FAQ.items.0.question'),
+      answer: t('FAQ.items.0.answer'),
     },
     {
-      question: 'Você trabalha com projetos remotos?',
-      answer: 'Sim! Trabalho com clientes do mundo todo de forma 100% remota.',
+      question: t('FAQ.items.1.question'),
+      answer: t('FAQ.items.1.answer'),
     },
     {
-      question: 'Quais tipos de projeto você aceita?',
-      answer: 'Aceito projetos de desenvolvimento web, mobile e consultoria em tecnologia.',
+      question: t('FAQ.items.2.question'),
+      answer: t('FAQ.items.2.answer'),
     },
   ];
 
