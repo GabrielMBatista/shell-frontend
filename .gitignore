@@ -42,4 +42,4 @@ prisma/seed.ts
 next-env.d.ts
 
 /generated/prisma
-
+.npmrc
