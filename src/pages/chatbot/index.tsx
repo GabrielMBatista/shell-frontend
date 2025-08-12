@@ -1,14 +1,17 @@
-import dynamic from 'next/dynamic';
-import { Suspense } from 'react';
+import React, { lazy, Suspense } from 'react';
+import Loading from '@/components/common/Loading';
 
-const RemoteApp = dynamic(() => import('Chatbot/Chatbot').then((mod) => mod.default), {
-  ssr: false,
-  loading: () => <ui-loading />,
-});
+const RemoteApp = lazy(() => import('Chatbot/Chatbot').then((mod) => mod.default));
 
 export default function ChatbotPage() {
   return (
-    <Suspense fallback={<ui-loading />}>
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex items-center justify-center">
+          <Loading />
+        </div>
+      }
+    >
       <RemoteApp />
     </Suspense>
   );

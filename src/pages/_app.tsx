@@ -4,7 +4,7 @@ import { Providers } from '@/providers/providers';
 import { ClientOnly } from '@/utils/client-only';
 import Header from '@/components/common/Header';
 import Footer from '@/components/common/Footer';
-import { Suspense } from 'react';
+import { Suspense, lazy } from 'react';
 import { Inter } from 'next/font/google';
 import { useTheme } from '@/hooks/useTheme';
 import { useWidgetPosition } from '@/hooks/useWidgetPosition';
@@ -12,6 +12,8 @@ import { useClarity } from '@/hooks/useClarity';
 import { GabsIAWidget } from '@/components/common/GabsIAWidget';
 import { isEnvTrue } from '@/utils/env';
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
+import Loading from '@/components/common/Loading';
 
 const inter = Inter({ subsets: ['latin'], display: 'swap' });
 
@@ -25,13 +27,14 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Providers session={pageProps.session}>
       <ClientOnly>
+        <SpeedInsights />
         <div
           className={`min-h-screen transition-colors duration-300 ${
             isDark ? 'bg-gray-900' : 'bg-gray-50'
           } ${inter.className}`}
         >
           <Header isDark={isDark} setIsDark={setIsDark} />
-          <Suspense fallback={<ui-loading />}>
+          <Suspense fallback={<Loading />}>
             <Component {...pageProps} isDark={isDark} />
           </Suspense>
           <Footer isDark={isDark} />
