@@ -12,10 +12,6 @@ interface HeaderProps {
   setIsDark: (value: boolean) => void;
 }
 
-interface WindowWithWebpackRequire extends Window {
-  __webpack_require__: (module: string) => unknown;
-}
-
 export default function Header({ isDark, setIsDark }: HeaderProps) {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -26,10 +22,18 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
 
   const handleReopenAssistant = async () => {
     try {
-      const mod = (window as unknown as WindowWithWebpackRequire).__webpack_require__(
-        'Chatbot/GabsIAWidget',
-      );
-      (mod as { reopenGabsIAWidget?: () => void }).reopenGabsIAWidget?.();
+      interface ChatbotWindow {
+        Chatbot?: {
+          reopenGabsIAWidget?: () => void;
+        };
+      }
+
+      const mod = (window as unknown as ChatbotWindow).Chatbot;
+      if (!mod?.reopenGabsIAWidget) {
+        console.warn('Módulo remoto Chatbot/GabsIAWidget não encontrado.');
+        return;
+      }
+      mod.reopenGabsIAWidget();
     } catch (error) {
       console.error('Erro ao carregar o módulo remoto:', error);
     }

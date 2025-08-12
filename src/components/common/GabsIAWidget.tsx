@@ -15,15 +15,21 @@ export function GabsIAWidget({ fixedPosition }: { fixedPosition: DockPos }) {
     if (isChatbotEnabled) {
       (async () => {
         try {
-          const mod = await (
-            window as typeof window & {
-              __webpack_require__: (module: string) => Promise<{ default: React.ComponentType }>;
-            }
-          ).__webpack_require__('Chatbot/GabsIAWidget');
-          setGabsIA(
-            () =>
-              mod.default as React.ComponentType<{ tourEnabled: boolean; fixedPosition: DockPos }>,
-          );
+          interface ChatbotWindow {
+            Chatbot?: {
+              GabsIAWidget?: React.ComponentType<{
+                tourEnabled: boolean;
+                fixedPosition: DockPos;
+              }>;
+            };
+          }
+
+          const mod = (window as unknown as ChatbotWindow).Chatbot?.GabsIAWidget;
+          if (!mod) {
+            console.warn('Módulo remoto Chatbot/GabsIAWidget não encontrado.');
+            return;
+          }
+          setGabsIA(() => mod);
         } catch (error) {
           console.error('Erro ao carregar o módulo remoto:', error);
         }
