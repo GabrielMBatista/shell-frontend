@@ -1,0 +1,35 @@
+{
+  "pageTitle": "Sobre",
+  "hero": {
+    "locationBadge": "São Paulo, Brasil",
+    "title": "Sobre",
+    "highlightName": "Gabriel Marques",
+    "role": "Desenvolvedor Full Stack apaixonado por criar experiências digitais excepcionais",
+    "description": "Com mais de 4 anos de experiência, combino conhecimento técnico sólido com visão de design para entregar soluções que realmente fazem a diferença. Especializado em React, Node.js e arquiteturas modernas."
+  },
+  "ctas": {
+    "downloadCV": "Baixar CV",
+    "contact": "Entrar em Contato",
+    "viewProjects": "Ver Meus Projetos"
+  },
+  "journey": {
+    "title": "Minha Jornada",
+    "subtitle": "Uma linha do tempo da minha experiência profissional e educacional",
+    "items": [
+      {
+        "year": "2025",
+        "type": "Experiência Profissional",
+        "role": "Desenvolvedor JavaScript Pleno",
+        "company": "Meta",
+        "description": "Atuação com Next.js e React.js em equipe remota. Desenvolvimento de soluções performáticas e escaláveis."
+      },
+      {
+        "year": "2022 - 2025",
+        "type": "Experiência Profissional",
+        "role": "Desenvolvedor JavaScript | Mentor",
+        "company": "Meta",
+        "description": "Mentoria técnica para estagiários e JRs com foco em práticas ágeis, versionamento, APIs REST e acompanhamento via GitLab e Sonar."
+      }
+    ]
+  }
+}

@@ -1,4 +1,15 @@
 {
-  "title": "Bem-vindo à Página Home",
-  "description": "Esta é a descrição da página inicial em português."
+  "title": "Portfólio do Gabriel",
+  "description": "Next.js + Tailwind + Shadcn + Next-Intl funcionando!",
+  "badge": {
+    "available": "Disponível para novos projetos"
+  },
+  "greeting": "Olá, eu sou",
+  "name": "Gabriel Marques",
+  "role": "Desenvolvedor Full Stack | Entusiasta de IA",
+  "intro": "Transformo ideias em experiências digitais excepcionais. Especializado em React, Node.js e design de interfaces modernas que conectam pessoas e tecnologia.",
+  "ctas": {
+    "viewProjects": "Ver Projetos",
+    "downloadCV": "Baixar CV"
+  }
 }

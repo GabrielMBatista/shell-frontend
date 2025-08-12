@@ -234,6 +234,29 @@
   },
   "FAQ": {
     "title": "Frequently Asked Questions",
-    "subtitle": "Some quick answers to common doubts"
+    "subtitle": "Quick answers to common questions",
+    "items": [
+      {
+        "question": "What is your response time?",
+        "answer": "I usually respond to emails within 24 hours on business days."
+      },
+      {
+        "question": "Do you work on remote projects?",
+        "answer": "Yes! I work with clients worldwide in a 100% remote setup."
+      },
+      {
+        "question": "What types of projects do you accept?",
+        "answer": "I accept web development, mobile development, and technology consulting projects."
+      }
+    ]
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred. Please try again.",
+    "success": "Operation completed successfully.",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "save": "Save",
+    "delete": "Delete"
   }
 }

@@ -1,6 +1,7 @@
 'use client';
 
 import HighlightWrapper from './HighlightWrapper';
+import { useTranslation } from '@/hooks/useTranslation';
 
 interface FAQ {
   question: string;
@@ -13,6 +14,8 @@ interface FAQSectionProps {
 }
 
 export default function FAQSection({ faqs, isDark }: FAQSectionProps) {
+  const { t } = useTranslation('common');
+
   return (
     <section
       className={`py-20 border-t ${isDark ? 'border-gray-800 bg-gray-800' : 'border-gray-200 bg-white'}`}
@@ -22,10 +25,10 @@ export default function FAQSection({ faqs, isDark }: FAQSectionProps) {
           <h2
             className={`text-3xl md:text-4xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}
           >
-            Perguntas Frequentes
+            {t('FAQ.title')}
           </h2>
           <p className={`text-lg ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-            Algumas respostas rápidas para dúvidas comuns
+            {t('FAQ.subtitle')}
           </p>
         </div>
 

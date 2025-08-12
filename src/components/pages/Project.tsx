@@ -14,9 +14,11 @@ import {
 } from '@/utils/analytics';
 import type { Project, Category, ProjectsProps } from '@/types/projects';
 import { usePageTitle } from '@/hooks/usePageTitle';
+import { useTranslation } from '@/hooks/useTranslation';
 
 export default function Projetos({ isDark }: ProjectsProps) {
-  usePageTitle('Projetos');
+  const { t } = useTranslation('projects');
+  usePageTitle(t('pageTitle'));
   const fontFamily = useGoogleFont('Inter');
   const [activeFilter, setActiveFilter] = useState<string>('todos');
   const [searchTerm, setSearchTerm] = useState<string>('');
@@ -37,9 +39,8 @@ export default function Projetos({ isDark }: ProjectsProps) {
   const projects: Project[] = [
     {
       id: 1,
-      title: 'Entrevista AI',
-      description:
-        'Sistema básico que usa a API da OpenAI para avaliar níveis técnicos, agilizando o processo de triagem.',
+      title: t('items.1.title'),
+      description: t('items.1.description'),
       category: 'fullstack' as const,
       technologies: [
         'Next.js',
@@ -55,9 +56,8 @@ export default function Projetos({ isDark }: ProjectsProps) {
     },
     {
       id: 2,
-      title: 'Tropa Login',
-      description:
-        'Teste técnico para uma vaga do LinkedIn com o intuito de desenvolver uma tela de login funcional.',
+      title: t('items.2.title'),
+      description: t('items.2.description'),
       category: 'frontend' as const,
       technologies: [
         'Next.js',
@@ -73,9 +73,8 @@ export default function Projetos({ isDark }: ProjectsProps) {
     },
     {
       id: 3,
-      title: 'Alphabet Recorder',
-      description:
-        'Teste técnico Gravador de áudio para treinar fonemas do alfabeto, com interface simples e prática.',
+      title: t('items.3.title'),
+      description: t('items.3.description'),
       category: 'frontend' as const,
       technologies: [
         'React',
@@ -91,9 +90,8 @@ export default function Projetos({ isDark }: ProjectsProps) {
     },
     {
       id: 4,
-      title: 'UI Library - StencilJS',
-      description:
-        'Biblioteca de componentes web reutilizáveis criada com StencilJS e integrada ao Storybook.',
+      title: t('items.4.title'),
+      description: t('items.4.description'),
       category: 'frontend' as const,
       technologies: ['StencilJS', 'Storybook', 'TypeScript', 'Web Components', 'Jest'],
       github: 'https://github.com/GabrielMBatista/ui-library-stencil',
@@ -102,9 +100,8 @@ export default function Projetos({ isDark }: ProjectsProps) {
     },
     {
       id: 5,
-      title: 'SSE Manager - Node.js',
-      description:
-        'Biblioteca backend desenvolvida em Node.js e TypeScript para comunicação em tempo real via Server-Sent Events (SSE), com gerenciamento eficiente de múltiplos clientes e envio seletivo de mensagens.',
+      title: t('items.5.title'),
+      description: t('items.5.description'),
       category: 'backend' as const,
       technologies: ['Node.js', 'TypeScript', 'Express', 'Jest'],
       github: 'https://github.com/GabrielMBatista/see-manager',
@@ -114,11 +111,11 @@ export default function Projetos({ isDark }: ProjectsProps) {
   ].sort((a, b) => a.id - b.id);
 
   const categories: Category[] = [
-    { id: 'todos', name: 'Todos os Projetos', icon: Globe },
-    { id: 'frontend', name: 'Frontend', icon: Code },
-    { id: 'backend', name: 'Backend', icon: Database },
-    { id: 'fullstack', name: 'Full Stack', icon: Zap },
-    { id: 'mobile', name: 'Mobile', icon: Smartphone },
+    { id: 'todos', name: t('categories.all'), icon: Globe },
+    { id: 'frontend', name: t('categories.frontend'), icon: Code },
+    { id: 'backend', name: t('categories.backend'), icon: Database },
+    { id: 'fullstack', name: t('categories.fullstack'), icon: Zap },
+    { id: 'mobile', name: t('categories.mobile'), icon: Smartphone },
   ];
 
   const filteredProjects: Project[] = projects.filter((project) => {
@@ -343,16 +340,15 @@ export default function Projetos({ isDark }: ProjectsProps) {
             <h1
               className={`text-4xl md:text-6xl font-bold mb-6 ${isDark ? 'text-white' : 'text-gray-900'}`}
             >
-              Meus{' '}
+              {t('hero.title')}{' '}
               <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                Projetos
+                {t('hero.highlight')}
               </span>
             </h1>
             <p
               className={`text-xl max-w-3xl mx-auto ${isDark ? 'text-gray-400' : 'text-gray-600'}`}
             >
-              Uma seleção dos meus trabalhos mais recentes até os mais antigos, aplicações web
-              completas incluindo APIs e interfaces modernas.
+              {t('hero.subtitle')}
             </p>
           </div>
         </div>
@@ -363,7 +359,7 @@ export default function Projetos({ isDark }: ProjectsProps) {
           <h2
             className={`text-2xl md:text-3xl font-bold mb-8 ${isDark ? 'text-white' : 'text-gray-900'}`}
           >
-            Projetos em Destaque
+            {t('featured.title')}
           </h2>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {featuredProjects.map((project) => (
@@ -395,7 +391,7 @@ export default function Projetos({ isDark }: ProjectsProps) {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   <div className="absolute top-4 right-4">
                     <span className="px-3 py-1 bg-blue-600 text-white text-sm font-medium rounded-full">
-                      Destaque
+                      {t('featured.label')}
                     </span>
                   </div>
                 </div>
@@ -432,7 +428,7 @@ export default function Projetos({ isDark }: ProjectsProps) {
                       className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-cyan-400 transition-colors duration-200 font-medium"
                     >
                       <ExternalLink size={18} />
-                      Ver Demo
+                      {t('featured.demo')}
                     </button>
                     <a
                       href={project.github}
@@ -447,7 +443,7 @@ export default function Projetos({ isDark }: ProjectsProps) {
                       }`}
                     >
                       <Github size={18} />
-                      Código
+                      {t('featured.code')}
                     </a>
                   </div>
                 </div>
@@ -467,7 +463,7 @@ export default function Projetos({ isDark }: ProjectsProps) {
               />
               <input
                 type="text"
-                placeholder="Buscar projetos..."
+                placeholder={t('search.placeholder')}
                 value={searchTerm}
                 onChange={(e) => handleSearchChange(e.target.value)}
                 className={`w-full pl-10 pr-4 py-3 border rounded-xl transition-all duration-200 outline-none focus:ring-2 focus:ring-blue-200 ${
@@ -508,11 +504,10 @@ export default function Projetos({ isDark }: ProjectsProps) {
             <h2
               className={`text-2xl md:text-3xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}
             >
-              Todos os Projetos
+              {t('all.title')}
             </h2>
             <p className={`mt-2 text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-              Nota: Nem todos os projetos possuem responsividade e alguns foram desenvolvidos no
-              início da minha carreira.
+              {t('all.note')}
             </p>
           </div>
 
@@ -524,10 +519,10 @@ export default function Projetos({ isDark }: ProjectsProps) {
               <h3
                 className={`text-xl font-semibold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}
               >
-                Nenhum projeto encontrado
+                {t('noResults.title')}
               </h3>
               <p className={`${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                Tente ajustar os filtros ou termo de busca
+                {t('noResults.subtitle')}
               </p>
             </div>
           ) : (
@@ -547,7 +542,6 @@ export default function Projetos({ isDark }: ProjectsProps) {
                     }`}
                   >
                     {hasDemo ? (
-                      // Layout padrão com demo (iframe)
                       <>
                         <div className="relative overflow-hidden">
                           <div className="w-full h-48 relative">
@@ -605,7 +599,7 @@ export default function Projetos({ isDark }: ProjectsProps) {
                               className="flex-1 inline-flex items-center justify-center gap-1 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-cyan-400 transition-colors duration-200 text-sm font-medium"
                             >
                               <ExternalLink size={14} />
-                              Demo
+                              {t('all.demo')}
                             </button>
                             <a
                               href={project.github}
@@ -620,13 +614,12 @@ export default function Projetos({ isDark }: ProjectsProps) {
                               }`}
                             >
                               <Github size={14} />
-                              Código
+                              {t('all.code')}
                             </a>
                           </div>
                         </div>
                       </>
                     ) : (
-                      // Novo layout sem demo
                       <div className="p-6">
                         <h3
                           className={`text-xl font-bold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}
@@ -642,14 +635,14 @@ export default function Projetos({ isDark }: ProjectsProps) {
                           <h4
                             className={`text-sm font-semibold mb-2 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}
                           >
-                            Principais Características:
+                            {t('all.features.title')}
                           </h4>
                           <ul
                             className={`list-disc pl-5 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}
                           >
-                            <li>Gerenciamento eficiente de conexões SSE</li>
-                            <li>Envio de mensagens em tempo real</li>
-                            <li>Fácil integração com aplicações Node.js</li>
+                            <li>{t('all.features.item1')}</li>
+                            <li>{t('all.features.item2')}</li>
+                            <li>{t('all.features.item3')}</li>
                           </ul>
                         </div>
                         <div className="flex flex-wrap gap-1 mb-4">
@@ -678,7 +671,7 @@ export default function Projetos({ isDark }: ProjectsProps) {
                             }`}
                           >
                             <Github size={14} />
-                            Código
+                            {t('all.code')}
                           </a>
                         </div>
                       </div>
@@ -693,9 +686,9 @@ export default function Projetos({ isDark }: ProjectsProps) {
 
       <CTASection
         isDark={isDark}
-        title="Gostou do que viu?"
-        description="Vamos conversar sobre como posso ajudar no seu próximo projeto."
-        primaryLink={{ href: '/contact', label: 'Entrar em Contato' }}
+        title={t('cta.title')}
+        description={t('cta.description')}
+        primaryLink={{ href: '/contact', label: t('cta.primary') }}
       />
     </div>
   );

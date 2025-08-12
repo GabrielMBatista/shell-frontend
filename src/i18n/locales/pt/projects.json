@@ -1,0 +1,66 @@
+{
+  "pageTitle": "Projetos",
+  "hero": {
+    "title": "Meus Projetos",
+    "highlight": "Destaques",
+    "subtitle": "Explore os projetos que desenvolvi com tecnologias modernas."
+  },
+  "categories": {
+    "all": "Todos os Projetos",
+    "frontend": "Frontend",
+    "backend": "Backend",
+    "fullstack": "Full Stack",
+    "mobile": "Mobile"
+  },
+  "featured": {
+    "title": "Projetos em Destaque",
+    "label": "Destaque",
+    "demo": "Ver Demo",
+    "code": "Código"
+  },
+  "all": {
+    "title": "Todos os Projetos",
+    "note": "Aqui estão todos os projetos que desenvolvi.",
+    "demo": "Ver Demo",
+    "code": "Código",
+    "features": {
+      "item1": "Gerenciamento eficiente de conexões SSE",
+      "item2": "Envio de mensagens em tempo real",
+      "item3": "Fácil integração com aplicações Node.js"
+    }
+  },
+  "noResults": {
+    "title": "Nenhum projeto encontrado",
+    "subtitle": "Tente ajustar os filtros ou termo de busca."
+  },
+  "search": {
+    "placeholder": "Buscar projetos..."
+  },
+  "cta": {
+    "title": "Interessado em trabalhar comigo?",
+    "description": "Entre em contato para discutirmos como posso ajudar no seu projeto.",
+    "primary": "Entre em Contato"
+  },
+  "items": {
+    "1": {
+      "title": "Entrevista AI",
+      "description": "Sistema básico que usa a API da OpenAI para avaliar níveis técnicos, agilizando o processo de triagem."
+    },
+    "2": {
+      "title": "Tropa Login",
+      "description": "Teste técnico para uma vaga do LinkedIn com o intuito de desenvolver uma tela de login funcional."
+    },
+    "3": {
+      "title": "Alphabet Recorder",
+      "description": "Teste técnico Gravador de áudio para treinar fonemas do alfabeto, com interface simples e prática."
+    },
+    "4": {
+      "title": "UI Library - StencilJS",
+      "description": "Biblioteca de componentes web reutilizáveis criada com StencilJS e integrada ao Storybook."
+    },
+    "5": {
+      "title": "SSE Manager - Node.js",
+      "description": "Biblioteca backend desenvolvida em Node.js e TypeScript para comunicação em tempo real via Server-Sent Events (SSE), com gerenciamento eficiente de múltiplos clientes e envio seletivo de mensagens."
+    }
+  }
+}
