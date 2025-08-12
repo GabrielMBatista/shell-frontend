@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { Sun, Moon, Menu, Globe } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { reopenGabsIAWidget } from 'Chatbot/GabsIAWidget';
 import { useTranslation } from '@/hooks/useTranslation';
 import { locales, type Locale } from '@/i18n';
 import { isEnvTrue } from '@/utils/env';
@@ -13,6 +12,10 @@ interface HeaderProps {
   setIsDark: (value: boolean) => void;
 }
 
+interface WindowWithWebpackRequire extends Window {
+  __webpack_require__: (module: string) => unknown;
+}
+
 export default function Header({ isDark, setIsDark }: HeaderProps) {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -20,6 +23,17 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
 
   const { t, locale, changeLocale } = useTranslation('common');
   const isChatbotEnabled = isEnvTrue(process.env.NEXT_PUBLIC_CHATBOT);
+
+  const handleReopenAssistant = async () => {
+    try {
+      const mod = (window as unknown as WindowWithWebpackRequire).__webpack_require__(
+        'Chatbot/GabsIAWidget',
+      );
+      (mod as { reopenGabsIAWidget?: () => void }).reopenGabsIAWidget?.();
+    } catch (error) {
+      console.error('Erro ao carregar o módulo remoto:', error);
+    }
+  };
 
   return (
     <header
@@ -32,7 +46,7 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
           <div id="gabs-header-anchor" className="flex items-center gap-4">
             {isChatbotEnabled && (
               <button
-                onClick={reopenGabsIAWidget}
+                onClick={handleReopenAssistant}
                 className="flex items-center gap-4 focus:outline-none"
                 title={t('Header.tooltip.reopenAssistant')}
               >

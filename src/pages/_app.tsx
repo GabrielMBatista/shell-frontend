@@ -7,21 +7,26 @@ import Footer from '@/components/common/Footer';
 import { Suspense } from 'react';
 import { Inter } from 'next/font/google';
 import { useTheme } from '@/hooks/useTheme';
-import { useWidgetPosition } from '@/hooks/useWidgetPosition';
 import { useClarity } from '@/hooks/useClarity';
-import { GabsIAWidget } from '@/components/common/GabsIAWidget';
 import { isEnvTrue } from '@/utils/env';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import Loading from '@/components/common/Loading';
+import dynamic from 'next/dynamic';
+import { useWidgetPosition } from '@/hooks/useWidgetPosition';
 
 const inter = Inter({ subsets: ['latin'], display: 'swap' });
+const GabsIAWidget = isEnvTrue(process.env.NEXT_PUBLIC_CHATBOT)
+  ? dynamic(() => import('@/components/common/GabsIAWidget').then((mod) => mod.GabsIAWidget), {
+      ssr: false,
+      loading: () => <Loading />,
+    })
+  : null;
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   const { isDark, setIsDark } = useTheme();
-  const widgetPos = useWidgetPosition();
   useClarity();
-
+  const widgetPos = useWidgetPosition();
   const isChatbotEnabled = isEnvTrue(process.env.NEXT_PUBLIC_CHATBOT);
 
   return (
@@ -39,7 +44,11 @@ export default function MyApp({ Component, pageProps }: AppProps) {
           </Suspense>
           <Footer isDark={isDark} />
         </div>
-        {isChatbotEnabled && <GabsIAWidget fixedPosition={widgetPos} />}
+        {isChatbotEnabled && GabsIAWidget && (
+          <Suspense fallback={<Loading />}>
+            <GabsIAWidget fixedPosition={widgetPos} />
+          </Suspense>
+        )}
         <Analytics />
       </ClientOnly>
     </Providers>
