@@ -11,35 +11,35 @@ export function GabsIAWidget({ fixedPosition }: { fixedPosition: DockPos }) {
     fixedPosition: DockPos;
   }> | null>(null);
 
+  console.log('Componente GabsIAWidget renderizado. Estado inicial:', { GabsIA, isChatbotEnabled });
+
   React.useEffect(() => {
     if (isChatbotEnabled) {
+      console.log('Chatbot está habilitado. Iniciando carregamento do módulo remoto...');
       (async () => {
         try {
-          interface ChatbotWindow {
-            Chatbot?: {
-              GabsIAWidget?: React.ComponentType<{
-                tourEnabled: boolean;
-                fixedPosition: DockPos;
-              }>;
-            };
-          }
-
-          const mod = (window as unknown as ChatbotWindow).Chatbot?.GabsIAWidget;
-          if (!mod) {
-            console.warn('Módulo remoto Chatbot/GabsIAWidget não encontrado.');
-            return;
-          }
-          setGabsIA(() => mod);
+          const mod = await import('Chatbot/GabsIAWidget');
+          console.log('Módulo remoto Chatbot/GabsIAWidget carregado:', mod);
+          setGabsIA(() => mod.default || mod);
         } catch (error) {
-          console.error('Erro ao carregar o módulo remoto:', error);
+          console.error('Erro ao carregar o módulo remoto Chatbot/GabsIAWidget:', error);
+          alert(
+            'Erro ao carregar o módulo remoto. Verifique a configuração do módulo federado e a disponibilidade do servidor.',
+          );
         }
       })();
+    } else {
+      console.log('Chatbot está desabilitado. Componente não será exibido.');
     }
   }, []);
 
   if (!isChatbotEnabled) return null;
 
-  if (!GabsIA) return null;
+  if (!GabsIA) {
+    console.log('Componente GabsIA ainda não está disponível. Retornando null.');
+    return null;
+  }
 
+  console.log('Componente GabsIA encontrado. Renderizando...');
   return <GabsIA tourEnabled fixedPosition={fixedPosition} />;
 }

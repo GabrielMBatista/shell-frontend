@@ -19,18 +19,15 @@ const nextConfig = {
     if (isServer) {
       config.plugins.push(new PrismaPlugin());
     }
-
-    const remotes = process.env.NEXT_PUBLIC_CHATBOT === 'true'
-      ? {
-        Chatbot: `Chatbot@${process.env.NEXT_PUBLIC_CHATBOT_REMOTE_URL}/_next/static/chunks/remoteEntry.js`,
-      }
-      : {};
-
     config.plugins.push(
       new NextFederationPlugin({
         name: 'shell',
         filename: 'static/chunks/remoteEntry.js',
-        remotes,
+        remotes: process.env.NEXT_PUBLIC_CHATBOT === 'true'
+          ? {
+            Chatbot: `Chatbot@${process.env.NEXT_PUBLIC_CHATBOT_REMOTE_URL}/_next/static/chunks/remoteEntry.js`,
+          }
+          : {},
         exposes: {
           './Error': './src/pages/_error.tsx',
           './Providers': './src/providers/providers.tsx',
