@@ -2,14 +2,14 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { getToken } from 'next-auth/jwt';
 
-const PUBLIC_ROUTES = [
-  '/auth/signin',
-  '/register',
-  '/about',
-  '/home',
-  '/about',
-  '/contact',
-  '/projects',
+const PUBLIC_ROUTES = ['/auth/signin','/about', '/home', '/contact', '/projects'];
+
+const BLOCKED_PATHS = [
+  '/wp-admin',
+  '/wordpress',
+  '/phpmyadmin',
+  '/xmlrpc.php',
+  '/setup-config.php',
 ];
 
 export async function middleware(request: NextRequest) {
@@ -17,13 +17,19 @@ export async function middleware(request: NextRequest) {
 
   console.log('[Middleware] Request pathname:', pathname);
 
+  //Bloquear scanners/bots
+  const isBlockedPath = BLOCKED_PATHS.some((blockedPath) => pathname.startsWith(blockedPath));
+  if (isBlockedPath) {
+    console.warn(`[Middleware] Acesso bloqueado a rota suspeita: ${pathname}`);
+    return new NextResponse('Not Found', { status: 404 });
+  }
+
+  //Proteção por autenticação
   const token = await getToken({
     req: request,
     secret: process.env.NEXTAUTH_SECRET,
     raw: true,
   });
-
-  // console.log('[Middleware] Token:', token);
 
   const isAuthenticated = !!token;
 
