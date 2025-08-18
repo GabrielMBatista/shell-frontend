@@ -22,20 +22,14 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
 
   const handleReopenAssistant = async () => {
     try {
-      interface ChatbotWindow {
-        Chatbot?: {
-          reopenGabsIAWidget?: () => void;
-        };
-      }
-
-      const mod = (window as unknown as ChatbotWindow).Chatbot;
+      const mod = await import('Chatbot/GabsIAWidget');
       if (!mod?.reopenGabsIAWidget) {
-        console.warn('Módulo remoto Chatbot/GabsIAWidget não encontrado.');
+        console.warn('Função reopenGabsIAWidget não encontrada no módulo remoto.');
         return;
       }
       mod.reopenGabsIAWidget();
     } catch (error) {
-      console.error('Erro ao carregar o módulo remoto:', error);
+      console.error('Erro ao carregar o módulo remoto Chatbot/GabsIAWidget:', error);
     }
   };
 

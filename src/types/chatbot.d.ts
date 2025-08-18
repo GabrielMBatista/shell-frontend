@@ -15,6 +15,11 @@ declare module 'Chatbot/GabsIAWidget' {
   export type GabsIAWidgetProps = {
     tourEnabled?: boolean;
     fixedPosition?: DockPos;
+    initialMessage?: {
+      question: string;
+      answer: string;
+      owner: 'gone';
+    };
   };
 
   // Versão do contrato (mantenha em sincronia com o runtime)

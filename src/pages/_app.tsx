@@ -46,7 +46,14 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         </div>
         {isChatbotEnabled && GabsIAWidget && (
           <Suspense fallback={<Loading />}>
-            <GabsIAWidget fixedPosition={widgetPos} />
+            <GabsIAWidget
+              fixedPosition={widgetPos}
+              initialMessage={{
+                answer:
+                  'Olá! Eu sou o G•One, assistente oficial do portfólio de Gabriel Marques. Posso te ajudar a entender cada área do site, explicar decisões técnicas ou apresentar os projetos do Gabriel com clareza e profundidade. Dica: utilize os botões de tour (ícone de interrogação) para navegar por explicações guiadas das principais áreas do portfólio.  Também é possível clicar em áreas marcadas com data-gabs para explicações rápidas. Como posso te ajudar hoje?',
+                owner: 'gone',
+              }}
+            />
           </Suspense>
         )}
         <Analytics />
