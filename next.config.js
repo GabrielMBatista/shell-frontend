@@ -25,7 +25,10 @@ const nextConfig = {
         filename: 'static/chunks/remoteEntry.js',
         remotes: process.env.NEXT_PUBLIC_CHATBOT === 'true'
           ? {
-            Chatbot: `Chatbot@${process.env.NEXT_PUBLIC_CHATBOT_REMOTE_URL}/_next/static/chunks/remoteEntry.js`,
+            Chatbot: `Chatbot@${process.env.NEXT_PUBLIC_CHATBOT_REMOTE_URL.startsWith('http')
+                ? process.env.NEXT_PUBLIC_CHATBOT_REMOTE_URL
+                : `https://${process.env.NEXT_PUBLIC_CHATBOT_REMOTE_URL}`
+              }/_next/static/chunks/remoteEntry.js`,
           }
           : {},
         exposes: {
@@ -75,12 +78,12 @@ const nextConfig = {
           },
           {
             key: 'Permissions-Policy',
-            value: 'camera=(), microphone=(), geolocation=()',
+            value: 'camera=*, microphone=*, geolocation=()',
           },
         ],
       },
     ];
-  }, 
+  },
   async redirects() {
     return [
       {
