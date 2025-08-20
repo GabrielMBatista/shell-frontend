@@ -209,6 +209,7 @@ export default function Sobre({ isDark }: { isDark: boolean }) {
               </div>
               <div className="flex flex-col sm:flex-row gap-4">
                 <button
+                  data-gabs="about-download-cv"
                   className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-blue-600 text-white rounded-xl hover:bg-cyan-400 transition-all duration-200 font-medium text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 cursor-pointer"
                   onClick={() => window.open('/Resume_Gabriel_Marques.pdf', '_blank')}
                 >
@@ -217,6 +218,7 @@ export default function Sobre({ isDark }: { isDark: boolean }) {
                 </button>
                 <Link
                   href="/contact"
+                  data-gabs="about-contact-button"
                   className={`inline-flex items-center justify-center gap-2 px-8 py-4 border rounded-xl transition-all duration-200 font-medium text-lg hover:shadow-lg transform hover:-translate-y-1 cursor-pointer ${
                     isDark
                       ? 'text-white border-gray-600 hover:bg-gray-800'

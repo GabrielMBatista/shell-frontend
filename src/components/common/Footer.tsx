@@ -21,6 +21,7 @@ export default function Footer({ isDark }: FooterProps) {
           <div className="flex items-center gap-4">
             <a
               href="https://github.com/GabrielMBatista"
+              data-gabs="footer-github"
               className={`p-2 rounded-lg transition-colors ${
                 isDark
                   ? 'text-gray-400 hover:text-white hover:bg-gray-800'
@@ -31,6 +32,7 @@ export default function Footer({ isDark }: FooterProps) {
             </a>
             <a
               href="https://www.linkedin.com/in/gabriel-marques-batista/"
+              data-gabs="footer-linkedin"
               className={`p-2 rounded-lg transition-colors ${
                 isDark
                   ? 'text-gray-400 hover:text-white hover:bg-gray-800'
@@ -41,6 +43,7 @@ export default function Footer({ isDark }: FooterProps) {
             </a>
             <a
               href="mailto:gabbriel_gbl2@hotmail.com"
+              data-gabs="footer-email"
               className={`p-2 rounded-lg transition-colors ${
                 isDark
                   ? 'text-gray-400 hover:text-white hover:bg-gray-800'

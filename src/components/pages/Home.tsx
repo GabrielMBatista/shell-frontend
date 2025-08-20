@@ -77,12 +77,14 @@ export default function Home({ isDark }: { isDark: boolean }) {
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link
                   href="/projects"
+                  data-gabs="view-projects-button"
                   className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-blue-600 text-white rounded-xl hover:bg-cyan-400 transition-all duration-200 font-medium text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                 >
                   {t('Home.ctas.viewProjects')}
                   <ArrowRight size={20} />
                 </Link>
                 <button
+                  data-gabs="download-cv-button"
                   className={`inline-flex items-center justify-center gap-2 px-8 py-4 border rounded-xl transition-all duration-200 font-medium text-lg hover:shadow-lg transform hover:-translate-y-1 ${
                     isDark
                       ? 'text-white border-gray-600 hover:bg-gray-800'
@@ -105,6 +107,7 @@ export default function Home({ isDark }: { isDark: boolean }) {
                 <div className="flex gap-3">
                   <a
                     href="https://github.com/GabrielMBatista"
+                    data-gabs="social-github"
                     className={`p-3 rounded-lg transition-all duration-200 hover:scale-110 ${
                       isDark
                         ? 'bg-gray-800 text-white hover:bg-gray-700'

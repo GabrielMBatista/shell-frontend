@@ -25,10 +25,13 @@ export default function CTASection({
         >
           {title}
         </h2>
-        <p className={`text-lg mb-8 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>{description}</p>
+        <p className={`text-lg mb-8 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+          {description}
+        </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <a
             href={primaryLink.href}
+            data-gabs="cta-primary"
             className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-blue-600 text-white rounded-xl hover:bg-cyan-400 transition-all duration-200 font-medium text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1"
           >
             {primaryLink.label}
@@ -37,6 +40,7 @@ export default function CTASection({
           {secondaryLink && (
             <a
               href={secondaryLink.href}
+              data-gabs="cta-secondary"
               className={`inline-flex items-center justify-center gap-2 px-8 py-4 border rounded-xl transition-all duration-200 font-medium text-lg hover:shadow-lg transform hover:-translate-y-1 ${
                 isDark
                   ? 'text-white border-gray-600 hover:bg-gray-700'

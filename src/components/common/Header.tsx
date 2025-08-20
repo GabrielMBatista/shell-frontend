@@ -55,6 +55,7 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
           <nav className="hidden md:flex items-center gap-8">
             <Link
               href="/"
+              data-gabs="nav-home"
               className={`transition-colors ${
                 isActive('/home')
                   ? 'text-blue-500 font-bold'
@@ -67,6 +68,7 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
             </Link>
             <Link
               href="/projects"
+              data-gabs="nav-projects"
               className={`transition-colors ${
                 isActive('/projects')
                   ? 'text-blue-500 font-bold'
@@ -79,6 +81,7 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
             </Link>
             <Link
               href="/about"
+              data-gabs="nav-about"
               className={`transition-colors ${
                 isActive('/about')
                   ? 'text-blue-500 font-bold'
@@ -91,6 +94,7 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
             </Link>
             <Link
               href="/contact"
+              data-gabs="nav-contact"
               className={`transition-colors ${
                 isActive('/contact')
                   ? 'text-blue-500 font-bold'
@@ -114,6 +118,7 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
               <select
                 value={locale}
                 onChange={(e) => changeLocale(e.target.value as Locale)}
+                data-gabs="lang-toggle"
                 aria-label={t('Header.lang.toggle')}
                 className={`bg-transparent outline-none text-[11px] font-semibold px-1 py-0.5 ${
                   isDark ? 'text-gray-200' : 'text-gray-700'
@@ -129,6 +134,7 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
             {/* Botão de tema */}
             <button
               onClick={() => setIsDark(!isDark)}
+              data-gabs="theme-toggle"
               className={`p-2 rounded-lg transition-all duration-200 ${
                 isDark
                   ? 'bg-gray-700 text-yellow-400 hover:bg-gray-600'
@@ -155,6 +161,7 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
           >
             <Link
               href="/"
+              data-gabs="nav-home"
               className={`block py-2 transition-colors ${
                 isActive('/home')
                   ? 'text-blue-500 font-bold'
@@ -167,6 +174,7 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
             </Link>
             <Link
               href="/projects"
+              data-gabs="nav-projects"
               className={`block py-2 transition-colors ${
                 isActive('/projects')
                   ? 'text-blue-500 font-bold'
@@ -179,6 +187,7 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
             </Link>
             <Link
               href="/about"
+              data-gabs="nav-about"
               className={`block py-2 transition-colors ${
                 isActive('/about')
                   ? 'text-blue-500 font-bold'
@@ -191,6 +200,7 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
             </Link>
             <Link
               href="/contact"
+              data-gabs="nav-contact"
               className={`block py-2 transition-colors ${
                 isActive('/contact')
                   ? 'text-blue-500 font-bold'

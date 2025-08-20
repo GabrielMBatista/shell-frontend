@@ -57,18 +57,44 @@ export default function MyApp({ Component, pageProps }: AppProps) {
                 {
                   target: '.gabs-avatar',
                   content:
-                    'Este é o G•One, assistente do portfólio. Clique para interagir ou buscar explicações rápidas nas áreas marcadas.',
+                    'Este é o G•One, assistente do portfólio. Clique para conversar ou obter ajuda contextual.',
+                },
+                {
+                  target: '.dynamic-tour',
+                  content:
+                    'Esse é o tour dinamico ao ativar items destacados podem fornecer mais detalhes ao serem clicados.',
+                },
+                {
+                  target: '[data-gabs="nav-projects"]',
+                  content:
+                    'Use o menu para navegar entre as páginas. Aqui você pode acessar os projetos.',
+                  route: '/home',
+                },
+                {
+                  target: '[data-gabs="view-projects-button"]',
+                  content: 'Comece explorando os projetos clicando neste botão.',
+                  route: '/home',
+                },
+                {
+                  target: '[data-gabs="frontend"]',
+                  content:
+                    'Cada card de habilidade oferece uma explicação rápida. Explore para conhecer minhas especialidades.',
+                  route: '/home',
                 },
                 {
                   target: '[data-gabs="featured-project-1"]',
-                  content:
-                    'Este é um projeto em destaque. Clique para ver mais detalhes sobre este projeto.',
+                  content: 'Este é um projeto em destaque. Clique para ver mais detalhes.',
                   route: '/projects',
+                },
+                {
+                  target: '[data-gabs="about-download-cv"]',
+                  content: 'Baixe meu currículo para conhecer mais sobre minha trajetória.',
+                  route: '/about',
                 },
                 {
                   target: '[data-gabs="contact-button"]',
                   content:
-                    'Use este botão para abrir o formulário de contato e enviar uma mensagem diretamente.',
+                    'Pronto para entrar em contato? Use este botão para enviar uma mensagem.',
                   route: '/contact',
                 },
               ]}
