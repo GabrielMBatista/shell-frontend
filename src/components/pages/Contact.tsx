@@ -332,6 +332,7 @@ export default function Contato({ isDark }: { isDark: boolean }) {
             <button
               type="submit"
               data-gabs={`contact-button`}
+              gabs-content="Envia o formulário de contato. Permite iniciar uma conversa direta com Gabriel Marques."
               disabled={isSubmitting}
               className={`w-full inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl transition-all duration-200 font-medium text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 cursor-pointer ${
                 isSubmitting
