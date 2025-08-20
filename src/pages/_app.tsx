@@ -51,7 +51,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
               initialMessage={{
                 question: '',
                 answer:
-                  'Olá! Eu sou o G•One, assistente oficial do portfólio de Gabriel Marques. Posso te ajudar a entender cada área do site, explicar decisões técnicas ou apresentar os projetos do Gabriel com clareza e profundidade. Dica: utilize os botões de tour (ícone de interrogação) para navegar por explicações guiadas das principais áreas do portfólio. Também é possível clicar em áreas marcadas com data-gabs para explicações rápidas. Como posso te ajudar hoje?',
+                  'Olá! Eu sou o G•One, assistente oficial do portfólio de Gabriel Marques.Estou aqui para te ajudar a explorar o site, entender as escolhas técnicas e conhecer os projetos do Gabriel com clareza.💡 Clique em ❓ para iniciar o tour guiado pelas principais áreas.▶️ Use o botão verde para destacar os itens interativos com explicações extras (marcados com data-gabs).Como posso te ajudar hoje?',
               }}
               fixedTourSteps={[
                 {

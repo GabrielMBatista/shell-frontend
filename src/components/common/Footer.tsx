@@ -22,6 +22,7 @@ export default function Footer({ isDark }: FooterProps) {
             <a
               href="https://github.com/GabrielMBatista"
               data-gabs="footer-github"
+              gabs-content="Link para o GitHub no rodapé, reforçando a presença técnica mesmo ao final da página."
               className={`p-2 rounded-lg transition-colors ${
                 isDark
                   ? 'text-gray-400 hover:text-white hover:bg-gray-800'
@@ -33,6 +34,7 @@ export default function Footer({ isDark }: FooterProps) {
             <a
               href="https://www.linkedin.com/in/gabriel-marques-batista/"
               data-gabs="footer-linkedin"
+              gabs-content="Link para o LinkedIn no rodapé, mantendo aberto o canal de networking e conferindo credibilidade profissional."
               className={`p-2 rounded-lg transition-colors ${
                 isDark
                   ? 'text-gray-400 hover:text-white hover:bg-gray-800'
@@ -44,6 +46,7 @@ export default function Footer({ isDark }: FooterProps) {
             <a
               href="mailto:gabbriel_gbl2@hotmail.com"
               data-gabs="footer-email"
+              gabs-content="Link de e-mail no rodapé, garantindo que a opção de contato permaneça disponível em qualquer ponto da navegação."
               className={`p-2 rounded-lg transition-colors ${
                 isDark
                   ? 'text-gray-400 hover:text-white hover:bg-gray-800'

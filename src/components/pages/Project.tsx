@@ -370,12 +370,12 @@ export default function Projetos({ isDark }: ProjectsProps) {
                   isDark ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200'
                 }`}
               >
-                <div className="relative flex items-center justify-center overflow-hidden">
+                <div className="relative flex items-center justify-center">
                   <div
                     className="relative flex items-center justify-center"
                     style={{
                       width: resolution.width,
-                      height: resolution.height,
+                      height: '30vh', // Alterado de resolution.height para 30vh
                       transform: `scale(${resolution.scale})`,
                       transformOrigin: 'center',
                     }}

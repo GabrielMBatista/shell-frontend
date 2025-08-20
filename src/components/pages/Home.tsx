@@ -19,7 +19,6 @@ import gabrielPhoto from '@/assets/gabrielPhoto.jpg';
 import Link from 'next/link';
 import { usePageTitle } from '@/hooks/usePageTitle';
 import { useTranslation } from '@/hooks/useTranslation';
-import HighlightWrapper from '../common/HighlightWrapper';
 
 const CTASection = dynamic(() => import('@/components/common/CTASection'), { ssr: false });
 
@@ -78,6 +77,7 @@ export default function Home({ isDark }: { isDark: boolean }) {
                 <Link
                   href="/projects"
                   data-gabs="view-projects-button"
+                  gabs-content="Botão de destaque que leva à listagem completa de projetos. Indica uma chamada à ação reutilizável e conduz o visitante diretamente ao portfólio técnico."
                   className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-blue-600 text-white rounded-xl hover:bg-cyan-400 transition-all duration-200 font-medium text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                 >
                   {t('Home.ctas.viewProjects')}
@@ -85,6 +85,7 @@ export default function Home({ isDark }: { isDark: boolean }) {
                 </Link>
                 <button
                   data-gabs="download-cv-button"
+                  gabs-content="Disponibiliza o download do currículo em PDF. Mostra integração de assets e permite que recrutadores salvem informações detalhadas para análise posterior."
                   className={`inline-flex items-center justify-center gap-2 px-8 py-4 border rounded-xl transition-all duration-200 font-medium text-lg hover:shadow-lg transform hover:-translate-y-1 ${
                     isDark
                       ? 'text-white border-gray-600 hover:bg-gray-800'
@@ -108,6 +109,7 @@ export default function Home({ isDark }: { isDark: boolean }) {
                   <a
                     href="https://github.com/GabrielMBatista"
                     data-gabs="social-github"
+                    gabs-content="Link para o perfil no GitHub. Para técnicos, oferece acesso ao código-fonte; para outros, comprova presença ativa na comunidade de desenvolvimento."
                     className={`p-3 rounded-lg transition-all duration-200 hover:scale-110 ${
                       isDark
                         ? 'bg-gray-800 text-white hover:bg-gray-700'
@@ -118,6 +120,8 @@ export default function Home({ isDark }: { isDark: boolean }) {
                   </a>
                   <a
                     href="https://www.linkedin.com/in/gabriel-marques-batista/"
+                    data-gabs="social-linkedin"
+                    gabs-content="Conecta ao perfil no LinkedIn. Expõe networking profissional, recomendações e histórico público."
                     className={`p-3 rounded-lg transition-all duration-200 hover:scale-110 ${
                       isDark
                         ? 'bg-gray-800 text-white hover:bg-gray-700'
@@ -128,6 +132,8 @@ export default function Home({ isDark }: { isDark: boolean }) {
                   </a>
                   <a
                     href="mailto:gabbriel_gbl2@hotmail.com"
+                    data-gabs="social-email"
+                    gabs-content="Abre o cliente de e-mail com endereço preenchido. Mostra interação direta com protocolos mailto: e facilita o primeiro contato formal."
                     className={`p-3 rounded-lg transition-all duration-200 hover:scale-110 ${
                       isDark
                         ? 'bg-gray-800 text-white hover:bg-gray-700'
@@ -138,6 +144,8 @@ export default function Home({ isDark }: { isDark: boolean }) {
                   </a>
                   <a
                     href="https://wa.me/5511951222379?text=Ol%C3%A1%2C%20vi%20seu%20portf%C3%B3lio%20e%20gostaria%20de%20conversar!"
+                    data-gabs="social-whatsapp"
+                    gabs-content="Inicia conversa pelo WhatsApp. Evidencia integração com APIs de comunicação e oferece canal rápido e informal de contato."
                     className={`p-3 rounded-lg transition-all duration-200 hover:scale-110 ${
                       isDark
                         ? 'bg-gray-800 text-white hover:bg-gray-700'
@@ -219,7 +227,15 @@ export default function Home({ isDark }: { isDark: boolean }) {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Frontend */}
-            <HighlightWrapper dataGabsText="frontend" isDark={isDark}>
+            <div
+              data-gabs="frontend"
+              gabs-content="Card de habilidades frontend. Explica rapidamente as tecnologias e competências principais do desenvolvedor."
+              className={`p-6 rounded-xl transition-all duration-300 hover:scale-105 cursor-pointer ${
+                isDark
+                  ? 'bg-gray-800 border border-gray-700'
+                  : 'bg-white border border-gray-200 shadow-lg'
+              }`}
+            >
               <div className="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center mb-6">
                 <Code size={24} className="text-white" />
               </div>
@@ -246,10 +262,17 @@ export default function Home({ isDark }: { isDark: boolean }) {
                   Tailwind
                 </span>
               </div>
-            </HighlightWrapper>
-
+            </div>
             {/* Backend */}
-            <HighlightWrapper dataGabsText="backend" isDark={isDark}>
+            <div
+              data-gabs="backend"
+              gabs-content="Card de habilidades backend. Resume as tecnologias e práticas utilizadas para desenvolvimento do lado servidor."
+              className={`p-6 rounded-xl transition-all duration-300 hover:scale-105 cursor-pointer ${
+                isDark
+                  ? 'bg-gray-800 border border-gray-700'
+                  : 'bg-white border border-gray-200 shadow-lg'
+              }`}
+            >
               <div className="w-12 h-12 bg-purple-600 rounded-xl flex items-center justify-center mb-6">
                 <Smartphone size={24} className="text-white" />
               </div>
@@ -276,10 +299,17 @@ export default function Home({ isDark }: { isDark: boolean }) {
                   Docker
                 </span>
               </div>
-            </HighlightWrapper>
-
+            </div>
             {/* Design */}
-            <HighlightWrapper dataGabsText="design" isDark={isDark}>
+            <div
+              data-gabs="design"
+              gabs-content="Card de habilidades em design e pensamento crítico. Apresenta competências em análise, criatividade e estratégia."
+              className={`p-6 rounded-xl transition-all duration-300 hover:scale-105 cursor-pointer ${
+                isDark
+                  ? 'bg-gray-800 border border-gray-700'
+                  : 'bg-white border border-gray-200 shadow-lg'
+              }`}
+            >
               <div className="w-12 h-12 bg-green-600 rounded-xl flex items-center justify-center mb-6">
                 <Brain size={24} className="text-white" />
               </div>
@@ -306,7 +336,7 @@ export default function Home({ isDark }: { isDark: boolean }) {
                   Estratégia
                 </span>
               </div>
-            </HighlightWrapper>
+            </div>
           </div>
         </div>
       </section>

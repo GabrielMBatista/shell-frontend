@@ -56,6 +56,7 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
             <Link
               href="/"
               data-gabs="nav-home"
+              gabs-content="Retorna à página inicial, oferecendo um panorama completo do portfólio. Demonstra o roteamento single-page em React, ao mesmo tempo que dá ao visitante um ponto seguro para reiniciar a navegação."
               className={`transition-colors ${
                 isActive('/home')
                   ? 'text-blue-500 font-bold'
@@ -69,6 +70,7 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
             <Link
               href="/projects"
               data-gabs="nav-projects"
+              gabs-content="Direciona para a página de projetos, onde estão exemplos práticos de soluções. Técnicos veem a organização de código e integrações; não técnicos encontram histórias de impacto e resultados."
               className={`transition-colors ${
                 isActive('/projects')
                   ? 'text-blue-500 font-bold'
@@ -82,6 +84,7 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
             <Link
               href="/about"
               data-gabs="nav-about"
+              gabs-content="Leva à seção “Sobre”, com detalhes da trajetória profissional. Ilustra como o site gerencia conteúdo estático e fornece contexto pessoal para qualquer recrutador."
               className={`transition-colors ${
                 isActive('/about')
                   ? 'text-blue-500 font-bold'
@@ -95,6 +98,7 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
             <Link
               href="/contact"
               data-gabs="nav-contact"
+              gabs-content="Abre a área de contato para envio de mensagens. Evidencia uso de formulários e validações (para técnicos) e facilita o início de um diálogo (para não técnicos)."
               className={`transition-colors ${
                 isActive('/contact')
                   ? 'text-blue-500 font-bold'
@@ -119,6 +123,7 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
                 value={locale}
                 onChange={(e) => changeLocale(e.target.value as Locale)}
                 data-gabs="lang-toggle"
+                gabs-content="Alterna o idioma do site. Mostra a implementação de i18n e torna o conteúdo acessível a públicos distintos."
                 aria-label={t('Header.lang.toggle')}
                 className={`bg-transparent outline-none text-[11px] font-semibold px-1 py-0.5 ${
                   isDark ? 'text-gray-200' : 'text-gray-700'
@@ -135,6 +140,7 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
             <button
               onClick={() => setIsDark(!isDark)}
               data-gabs="theme-toggle"
+              gabs-content="Muda entre temas claro e escuro. Demonstra controle de estado e design system, além de melhorar a acessibilidade visual para todos."
               className={`p-2 rounded-lg transition-all duration-200 ${
                 isDark
                   ? 'bg-gray-700 text-yellow-400 hover:bg-gray-600'
@@ -162,6 +168,7 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
             <Link
               href="/"
               data-gabs="nav-home"
+              gabs-content="Retorna à página inicial, oferecendo um panorama completo do portfólio. Demonstra o roteamento single-page em React, ao mesmo tempo que dá ao visitante um ponto seguro para reiniciar a navegação."
               className={`block py-2 transition-colors ${
                 isActive('/home')
                   ? 'text-blue-500 font-bold'
@@ -175,6 +182,7 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
             <Link
               href="/projects"
               data-gabs="nav-projects"
+              gabs-content="Direciona para a página de projetos, onde estão exemplos práticos de soluções. Técnicos veem a organização de código e integrações; não técnicos encontram histórias de impacto e resultados."
               className={`block py-2 transition-colors ${
                 isActive('/projects')
                   ? 'text-blue-500 font-bold'
@@ -188,6 +196,7 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
             <Link
               href="/about"
               data-gabs="nav-about"
+              gabs-content="Leva à seção “Sobre”, com detalhes da trajetória profissional. Ilustra como o site gerencia conteúdo estático e fornece contexto pessoal para qualquer recrutador."
               className={`block py-2 transition-colors ${
                 isActive('/about')
                   ? 'text-blue-500 font-bold'
@@ -201,6 +210,7 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
             <Link
               href="/contact"
               data-gabs="nav-contact"
+              gabs-content="Abre a área de contato para envio de mensagens. Evidencia uso de formulários e validações (para técnicos) e facilita o início de um diálogo (para não técnicos)."
               className={`block py-2 transition-colors ${
                 isActive('/contact')
                   ? 'text-blue-500 font-bold'
