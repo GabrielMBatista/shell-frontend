@@ -24,6 +24,7 @@
     "demo": "View Demo",
     "code": "Code",
     "features": {
+      "title": "Main Features",
       "item1": "Efficient management of SSE connections",
       "item2": "Real-time message sending",
       "item3": "Easy integration with Node.js applications"
@@ -41,26 +42,52 @@
     "description": "Get in touch so we can discuss how I can help with your project.",
     "primary": "Contact Me"
   },
+
   "items": {
     "1": {
-      "title": "AI Interview",
-      "description": "Basic system using OpenAI API to evaluate technical levels, streamlining the screening process."
+      "title": "Interview AI",
+      "description": "Basic system that uses the OpenAI API to evaluate technical levels, speeding up the screening process.",
+      "gabs": {
+        "card": "Technical screening MFE with voice: question→audio answer flow, transcription and LLM analysis. Explore latency, speech UX and Module Federation isolation.",
+        "demoButton": "Opens a modal with the project running in an iframe. See the full interview flow (question, voice answer, analysis and summary).",
+        "githubButton": "Opens the repository with the MFE code, OpenAI integration (text/speech) and modular organization."
+      }
     },
     "2": {
       "title": "Tropa Login",
-      "description": "Technical test for a LinkedIn job to develop a functional login screen."
+      "description": "Technical test for a LinkedIn job application, aimed at building a functional login screen.",
+      "gabs": {
+        "card": "Next.js (React 19) login screen with validation, error feedback and integration with state/requests. Shows clean and accessible UI patterns.",
+        "demoButton": "Opens the functional login prototype. Test validations, loading/error states and transitions.",
+        "githubButton": "Repository with the technical test code: folder structure, data hooks (React Query) and styles with Styled Components."
+      }
     },
     "3": {
       "title": "Alphabet Recorder",
-      "description": "Technical test Audio recorder to train alphabet phonemes with a simple and practical interface."
+      "description": "Technical test Audio recorder to train alphabet phonemes, with a simple and practical interface.",
+      "gabs": {
+        "card": "Phoneme training app: record, play back and recognize speech. Focus on mic UX, accessibility and simplicity of the flow.",
+        "demoButton": "Opens the demo with microphone permission. Record a phoneme, play it back and see real-time recognition.",
+        "githubButton": "Implementation with React Mic/Speech Recognition, component organization and TypeScript typing."
+      }
     },
     "4": {
       "title": "UI Library - StencilJS",
-      "description": "Reusable web component library created with StencilJS and integrated with Storybook."
+      "description": "Reusable web components library built with StencilJS and integrated with Storybook.",
+      "gabs": {
+        "card": "Design System in Web Components: theme tokens, slots, typed props and docs in Storybook. Think cross-framework reuse.",
+        "demoButton": "Opens Storybook. Browse components, read controls/props and tweak themes with CSS vars.",
+        "githubButton": "Repository of the UI Library: Stencil build, Jest tests and Web Components usage examples."
+      }
     },
     "5": {
       "title": "SSE Manager - Node.js",
-      "description": "Backend library developed in Node.js and TypeScript for real-time communication via Server-Sent Events (SSE), with efficient management of multiple clients and selective message sending."
+      "description": "Backend library developed in Node.js and TypeScript for real-time communication via Server-Sent Events (SSE), with efficient management of multiple clients and selective message sending.",
+      "gabs": {
+        "card": "Node/TS core for SSE: multiple clients, selective broadcast and connection cleanup. Focus on the API and efficient management.",
+        "demoButton": "This project has no visual demo. Check GitHub for the API and usage examples.",
+        "githubButton": "Opens the repository with the API, broadcast/unicast examples and performance/cleanup strategies."
+      }
     }
   }
 }

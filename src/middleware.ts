@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { getToken } from 'next-auth/jwt';
 
-const PUBLIC_ROUTES = ['/auth/signin','/about', '/home', '/contact', '/projects'];
+const PUBLIC_ROUTES = ['/auth/signin', '/about', '/home', '/contact', '/projects'];
 
 const BLOCKED_PATHS = [
   '/wp-admin',
@@ -10,6 +10,7 @@ const BLOCKED_PATHS = [
   '/phpmyadmin',
   '/xmlrpc.php',
   '/setup-config.php',
+  '/robots.txt',
 ];
 
 export async function middleware(request: NextRequest) {
