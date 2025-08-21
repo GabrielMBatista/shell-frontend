@@ -421,6 +421,7 @@ export default function Projetos({ isDark }: ProjectsProps) {
                   <div className="flex gap-4">
                     <button
                       data-gabs={`view-details-${project.id}`}
+                      gabs-content={project.title}
                       onClick={() => {
                         handleProjectClick(project, 'demo', 0);
                         openModal(project, 0);
@@ -433,6 +434,7 @@ export default function Projetos({ isDark }: ProjectsProps) {
                     <a
                       href={project.github}
                       data-gabs={`github-link-${project.id}`}
+                      gabs-content={project.title}
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={() => handleProjectClick(project, 'github', 0)}
@@ -592,6 +594,7 @@ export default function Projetos({ isDark }: ProjectsProps) {
                           <div className="flex gap-2">
                             <button
                               data-gabs={`view-details-${project.id}`}
+                              gabs-content={project.description}
                               onClick={() => {
                                 handleProjectClick(project, 'demo', position);
                                 openModal(project, position);
@@ -604,6 +607,7 @@ export default function Projetos({ isDark }: ProjectsProps) {
                             <a
                               href={project.github}
                               data-gabs={`github-link-${project.id}`}
+                              gabs-content={project.description}
                               target="_blank"
                               rel="noopener noreferrer"
                               onClick={() => handleProjectClick(project, 'github', position)}
@@ -661,6 +665,7 @@ export default function Projetos({ isDark }: ProjectsProps) {
                           <a
                             href={project.github}
                             data-gabs={`github-link-${project.id}`}
+                            gabs-content={project.title}
                             target="_blank"
                             rel="noopener noreferrer"
                             onClick={() => handleProjectClick(project, 'github', position)}
