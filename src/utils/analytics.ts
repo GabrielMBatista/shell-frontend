@@ -98,14 +98,18 @@ export const trackDetailedPageView = async (
   try {
     const clarityLoaded = await waitForClarity();
     if (clarityLoaded && typeof window.clarity === 'function') {
-      (window.clarity as (event: string, name: string, data: Record<string, unknown>) => void)('event', 'detailed_page_view', {
-        page,
-        section,
-        ...details,
-        timestamp: new Date().toISOString(),
-        url: window.location.href,
-        pathname: window.location.pathname,
-      });
+      (window.clarity as (event: string, name: string, data: Record<string, unknown>) => void)(
+        'event',
+        'detailed_page_view',
+        {
+          page,
+          section,
+          ...details,
+          timestamp: new Date().toISOString(),
+          url: window.location.href,
+          pathname: window.location.pathname,
+        },
+      );
     }
   } catch (error: unknown) {
     console.warn('Detailed page view tracking error:', error);
