@@ -18,7 +18,7 @@ export function GabsIAWidget({
   const router = useRouter();
   const pathname = usePathname();
 
-  // Função de navegação para passar ao federado
+
   const handleNavigate = (route: string) => {
     if (route && pathname !== route) {
       console.log('Navigating to route:', route);
