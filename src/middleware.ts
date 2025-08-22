@@ -2,7 +2,14 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { getToken } from 'next-auth/jwt';
 
-const PUBLIC_ROUTES = ['/auth/signin', '/about', '/home', '/contact', '/projects'];
+const PUBLIC_ROUTES = [
+  '/auth/signin',
+  '/about',
+  '/home',
+  '/contact',
+  '/projects',
+  '/Resume_Gabriel_Marques.pdf',
+];
 
 const BLOCKED_PATHS = [
   '/wp-admin',
