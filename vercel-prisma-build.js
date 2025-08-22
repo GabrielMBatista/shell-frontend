@@ -30,6 +30,12 @@ async function main() {
     }
 
     console.log('✅ Prisma files copiados para .next/standalone');
+
+    // ✅ 3. Remove .npmrc temporário após o build (opcional)
+    if (fs.existsSync('.npmrc')) {
+        fs.unlinkSync('.npmrc');
+        console.log('✅ .npmrc removido após o build');
+    }
 }
 
 main();
