@@ -1,6 +1,6 @@
 'use client';
 import React, { useState } from 'react';
-import { Sun, Moon, Menu, Globe } from 'lucide-react';
+import { Sun, Moon, Menu, Globe, HelpCircle } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { useTranslation } from '@/hooks/useTranslation';
@@ -20,14 +20,22 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
   const { t, locale, changeLocale } = useTranslation('common');
   const isChatbotEnabled = isEnvTrue(process.env.NEXT_PUBLIC_CHATBOT);
 
-  const handleReopenAssistant = async () => {
+  // Detecta se está em mobile
+  const isMobile = typeof window !== 'undefined' ? window.innerWidth <= 768 : false;
+
+  const handleTourClick = async () => {
+    if (isMobile && window.startGabsTour) {
+      window.startGabsTour();
+      return;
+    }
+    // fallback para desktop: importa e chama direto do federado
     try {
       const mod = await import('Chatbot/GabsIAWidget');
-      if (!mod?.reopenGabsIAWidget) {
-        console.warn('Função reopenGabsIAWidget não encontrada no módulo remoto.');
-        return;
+      if (mod?.startGabsTour) {
+        mod.startGabsTour();
+      } else {
+        window.dispatchEvent(new CustomEvent('startGabsTour'));
       }
-      mod.reopenGabsIAWidget();
     } catch (error) {
       console.error('Erro ao carregar o módulo remoto Chatbot/GabsIAWidget:', error);
     }
@@ -44,11 +52,35 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
           <div id="gabs-header-anchor" className="flex items-center gap-4">
             {isChatbotEnabled && (
               <button
-                onClick={handleReopenAssistant}
+                onClick={handleTourClick}
                 className="flex items-center gap-4 focus:outline-none"
                 title={t('Header.tooltip.reopenAssistant')}
               >
-                <div className="w-8 h-8 rounded-full bg-gradient-to-r from-blue-600 to-purple-600"></div>
+                <div
+                  className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors duration-200 ${
+                    isDark
+                      ? 'bg-gradient-to-r from-blue-700 to-purple-700 border-2 border-white'
+                      : 'bg-gradient-to-r from-blue-500 to-purple-400 border-2 border-blue-900'
+                  }`}
+                >
+                  {isMobile && (
+                    <HelpCircle
+                      size={28}
+                      color={isDark ? '#fff' : '#0028af'}
+                      style={{
+                        cursor: 'pointer',
+                        filter: isDark
+                          ? 'drop-shadow(0 0 2px #fff)'
+                          : 'drop-shadow(0 0 2px #0028af)',
+                      }}
+                      aria-label="Iniciar tour"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        if (window.startGabsTour) window.startGabsTour();
+                      }}
+                    />
+                  )}
+                </div>
               </button>
             )}
           </div>
@@ -154,6 +186,9 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
               className={`p-2 rounded-lg md:hidden ${
                 isDark ? 'text-white hover:bg-gray-700' : 'text-gray-600 hover:bg-gray-100'
               }`}
+              aria-label="Iniciar menu"
+              data-gabs="nav-mobile-menu"
+              gabs-content="Abre o menu de navegação mobile."
             >
               <Menu size={20} />
             </button>

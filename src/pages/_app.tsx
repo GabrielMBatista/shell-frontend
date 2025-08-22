@@ -14,6 +14,15 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import Loading from '@/components/common/Loading';
 import dynamic from 'next/dynamic';
 import { useWidgetPosition } from '@/hooks/useWidgetPosition';
+import { useEffect, useState } from 'react';
+import { TourStep } from '@/types/chatbot';
+import { GabsTourWidget } from '@/components/common/GabsTourWidget';
+
+declare global {
+  interface Window {
+    startGabsTour?: () => void;
+  }
+}
 
 const inter = Inter({ subsets: ['latin'], display: 'swap' });
 const GabsIAWidget = isEnvTrue(process.env.NEXT_PUBLIC_CHATBOT)
@@ -23,11 +32,116 @@ const GabsIAWidget = isEnvTrue(process.env.NEXT_PUBLIC_CHATBOT)
     })
   : null;
 
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth <= 768);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
+  return isMobile;
+}
+
+function useGabsIATourStarter() {
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.startGabsTour = async () => {
+        try {
+          const mod = await import('Chatbot/GabsIAWidget');
+          if (mod?.startGabsTour) {
+            mod.startGabsTour();
+          } else if (mod?.default?.startGabsTour) {
+            mod.default.startGabsTour();
+          } else {
+            window.dispatchEvent(new CustomEvent('startGabsTour'));
+          }
+        } catch (err) {
+          console.error('Não foi possível iniciar o tour do GabsIA:', err);
+        }
+      };
+    }
+  }, []);
+}
+
 export default function MyApp({ Component, pageProps }: AppProps) {
   const { isDark, setIsDark } = useTheme();
   useClarity();
   const widgetPos = useWidgetPosition();
   const isChatbotEnabled = isEnvTrue(process.env.NEXT_PUBLIC_CHATBOT);
+  const isMobile = useIsMobile();
+
+  useGabsIATourStarter();
+
+  // Passos do tour ajustados para mobile
+  const tourSteps: TourStep[] = isMobile
+    ? [
+        {
+          target: '[data-gabs="nav-mobile-menu"]',
+          content: 'Este é o menu mobile. Toque para abrir as opções de navegação.',
+          route: '/home',
+        },
+        {
+          target: '[data-gabs="frontend"]',
+          content: 'Cada card de habilidade oferece uma explicação rápida. Explore para conhecer minhas especialidades.',
+          route: '/home',
+        },
+        {
+          target: '[data-gabs="featured-project-1"]',
+          content: 'Este é um projeto em destaque. Toque para ver mais detalhes.',
+          route: '/projects',
+        },
+        {
+          target: '[data-gabs="about-download-cv"]',
+          content: 'Baixe meu currículo para conhecer mais sobre minha trajetória.',
+          route: '/about',
+        },
+        {
+          target: '[data-gabs="contact-button"]',
+          content: 'Pronto para entrar em contato? Use este botão para enviar uma mensagem.',
+          route: '/contact',
+        },
+      ]
+    : [
+        {
+          target: '.gabs-avatar',
+          content: 'Este é o G•One, assistente do portfólio. Clique para conversar ou obter ajuda contextual.',
+        },
+        {
+          target: '.dynamic-tour',
+          content: 'No desktop, itens destacados podem fornecer mais detalhes ao serem clicados.',
+        },
+        {
+          target: '[data-gabs="nav-projects"]',
+          content: 'Use o menu para navegar entre as páginas. Aqui você pode acessar os projetos.',
+          route: '/home',
+        },
+        {
+          target: '[data-gabs="view-projects-button"]',
+          content: 'Comece explorando os projetos clicando neste botão.',
+          route: '/home',
+        },
+        {
+          target: '[data-gabs="frontend"]',
+          content: 'Cada card de habilidade oferece uma explicação rápida. Explore para conhecer minhas especialidades.',
+          route: '/home',
+        },
+        {
+          target: '[data-gabs="featured-project-1"]',
+          content: 'Este é um projeto em destaque. Clique para ver mais detalhes.',
+          route: '/projects',
+        },
+        {
+          target: '[data-gabs="about-download-cv"]',
+          content: 'Baixe meu currículo para conhecer mais sobre minha trajetória.',
+          route: '/about',
+        },
+        {
+          target: '[data-gabs="contact-button"]',
+          content: 'Pronto para entrar em contato? Use este botão para enviar uma mensagem.',
+          route: '/contact',
+        },
+      ];
 
   return (
     <Providers session={pageProps.session}>
@@ -44,63 +158,29 @@ export default function MyApp({ Component, pageProps }: AppProps) {
           </Suspense>
           <Footer isDark={isDark} />
         </div>
-        {isChatbotEnabled && GabsIAWidget && (
-          <Suspense fallback={<Loading />}>
-            <GabsIAWidget
-              fixedPosition={widgetPos}
-              initialMessage={{
-                question: '',
-                answer:
-                  'Olá! Eu sou o G•One, assistente oficial do portfólio de Gabriel Marques.Estou aqui para te ajudar a explorar o site, entender as escolhas técnicas e conhecer os projetos do Gabriel com clareza.💡 Clique em ❓ para iniciar o tour guiado pelas principais áreas.▶️ Use o botão verde para destacar os itens interativos com explicações extras (marcados com data-gabs).Como posso te ajudar hoje?',
-              }}
-              fixedTourSteps={[
-                {
-                  target: '.gabs-avatar',
-                  content:
-                    'Este é o G•One, assistente do portfólio. Clique para conversar ou obter ajuda contextual.',
-                },
-                {
-                  target: '.dynamic-tour',
-                  content:
-                    'Esse é o tour dinamico ao ativar items destacados podem fornecer mais detalhes ao serem clicados.',
-                },
-                {
-                  target: '[data-gabs="nav-projects"]',
-                  content:
-                    'Use o menu para navegar entre as páginas. Aqui você pode acessar os projetos.',
-                  route: '/home',
-                },
-                {
-                  target: '[data-gabs="view-projects-button"]',
-                  content: 'Comece explorando os projetos clicando neste botão.',
-                  route: '/home',
-                },
-                {
-                  target: '[data-gabs="frontend"]',
-                  content:
-                    'Cada card de habilidade oferece uma explicação rápida. Explore para conhecer minhas especialidades.',
-                  route: '/home',
-                },
-                {
-                  target: '[data-gabs="featured-project-1"]',
-                  content: 'Este é um projeto em destaque. Clique para ver mais detalhes.',
-                  route: '/projects',
-                },
-                {
-                  target: '[data-gabs="about-download-cv"]',
-                  content: 'Baixe meu currículo para conhecer mais sobre minha trajetória.',
-                  route: '/about',
-                },
-                {
-                  target: '[data-gabs="contact-button"]',
-                  content:
-                    'Pronto para entrar em contato? Use este botão para enviar uma mensagem.',
-                  route: '/contact',
-                },
-              ]}
-            />
-          </Suspense>
-        )}
+        {isChatbotEnabled &&
+          (isMobile ? (
+            <Suspense fallback={<Loading />}>
+              <GabsTourWidget fixedTourSteps={tourSteps} initialStep={0} />
+            </Suspense>
+          ) : (
+            GabsIAWidget && (
+              <Suspense fallback={<Loading />}>
+                <GabsIAWidget
+                  fixedPosition={widgetPos}
+                  initialMessage={{
+                    question: '',
+                    answer: `Olá! Eu sou o <b>G•One</b>, assistente do portfólio de Gabriel Marques.  
+Vou te ajudar a explorar o site, entender as escolhas técnicas e conhecer seus projetos. 
+<span style="font-size:1.2em;">💡</span> <b>Dica:</b> Clique em <span style="color:#0028af;">❓</span> para iniciar o <b>tour</b> ou em <span style="color:#28a745;">▶️</span> para destacar itens interativos.  
+Como posso te ajudar hoje?
+`,
+                  }}
+                  fixedTourSteps={tourSteps}
+                />
+              </Suspense>
+            )
+          ))}
         <Analytics />
       </ClientOnly>
     </Providers>

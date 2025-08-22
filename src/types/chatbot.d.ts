@@ -30,6 +30,11 @@ export type GabsIAWidgetProps = {
   fixedTourSteps?: TourStep[];
   onNavigate?: (route: string) => void; // Adicionada a propriedade 'onNavigate'
 };
+export interface GabsTourWidgetProps {
+  fixedTourSteps: TourStep[];
+  initialStep: number;
+  onNavigate: () => void;
+}
 
 export interface HistoryPair {
   index: number;
@@ -52,7 +57,3 @@ export const TYPES_VERSION: string;
 
 const Component: React.ComponentType<GabsIAWidgetProps>;
 export default Component;
-
-export function reopenGabsIAWidget(): void;
-export function pinGabsIAWidgetAt(position: DockPos): void;
-export function unpinGabsIAWidget(): void;
