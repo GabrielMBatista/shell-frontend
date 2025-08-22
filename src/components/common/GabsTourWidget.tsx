@@ -12,16 +12,13 @@ export interface GabsTourWidgetProps {
   fixedPosition?: Partial<{ top: number; left: number; right: number; bottom: number }>;
 }
 
-const FederatedGabsTourWidget =
-  typeof window !== 'undefined'
-    ? dynamic<GabsTourWidgetProps>(
-        () => import('Chatbot/GabsTourWidget').then((mod) => mod.default),
-        {
-          ssr: false,
-          loading: () => <Loading />,
-        },
-      )
-    : () => null;
+const FederatedGabsTourWidget = dynamic<GabsTourWidgetProps>(
+  () => import('Chatbot/GabsTourWidget').then((mod) => mod.default),
+  {
+    ssr: false,
+    loading: () => <Loading />,
+  },
+);
 
 export function GabsTourWidget(props: GabsTourWidgetProps) {
   const router = useRouter();
@@ -61,7 +58,6 @@ export function GabsTourWidget(props: GabsTourWidgetProps) {
       }
     : undefined;
 
-  // Só renderiza o federado se estiver no client-side
   if (props.fixedPosition) {
     return (
       <div style={fixedStyle}>
