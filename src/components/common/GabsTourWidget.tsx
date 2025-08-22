@@ -1,9 +1,11 @@
 import React from 'react';
-import dynamic from 'next/dynamic';
 import { TourStep } from '@/types/chatbot';
 import Loading from './Loading';
 import { useRouter, usePathname } from 'next/navigation';
 import { HelpCircle } from 'lucide-react';
+import { isEnvTrue } from '@/utils/env';
+
+const isChatbotEnabled = isEnvTrue(process.env.NEXT_PUBLIC_CHATBOT);
 
 export interface GabsTourWidgetProps {
   fixedTourSteps: TourStep[];
@@ -12,15 +14,10 @@ export interface GabsTourWidgetProps {
   fixedPosition?: Partial<{ top: number; left: number; right: number; bottom: number }>;
 }
 
-const FederatedGabsTourWidget = dynamic<GabsTourWidgetProps>(
-  () => import('Chatbot/GabsTourWidget').then((mod) => mod.default),
-  {
-    ssr: false,
-    loading: () => <Loading />,
-  },
-);
-
 export function GabsTourWidget(props: GabsTourWidgetProps) {
+  const [GabsTour, setGabsTour] = React.useState<React.ComponentType<GabsTourWidgetProps> | null>(
+    null,
+  );
   const router = useRouter();
   const pathname = usePathname();
 
@@ -29,6 +26,25 @@ export function GabsTourWidget(props: GabsTourWidgetProps) {
       router.push(route);
     }
   };
+
+  React.useEffect(() => {
+    if (isChatbotEnabled) {
+      (async () => {
+        try {
+          const mod = await import('Chatbot/GabsTourWidget');
+          if (!mod?.default) {
+            console.error('Módulo remoto Chatbot/GabsTourWidget não contém um componente padrão.');
+            return;
+          }
+          setGabsTour(() => mod.default);
+        } catch (error) {
+          console.error('Erro ao carregar o módulo remoto Chatbot/GabsTourWidget:', error);
+        }
+      })();
+    } else {
+      console.log('Chatbot está desabilitado. Componente não será exibido.');
+    }
+  }, []);
 
   const isDark =
     typeof window !== 'undefined'
@@ -58,6 +74,9 @@ export function GabsTourWidget(props: GabsTourWidgetProps) {
       }
     : undefined;
 
+  if (!isChatbotEnabled) return null;
+  if (!GabsTour) return <Loading />;
+
   if (props.fixedPosition) {
     return (
       <div style={fixedStyle}>
@@ -77,25 +96,12 @@ export function GabsTourWidget(props: GabsTourWidgetProps) {
             }
           }}
         />
-        {typeof window !== 'undefined' && (
-          <FederatedGabsTourWidget
-            {...props}
-            onNavigate={handleNavigate}
-            fixedPosition={props.fixedPosition}
-          />
-        )}
+        <GabsTour {...props} onNavigate={handleNavigate} fixedPosition={props.fixedPosition} />
       </div>
     );
   }
 
-  // Desktop: renderiza normalmente apenas client-side
-  return typeof window !== 'undefined' ? (
-    <FederatedGabsTourWidget
-      {...props}
-      onNavigate={handleNavigate}
-      fixedPosition={props.fixedPosition}
-    />
-  ) : null;
+  return <GabsTour {...props} onNavigate={handleNavigate} fixedPosition={props.fixedPosition} />;
 }
 
 export default GabsTourWidget;
