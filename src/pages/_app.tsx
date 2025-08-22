@@ -83,7 +83,8 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         },
         {
           target: '[data-gabs="frontend"]',
-          content: 'Cada card de habilidade oferece uma explicação rápida. Explore para conhecer minhas especialidades.',
+          content:
+            'Cada card de habilidade oferece uma explicação rápida. Explore para conhecer minhas especialidades.',
           route: '/home',
         },
         {
@@ -105,7 +106,8 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     : [
         {
           target: '.gabs-avatar',
-          content: 'Este é o G•One, assistente do portfólio. Clique para conversar ou obter ajuda contextual.',
+          content:
+            'Este é o G•One, assistente do portfólio. Clique para conversar ou obter ajuda contextual.',
         },
         {
           target: '.dynamic-tour',
@@ -123,7 +125,8 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         },
         {
           target: '[data-gabs="frontend"]',
-          content: 'Cada card de habilidade oferece uma explicação rápida. Explore para conhecer minhas especialidades.',
+          content:
+            'Cada card de habilidade oferece uma explicação rápida. Explore para conhecer minhas especialidades.',
           route: '/home',
         },
         {
@@ -159,28 +162,28 @@ export default function MyApp({ Component, pageProps }: AppProps) {
           <Footer isDark={isDark} />
         </div>
         {isChatbotEnabled &&
-          (isMobile ? (
+          // Tour só aparece no desktop
+          !isMobile && (
             <Suspense fallback={<Loading />}>
               <GabsTourWidget fixedTourSteps={tourSteps} initialStep={0} />
             </Suspense>
-          ) : (
-            GabsIAWidget && (
-              <Suspense fallback={<Loading />}>
-                <GabsIAWidget
-                  fixedPosition={widgetPos}
-                  initialMessage={{
-                    question: '',
-                    answer: `Olá! Eu sou o <b>G•One</b>, assistente do portfólio de Gabriel Marques.  
+          )}
+        {GabsIAWidget && (
+          <Suspense fallback={<Loading />}>
+            <GabsIAWidget
+              fixedPosition={widgetPos}
+              initialMessage={{
+                question: '',
+                answer: `Olá! Eu sou o <b>G•One</b>, assistente do portfólio de Gabriel Marques.  
 Vou te ajudar a explorar o site, entender as escolhas técnicas e conhecer seus projetos. 
 <span style="font-size:1.2em;">💡</span> <b>Dica:</b> Clique em <span style="color:#0028af;">❓</span> para iniciar o <b>tour</b> ou em <span style="color:#28a745;">▶️</span> para destacar itens interativos.  
 Como posso te ajudar hoje?
 `,
-                  }}
-                  fixedTourSteps={tourSteps}
-                />
-              </Suspense>
-            )
-          ))}
+              }}
+              fixedTourSteps={tourSteps}
+            />
+          </Suspense>
+        )}
         <Analytics />
       </ClientOnly>
     </Providers>
