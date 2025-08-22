@@ -6,11 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const NotFound = ({ error }: any) => {
-  useEffect(() => {
-    if (error) console.error(error);
-  }, [error]);
-
+const NotFound = () => {
   return <NotFoundContent />;
 };
 

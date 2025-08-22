@@ -209,6 +209,8 @@ export default function Sobre({ isDark }: { isDark: boolean }) {
               </div>
               <div className="flex flex-col sm:flex-row gap-4">
                 <button
+                  data-gabs="about-download-cv"
+                  gabs-content="Fornece download do currículo diretamente na página “Sobre”. Mostra preocupação com acessibilidade e centraliza os dados profissionais."
                   className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-blue-600 text-white rounded-xl hover:bg-cyan-400 transition-all duration-200 font-medium text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 cursor-pointer"
                   onClick={() => window.open('/Resume_Gabriel_Marques.pdf', '_blank')}
                 >
@@ -217,6 +219,8 @@ export default function Sobre({ isDark }: { isDark: boolean }) {
                 </button>
                 <Link
                   href="/contact"
+                  data-gabs="about-contact-button"
+                  gabs-content="Abre o formulário de contato a partir da página “Sobre”. Integra narrativa pessoal com uma chamada para ação imediata."
                   className={`inline-flex items-center justify-center gap-2 px-8 py-4 border rounded-xl transition-all duration-200 font-medium text-lg hover:shadow-lg transform hover:-translate-y-1 cursor-pointer ${
                     isDark
                       ? 'text-white border-gray-600 hover:bg-gray-800'
@@ -252,6 +256,7 @@ export default function Sobre({ isDark }: { isDark: boolean }) {
                     <div
                       key={index}
                       data-gabs={`stat-${stat.label}`}
+                      gabs-content={`Estatística destacando ${stat.label}. Fornece uma visão rápida sobre conquistas ou métricas importantes.`}
                       className={`text-center p-6 rounded-xl transition-all duration-300 hover:scale-105 cursor-pointer ${
                         isDark
                           ? 'bg-gray-800 border border-gray-700'

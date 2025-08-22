@@ -1,6 +1,5 @@
 'use client';
 
-import HighlightWrapper from './HighlightWrapper';
 import { useTranslation } from '@/hooks/useTranslation';
 
 interface FAQ {
@@ -34,14 +33,23 @@ export default function FAQSection({ faqs, isDark }: FAQSectionProps) {
 
         <div className="space-y-6">
           {faqs.map((faq, index) => (
-            <HighlightWrapper key={index} dataGabsText={`faq-${index}`} isDark={isDark}>
+            <div
+              key={index}
+              data-gabs={`faq-${index}`}
+              gabs-content={`Pergunta frequente: "${faq.question}". Clique para ver a resposta detalhada.`}
+              className={`p-6 rounded-xl transition-all duration-300 hover:scale-105 cursor-pointer ${
+                isDark
+                  ? 'bg-gray-800 border border-gray-700'
+                  : 'bg-white border border-gray-200 shadow-lg'
+              }`}
+            >
               <h3 className={`text-lg font-bold mb-3 ${isDark ? 'text-white' : 'text-gray-900'}`}>
                 {faq.question}
               </h3>
               <p className={`leading-relaxed ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
                 {faq.answer}
               </p>
-            </HighlightWrapper>
+            </div>
           ))}
         </div>
       </div>

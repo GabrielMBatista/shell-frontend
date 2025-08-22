@@ -366,16 +366,17 @@ export default function Projetos({ isDark }: ProjectsProps) {
               <div
                 key={project.id}
                 data-gabs={`featured-project-${project.id}`}
+                gabs-content={t(`items.${project.id}.gabs.card`)}
                 className={`group rounded-2xl overflow-hidden shadow-xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 ${
                   isDark ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200'
                 }`}
               >
-                <div className="relative flex items-center justify-center overflow-hidden">
+                <div className="relative flex items-center justify-center">
                   <div
                     className="relative flex items-center justify-center"
                     style={{
                       width: resolution.width,
-                      height: resolution.height,
+                      height: '30vh',
                       transform: `scale(${resolution.scale})`,
                       transformOrigin: 'center',
                     }}
@@ -421,6 +422,7 @@ export default function Projetos({ isDark }: ProjectsProps) {
                   <div className="flex gap-4">
                     <button
                       data-gabs={`view-details-${project.id}`}
+                      gabs-content={t(`items.${project.id}.gabs.demoButton`)}
                       onClick={() => {
                         handleProjectClick(project, 'demo', 0);
                         openModal(project, 0);
@@ -433,6 +435,7 @@ export default function Projetos({ isDark }: ProjectsProps) {
                     <a
                       href={project.github}
                       data-gabs={`github-link-${project.id}`}
+                      gabs-content={t(`items.${project.id}.gabs.githubButton`)}
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={() => handleProjectClick(project, 'github', 0)}
@@ -535,6 +538,7 @@ export default function Projetos({ isDark }: ProjectsProps) {
                   <div
                     key={project.id}
                     data-gabs={`project-${project.id}`}
+                    gabs-content={t(`items.${project.id}.gabs.card`)}
                     className={`group rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-2 ${
                       isDark
                         ? 'bg-gray-800 border border-gray-700'
@@ -592,6 +596,7 @@ export default function Projetos({ isDark }: ProjectsProps) {
                           <div className="flex gap-2">
                             <button
                               data-gabs={`view-details-${project.id}`}
+                              gabs-content={t(`items.${project.id}.gabs.demoButton`)}
                               onClick={() => {
                                 handleProjectClick(project, 'demo', position);
                                 openModal(project, position);
@@ -604,6 +609,7 @@ export default function Projetos({ isDark }: ProjectsProps) {
                             <a
                               href={project.github}
                               data-gabs={`github-link-${project.id}`}
+                              gabs-content={t(`items.${project.id}.gabs.githubButton`)}
                               target="_blank"
                               rel="noopener noreferrer"
                               onClick={() => handleProjectClick(project, 'github', position)}
@@ -661,6 +667,7 @@ export default function Projetos({ isDark }: ProjectsProps) {
                           <a
                             href={project.github}
                             data-gabs={`github-link-${project.id}`}
+                            gabs-content={t(`items.${project.id}.gabs.githubButton`)}
                             target="_blank"
                             rel="noopener noreferrer"
                             onClick={() => handleProjectClick(project, 'github', position)}

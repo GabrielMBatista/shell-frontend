@@ -17,6 +17,7 @@ const BLOCKED_PATHS = [
   '/phpmyadmin',
   '/xmlrpc.php',
   '/setup-config.php',
+  '/robots.txt',
 ];
 
 export async function middleware(request: NextRequest) {

@@ -1,31 +1,43 @@
+import { useRouter, usePathname } from 'next/navigation';
 import { isEnvTrue } from '@/utils/env';
 import React from 'react';
+import { GabsIAWidgetProps, TourStep } from '@/types/chatbot';
 
 const isChatbotEnabled = isEnvTrue(process.env.NEXT_PUBLIC_CHATBOT);
 
-type DockPos = Partial<{ top: number; left: number; right: number; bottom: number }>;
+export function GabsIAWidget({
+  fixedPosition,
+  initialMessage,
+  fixedTourSteps,
+}: {
+  fixedPosition: GabsIAWidgetProps['fixedPosition'];
+  initialMessage?: GabsIAWidgetProps['initialMessage'];
+  fixedTourSteps?: TourStep[];
+}) {
+  const [GabsIA, setGabsIA] = React.useState<React.ComponentType<GabsIAWidgetProps> | null>(null);
+  const router = useRouter();
+  const pathname = usePathname();
 
-export function GabsIAWidget({ fixedPosition }: { fixedPosition: DockPos }) {
-  const [GabsIA, setGabsIA] = React.useState<React.ComponentType<{
-    tourEnabled: boolean;
-    fixedPosition: DockPos;
-  }> | null>(null);
-
-  console.log('Componente GabsIAWidget renderizado. Estado inicial:', { GabsIA, isChatbotEnabled });
+  // Função de navegação para passar ao federado
+  const handleNavigate = (route: string) => {
+    if (route && pathname !== route) {
+      console.log('Navigating to route:', route);
+      router.push(route);
+    }
+  };
 
   React.useEffect(() => {
     if (isChatbotEnabled) {
-      console.log('Chatbot está habilitado. Iniciando carregamento do módulo remoto...');
       (async () => {
         try {
           const mod = await import('Chatbot/GabsIAWidget');
-          console.log('Módulo remoto Chatbot/GabsIAWidget carregado:', mod);
-          setGabsIA(() => mod.default || mod);
+          if (!mod?.default) {
+            console.error('Módulo remoto Chatbot/GabsIAWidget não contém um componente padrão.');
+            return;
+          }
+          setGabsIA(() => mod.default);
         } catch (error) {
           console.error('Erro ao carregar o módulo remoto Chatbot/GabsIAWidget:', error);
-          alert(
-            'Erro ao carregar o módulo remoto. Verifique a configuração do módulo federado e a disponibilidade do servidor.',
-          );
         }
       })();
     } else {
@@ -34,12 +46,14 @@ export function GabsIAWidget({ fixedPosition }: { fixedPosition: DockPos }) {
   }, []);
 
   if (!isChatbotEnabled) return null;
+  if (!GabsIA) return null;
 
-  if (!GabsIA) {
-    console.log('Componente GabsIA ainda não está disponível. Retornando null.');
-    return null;
-  }
-
-  console.log('Componente GabsIA encontrado. Renderizando...');
-  return <GabsIA tourEnabled fixedPosition={fixedPosition} />;
+  return (
+    <GabsIA
+      fixedPosition={fixedPosition}
+      initialMessage={initialMessage}
+      fixedTourSteps={fixedTourSteps}
+      onNavigate={handleNavigate}
+    />
+  );
 }

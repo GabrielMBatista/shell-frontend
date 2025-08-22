@@ -1,6 +1,5 @@
 /* eslint-disable react/display-name */
 import React, { forwardRef } from 'react';
-import HighlightWrapper from './HighlightWrapper';
 
 interface ContactModalProps {
   onClose: () => void;
@@ -25,7 +24,11 @@ const ContactModal = forwardRef<HTMLUiModalElement, ContactModalProps>(
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-[var(--space-md)]">
-            <HighlightWrapper dataGabsText="linkedin" isDark>
+            <div
+              data-gabs="linkedin"
+              gabs-content="Canal de contato via LinkedIn. Ideal para networking profissional e oportunidades de carreira."
+              className="p-4 rounded-xl transition-all duration-300 hover:scale-105 cursor-pointer bg-gray-800"
+            >
               <a
                 href="https://www.linkedin.com/in/gabriel-marques-batista"
                 target="_blank"
@@ -34,8 +37,12 @@ const ContactModal = forwardRef<HTMLUiModalElement, ContactModalProps>(
               >
                 <ui-icon name="linkedin"></ui-icon> LinkedIn
               </a>
-            </HighlightWrapper>
-            <HighlightWrapper dataGabsText="github" isDark>
+            </div>
+            <div
+              data-gabs="github"
+              gabs-content="Canal de contato via GitHub. Permite visualizar projetos e contribuir tecnicamente."
+              className="p-4 rounded-xl transition-all duration-300 hover:scale-105 cursor-pointer bg-gray-800"
+            >
               <a
                 href="https://github.com/GabrielMBatista"
                 target="_blank"
@@ -44,8 +51,12 @@ const ContactModal = forwardRef<HTMLUiModalElement, ContactModalProps>(
               >
                 <ui-icon name="github"></ui-icon> GitHub
               </a>
-            </HighlightWrapper>
-            <HighlightWrapper dataGabsText="whatsapp" isDark>
+            </div>
+            <div
+              data-gabs="whatsapp"
+              gabs-content="Canal de contato via WhatsApp. Comunicação rápida e direta para dúvidas ou propostas."
+              className="p-4 rounded-xl transition-all duration-300 hover:scale-105 cursor-pointer bg-gray-800"
+            >
               <a
                 href="https://wa.me/5511951222379?text=Ol%C3%A1%2C%20Gabriel!%20Encontrei%20seu%20portf%C3%B3lio%20e%20gostaria%20de%20conversar%20sobre%20uma%20poss%C3%ADvel%20oportunidade."
                 target="_blank"
@@ -54,7 +65,7 @@ const ContactModal = forwardRef<HTMLUiModalElement, ContactModalProps>(
               >
                 <ui-icon name="whatsapp"></ui-icon> WhatsApp
               </a>
-            </HighlightWrapper>
+            </div>
           </div>
           <div className="flex flex-col items-center gap-[var(--space-sm)]">
             <p className="text-[var(--color-text)] font-medium text-[var(--font-size-sm)] sm:text-[var(--font-size-md)]">

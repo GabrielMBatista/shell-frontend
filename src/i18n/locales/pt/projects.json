@@ -24,6 +24,7 @@
     "demo": "Ver Demo",
     "code": "Código",
     "features": {
+      "title": "Principais Funcionalidades",
       "item1": "Gerenciamento eficiente de conexões SSE",
       "item2": "Envio de mensagens em tempo real",
       "item3": "Fácil integração com aplicações Node.js"
@@ -44,23 +45,48 @@
   "items": {
     "1": {
       "title": "Entrevista AI",
-      "description": "Sistema básico que usa a API da OpenAI para avaliar níveis técnicos, agilizando o processo de triagem."
+      "description": "Sistema básico que usa a API da OpenAI para avaliar níveis técnicos, agilizando o processo de triagem.",
+      "gabs": {
+        "card": "MFE de triagem técnica com voz: fluxo pergunta→resposta por áudio, transcrição e análise com LLM. Explore latência, UX de fala e isolamento via Module Federation.",
+        "demoButton": "Abre um modal com o projeto rodando em iframe. Veja o fluxo completo de entrevista (pergunta, resposta por voz, análise e resumo).",
+        "githubButton": "Abre o repositório com o código do MFE, integração OpenAI (texto/fala) e organização por módulos."
+      }
     },
     "2": {
       "title": "Tropa Login",
-      "description": "Teste técnico para uma vaga do LinkedIn com o intuito de desenvolver uma tela de login funcional."
+      "description": "Teste técnico para uma vaga do LinkedIn com o intuito de desenvolver uma tela de login funcional.",
+      "gabs": {
+        "card": "Tela de login em Next.js (React 19) com validação, feedback de erro e integração com estado/requests. Mostra padrões de UI limpos e acessíveis.",
+        "demoButton": "Abre o protótipo funcional de login. Teste validações, estados de loading/erro e transições.",
+        "githubButton": "Código do teste técnico: estrutura de pastas, hooks de dados (React Query) e estilos com Styled Components."
+      }
     },
     "3": {
       "title": "Alphabet Recorder",
-      "description": "Teste técnico Gravador de áudio para treinar fonemas do alfabeto, com interface simples e prática."
+      "description": "Teste técnico Gravador de áudio para treinar fonemas do alfabeto, com interface simples e prática.",
+      "gabs": {
+        "card": "App de treino de fonemas: grava, reproduz e reconhece fala. Foque na UX de microfone, acessibilidade e simplicidade do fluxo.",
+        "demoButton": "Abre a demo com permissão de microfone. Grave um fonema, reproduza e veja o reconhecimento em tempo real.",
+        "githubButton": "Implementação com React Mic/Speech Recognition, organização dos componentes e tipagem em TypeScript."
+      }
     },
     "4": {
       "title": "UI Library - StencilJS",
-      "description": "Biblioteca de componentes web reutilizáveis criada com StencilJS e integrada ao Storybook."
+      "description": "Biblioteca de componentes web reutilizáveis criada com StencilJS e integrada ao Storybook.",
+      "gabs": {
+        "card": "Design System em Web Components: tokens de tema, slots, props tipadas e docs no Storybook. Pense em reuso cross-framework.",
+        "demoButton": "Abre o Storybook. Navegue por componentes, leia os controles/props e altere temas com CSS vars.",
+        "githubButton": "Monorepo da UI Library: build Stencil, testes com Jest e exemplos de uso com Web Components."
+      }
     },
     "5": {
       "title": "SSE Manager - Node.js",
-      "description": "Biblioteca backend desenvolvida em Node.js e TypeScript para comunicação em tempo real via Server-Sent Events (SSE), com gerenciamento eficiente de múltiplos clientes e envio seletivo de mensagens."
+      "description": "Biblioteca backend desenvolvida em Node.js e TypeScript para comunicação em tempo real via Server-Sent Events (SSE), com gerenciamento eficiente de múltiplos clientes e envio seletivo de mensagens.",
+      "gabs": {
+        "card": "Core Node/TS para SSE: múltiplos clientes, broadcast seletivo e limpeza de conexões. Foque na API e no gerenciamento eficiente.",
+        "demoButton": "Projeto sem demo visual. Veja o GitHub para a API e exemplos de uso.",
+        "githubButton": "Abre o repositório com API, exemplos de broadcast/unicast e estratégias de performance/cleanup."
+      }
     }
   }
 }
