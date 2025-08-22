@@ -2,9 +2,10 @@ import React from 'react';
 import { TourStep } from '@/types/chatbot';
 import Loading from './Loading';
 import { useRouter, usePathname } from 'next/navigation';
-import { isEnvTrue } from '@/utils/env';
+import { isTourMobileEnabled } from '@/utils/env';
 
-const isChatbotEnabled = isEnvTrue(process.env.NEXT_PUBLIC_CHATBOT);
+// Este componente deve ser usado exclusivamente no mobile, conforme controle em _app.tsx
+const tourMobileEnabled = isTourMobileEnabled();
 
 export interface GabsTourWidgetProps {
   fixedTourSteps: TourStep[];
@@ -27,7 +28,7 @@ export function GabsTourWidget(props: GabsTourWidgetProps) {
   };
 
   React.useEffect(() => {
-    if (isChatbotEnabled) {
+    if (tourMobileEnabled) {
       (async () => {
         try {
           const mod = await import('Chatbot/GabsTourWidget');
@@ -41,11 +42,11 @@ export function GabsTourWidget(props: GabsTourWidgetProps) {
         }
       })();
     } else {
-      console.log('Chatbot está desabilitado. Componente não será exibido.');
+      console.log('Tour mobile está desabilitado. Componente não será exibido.');
     }
   }, []);
 
-  if (!isChatbotEnabled) return null;
+  if (!tourMobileEnabled) return null;
   if (!GabsTour) return <Loading />;
 
   return <GabsTour {...props} onNavigate={handleNavigate} fixedPosition={props.fixedPosition} />;

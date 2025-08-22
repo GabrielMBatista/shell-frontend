@@ -8,7 +8,6 @@ import { Suspense } from 'react';
 import { Inter } from 'next/font/google';
 import { useTheme } from '@/hooks/useTheme';
 import { useClarity } from '@/hooks/useClarity';
-import { isEnvTrue } from '@/utils/env';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import Loading from '@/components/common/Loading';
@@ -16,7 +15,7 @@ import dynamic from 'next/dynamic';
 import { useWidgetPosition } from '@/hooks/useWidgetPosition';
 import { useEffect, useState } from 'react';
 import { TourStep } from '@/types/chatbot';
-// import { GabsTourWidget } from '@/components/common/GabsTourWidget';
+import { isChatbotEnabled, isTourMobileEnabled } from '@/utils/env';
 
 declare global {
   interface Window {
@@ -25,8 +24,15 @@ declare global {
 }
 
 const inter = Inter({ subsets: ['latin'], display: 'swap' });
-const GabsIAWidget = isEnvTrue(process.env.NEXT_PUBLIC_CHATBOT)
+const GabsIAWidget = isChatbotEnabled()
   ? dynamic(() => import('@/components/common/GabsIAWidget').then((mod) => mod.GabsIAWidget), {
+      ssr: false,
+      loading: () => <Loading />,
+    })
+  : null;
+
+const GabsTourWidgetDynamic = isTourMobileEnabled()
+  ? dynamic(() => import('@/components/common/GabsTourWidget').then((mod) => mod.GabsTourWidget), {
       ssr: false,
       loading: () => <Loading />,
     })
@@ -161,30 +167,28 @@ export default function MyApp({ Component, pageProps }: AppProps) {
           </Suspense>
           <Footer isDark={isDark} />
         </div>
-        {/* {isChatbotEnabled &&
-          // Tour só aparece no desktop
-          !isMobile && (
-            <Suspense fallback={<Loading />}>
-              <GabsTourWidget fixedTourSteps={tourSteps} initialStep={0} />
-            </Suspense>
-          )} */}
-
-        {GabsIAWidget && (
-          <Suspense fallback={<Loading />}>
-            <GabsIAWidget
-              fixedPosition={widgetPos}
-              initialMessage={{
-                question: '',
-                answer: `Olá! Eu sou o <b>G•One</b>, assistente do portfólio de Gabriel Marques.  
+        {isMobile
+          ? GabsTourWidgetDynamic && (
+              <Suspense fallback={<Loading />}>
+                <GabsTourWidgetDynamic fixedTourSteps={tourSteps} initialStep={0} />
+              </Suspense>
+            )
+          : GabsIAWidget && (
+              <Suspense fallback={<Loading />}>
+                <GabsIAWidget
+                  fixedPosition={widgetPos}
+                  initialMessage={{
+                    question: '',
+                    answer: `Olá! Eu sou o <b>G•One</b>, assistente do portfólio de Gabriel Marques.  
 Vou te ajudar a explorar o site, entender as escolhas técnicas e conhecer seus projetos. 
 <span style="font-size:1.2em;">💡</span> <b>Dica:</b> Clique em <span style="color:#0028af;">❓</span> para iniciar o <b>tour</b> ou em <span style="color:#28a745;">▶️</span> para destacar itens interativos.  
 Como posso te ajudar hoje?
 `,
-              }}
-              fixedTourSteps={tourSteps}
-            />
-          </Suspense>
-        )}
+                  }}
+                  fixedTourSteps={tourSteps}
+                />
+              </Suspense>
+            )}
         <Analytics />
       </ClientOnly>
     </Providers>

@@ -1,9 +1,10 @@
 import { useRouter, usePathname } from 'next/navigation';
-import { isEnvTrue } from '@/utils/env';
+import { isChatbotEnabled } from '@/utils/env';
 import React from 'react';
 import { GabsIAWidgetProps, TourStep } from '@/types/chatbot';
 
-const isChatbotEnabled = isEnvTrue(process.env.NEXT_PUBLIC_CHATBOT);
+// Este componente deve ser usado exclusivamente no desktop, conforme controle em _app.tsx
+const chatbotEnabled = isChatbotEnabled();
 
 export function GabsIAWidget({
   fixedPosition,
@@ -27,7 +28,7 @@ export function GabsIAWidget({
   };
 
   React.useEffect(() => {
-    if (isChatbotEnabled) {
+    if (chatbotEnabled) {
       (async () => {
         try {
           const mod = await import('Chatbot/GabsIAWidget');
@@ -45,7 +46,7 @@ export function GabsIAWidget({
     }
   }, []);
 
-  if (!isChatbotEnabled) return null;
+  if (!chatbotEnabled) return null;
   if (!GabsIA) return null;
 
   return (
