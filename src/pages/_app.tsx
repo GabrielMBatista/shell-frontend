@@ -16,7 +16,7 @@ import dynamic from 'next/dynamic';
 import { useWidgetPosition } from '@/hooks/useWidgetPosition';
 import { useEffect, useState } from 'react';
 import { TourStep } from '@/types/chatbot';
-import { GabsTourWidget } from '@/components/common/GabsTourWidget';
+// import { GabsTourWidget } from '@/components/common/GabsTourWidget';
 
 declare global {
   interface Window {
@@ -68,7 +68,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   const { isDark, setIsDark } = useTheme();
   useClarity();
   const widgetPos = useWidgetPosition();
-  const isChatbotEnabled = isEnvTrue(process.env.NEXT_PUBLIC_CHATBOT);
+  // const isChatbotEnabled = isEnvTrue(process.env.NEXT_PUBLIC_CHATBOT);
   const isMobile = useIsMobile();
 
   useGabsIATourStarter();
@@ -83,7 +83,8 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         },
         {
           target: '[data-gabs="frontend"]',
-          content: 'Cada card de habilidade oferece uma explicação rápida. Explore para conhecer minhas especialidades.',
+          content:
+            'Cada card de habilidade oferece uma explicação rápida. Explore para conhecer minhas especialidades.',
           route: '/home',
         },
         {
@@ -105,7 +106,8 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     : [
         {
           target: '.gabs-avatar',
-          content: 'Este é o G•One, assistente do portfólio. Clique para conversar ou obter ajuda contextual.',
+          content:
+            'Este é o G•One, assistente do portfólio. Clique para conversar ou obter ajuda contextual.',
         },
         {
           target: '.dynamic-tour',
@@ -123,7 +125,8 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         },
         {
           target: '[data-gabs="frontend"]',
-          content: 'Cada card de habilidade oferece uma explicação rápida. Explore para conhecer minhas especialidades.',
+          content:
+            'Cada card de habilidade oferece uma explicação rápida. Explore para conhecer minhas especialidades.',
           route: '/home',
         },
         {
@@ -158,29 +161,30 @@ export default function MyApp({ Component, pageProps }: AppProps) {
           </Suspense>
           <Footer isDark={isDark} />
         </div>
-        {isChatbotEnabled &&
-          (isMobile ? (
+        {/* {isChatbotEnabled &&
+          // Tour só aparece no desktop
+          !isMobile && (
             <Suspense fallback={<Loading />}>
               <GabsTourWidget fixedTourSteps={tourSteps} initialStep={0} />
             </Suspense>
-          ) : (
-            GabsIAWidget && (
-              <Suspense fallback={<Loading />}>
-                <GabsIAWidget
-                  fixedPosition={widgetPos}
-                  initialMessage={{
-                    question: '',
-                    answer: `Olá! Eu sou o <b>G•One</b>, assistente do portfólio de Gabriel Marques.  
+          )} */}
+
+        {GabsIAWidget && (
+          <Suspense fallback={<Loading />}>
+            <GabsIAWidget
+              fixedPosition={widgetPos}
+              initialMessage={{
+                question: '',
+                answer: `Olá! Eu sou o <b>G•One</b>, assistente do portfólio de Gabriel Marques.  
 Vou te ajudar a explorar o site, entender as escolhas técnicas e conhecer seus projetos. 
 <span style="font-size:1.2em;">💡</span> <b>Dica:</b> Clique em <span style="color:#0028af;">❓</span> para iniciar o <b>tour</b> ou em <span style="color:#28a745;">▶️</span> para destacar itens interativos.  
 Como posso te ajudar hoje?
 `,
-                  }}
-                  fixedTourSteps={tourSteps}
-                />
-              </Suspense>
-            )
-          ))}
+              }}
+              fixedTourSteps={tourSteps}
+            />
+          </Suspense>
+        )}
         <Analytics />
       </ClientOnly>
     </Providers>
