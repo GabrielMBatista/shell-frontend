@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { useTranslation } from '@/hooks/useTranslation';
 import { locales, type Locale } from '@/i18n';
-import { isEnvTrue } from '@/utils/env';
+import { isEnvTrue, isTourMobileEnabled } from '@/utils/env';
 
 interface HeaderProps {
   isDark: boolean;
@@ -19,6 +19,7 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
 
   const { t, locale, changeLocale } = useTranslation('common');
   const isChatbotEnabled = isEnvTrue(process.env.NEXT_PUBLIC_CHATBOT);
+  const tourMobileEnabled = isTourMobileEnabled();
 
   // Detecta se está em mobile
   const isMobile = typeof window !== 'undefined' ? window.innerWidth <= 768 : false;
@@ -50,7 +51,7 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div id="gabs-header-anchor" className="flex items-center gap-4">
-            {isChatbotEnabled && (
+            {isMobile && tourMobileEnabled && isChatbotEnabled && (
               <button
                 onClick={handleTourClick}
                 className="flex items-center gap-4 focus:outline-none"
@@ -63,25 +64,33 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
                       : 'bg-gradient-to-r from-blue-500 to-purple-400 border-2 border-blue-900'
                   }`}
                 >
-                  {isMobile && (
-                    <HelpCircle
-                      size={28}
-                      color={isDark ? '#fff' : '#0028af'}
-                      style={{
-                        cursor: 'pointer',
-                        filter: isDark
-                          ? 'drop-shadow(0 0 2px #fff)'
-                          : 'drop-shadow(0 0 2px #0028af)',
-                      }}
-                      aria-label="Iniciar tour"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        if (window.startGabsTour) window.startGabsTour();
-                      }}
-                    />
-                  )}
+                  <HelpCircle
+                    size={28}
+                    color={isDark ? '#fff' : '#0028af'}
+                    style={{
+                      cursor: 'pointer',
+                      filter: isDark ? 'drop-shadow(0 0 2px #fff)' : 'drop-shadow(0 0 2px #0028af)',
+                    }}
+                    aria-label="Iniciar tour"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      if (window.startGabsTour) window.startGabsTour();
+                    }}
+                  />
                 </div>
               </button>
+            )}
+            {!isMobile && isChatbotEnabled && (
+              <div
+                className={`gabs-avatar w-8 h-8 rounded-full flex items-center justify-center transition-colors duration-200 ${
+                  isDark
+                    ? 'bg-gradient-to-r from-blue-700 to-purple-700 border-2 border-white'
+                    : 'bg-gradient-to-r from-blue-500 to-purple-400 border-2 border-blue-900'
+                }`}
+                title="G•One Assistente"
+                aria-label="Assistente do portfólio"
+              >
+              </div>
             )}
           </div>
           <nav className="hidden md:flex items-center gap-8">

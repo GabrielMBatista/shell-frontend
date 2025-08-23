@@ -74,7 +74,6 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   const { isDark, setIsDark } = useTheme();
   useClarity();
   const widgetPos = useWidgetPosition();
-  // const isChatbotEnabled = isEnvTrue(process.env.NEXT_PUBLIC_CHATBOT);
   const isMobile = useIsMobile();
 
   useGabsIATourStarter();
