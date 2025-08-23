@@ -34,14 +34,14 @@ export function GabsTourWidget(props: GabsTourWidgetProps) {
     if (isTourMobileEnabled) {
       (async () => {
         try {
-          const mod = await import('Chatbot/GabsIAWidget');
+          const mod = await import('Chatbot/GabsTourWidget');
           if (!mod?.default) {
-            console.error('Módulo remoto Chatbot/GabsIAWidget não contém um componente padrão.');
+            console.error('Módulo remoto Chatbot/GabsTourWidget não contém um componente padrão.');
             return;
           }
           setGabsTour(() => mod.default);
         } catch (error) {
-          console.error('Erro ao carregar o módulo remoto Chatbot/GabsIAWidget:', error);
+          console.error('Erro ao carregar o módulo remoto Chatbot/GabsTourWidget:', error);
         }
       })();
     } else {
