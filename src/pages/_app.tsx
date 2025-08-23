@@ -12,11 +12,14 @@ import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import Loading from '@/components/common/Loading';
 import dynamic from 'next/dynamic';
-import { useWidgetPosition } from '@/hooks/useWidgetPosition';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { TourStep } from '@/types/chatbot';
-import { isChatbotEnabled, isTourMobileEnabled } from '@/utils/env';
+import { isEnvTrue } from '@/utils/env';
+import { useIsMobile } from '@/hooks/useMobile';
+import { useWidgetPosition } from '@/hooks/useWidgetPosition';
 
+const isChatbotEnabled = isEnvTrue(process.env.NEXT_PUBLIC_CHATBOT);
+const isTourMobileEnabled = isEnvTrue(process.env.NEXT_PUBLIC_TOUR_MOBILE);
 declare global {
   interface Window {
     startGabsTour?: () => void;
@@ -24,30 +27,18 @@ declare global {
 }
 
 const inter = Inter({ subsets: ['latin'], display: 'swap' });
-const GabsIAWidget = isChatbotEnabled()
+const GabsIAWidget = isChatbotEnabled
   ? dynamic(() => import('@/components/common/GabsIAWidget').then((mod) => mod.GabsIAWidget), {
       ssr: false,
       loading: () => <Loading />,
     })
   : null;
-
-const GabsTourWidgetDynamic = isTourMobileEnabled()
+const GabsTourWidgetDynamic = isTourMobileEnabled
   ? dynamic(() => import('@/components/common/GabsTourWidget').then((mod) => mod.GabsTourWidget), {
       ssr: false,
       loading: () => <Loading />,
     })
   : null;
-
-function useIsMobile() {
-  const [isMobile, setIsMobile] = useState(false);
-  useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth <= 768);
-    check();
-    window.addEventListener('resize', check);
-    return () => window.removeEventListener('resize', check);
-  }, []);
-  return isMobile;
-}
 
 function useGabsIATourStarter() {
   useEffect(() => {
@@ -72,13 +63,15 @@ function useGabsIATourStarter() {
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   const { isDark, setIsDark } = useTheme();
+  const widgetPos = useWidgetPosition('gabs-header-anchor', 64);
+  const widgetPosTour = useWidgetPosition('tour-header-anchor', 32);
   useClarity();
-  const widgetPos = useWidgetPosition();
   const isMobile = useIsMobile();
+  console.log('widgetPos', widgetPos);
+  console.log('widgetPosTour', widgetPosTour);
 
   useGabsIATourStarter();
 
-  // Passos do tour ajustados para mobile
   const tourSteps: TourStep[] = isMobile
     ? [
         {
@@ -169,7 +162,11 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         {isMobile
           ? GabsTourWidgetDynamic && (
               <Suspense fallback={<Loading />}>
-                <GabsTourWidgetDynamic fixedTourSteps={tourSteps} initialStep={0} />
+                <GabsTourWidgetDynamic
+                  fixedTourSteps={tourSteps}
+                  initialStep={0}
+                  fixedPosition={widgetPosTour}
+                />
               </Suspense>
             )
           : GabsIAWidget && (

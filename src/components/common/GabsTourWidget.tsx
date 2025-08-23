@@ -1,17 +1,18 @@
 import React from 'react';
-import { TourStep } from '@/types/chatbot';
+import { DockPos, TourStep } from '@/types/chatbot';
 import Loading from './Loading';
 import { useRouter, usePathname } from 'next/navigation';
-import { isTourMobileEnabled } from '@/utils/env';
+import { isEnvTrue } from '@/utils/env';
 
-// Este componente deve ser usado exclusivamente no mobile, conforme controle em _app.tsx
-const tourMobileEnabled = isTourMobileEnabled();
+const isTourMobileEnabled = isEnvTrue(process.env.NEXT_PUBLIC_TOUR_MOBILE);
+
+const tourMobileEnabled = isTourMobileEnabled;
 
 export interface GabsTourWidgetProps {
   fixedTourSteps: TourStep[];
   initialStep?: number;
   onNavigate?: (route: string) => void;
-  fixedPosition?: Partial<{ top: number; left: number; right: number; bottom: number }>;
+  fixedPosition?: DockPos;
 }
 
 export function GabsTourWidget(props: GabsTourWidgetProps) {
