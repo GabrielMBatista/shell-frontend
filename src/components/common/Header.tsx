@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { useTranslation } from '@/hooks/useTranslation';
 import { locales, type Locale } from '@/i18n';
-import { isEnvTrue, isTourMobileEnabled } from '@/utils/env';
+import { isEnvTrue, shouldShowFeature } from '@/utils/env';
 
 interface HeaderProps {
   isDark: boolean;
@@ -19,9 +19,6 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
 
   const { t, locale, changeLocale } = useTranslation('common');
   const isChatbotEnabled = isEnvTrue(process.env.NEXT_PUBLIC_CHATBOT);
-  const tourMobileEnabled = isTourMobileEnabled();
-
-  // Detecta se está em mobile
   const isMobile = typeof window !== 'undefined' ? window.innerWidth <= 768 : false;
 
   const handleTourClick = async () => {
@@ -51,7 +48,7 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div id="gabs-header-anchor" className="flex items-center gap-4">
-            {isMobile && tourMobileEnabled && isChatbotEnabled && (
+            {shouldShowFeature({ isMobile, env: 'NEXT_PUBLIC_TOUR_MOBILE', requireChatbot: true }) && (
               <button
                 onClick={handleTourClick}
                 className="flex items-center gap-4 focus:outline-none"
@@ -89,8 +86,7 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
                 }`}
                 title="G•One Assistente"
                 aria-label="Assistente do portfólio"
-              >
-              </div>
+              ></div>
             )}
           </div>
           <nav className="hidden md:flex items-center gap-8">
