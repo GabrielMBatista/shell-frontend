@@ -88,6 +88,15 @@
         "demoButton": "This project has no visual demo. Check GitHub for the API and usage examples.",
         "githubButton": "Opens the repository with the API, broadcast/unicast examples and performance/cleanup strategies."
       }
+    },
+    "6": {
+      "title": "Interview API",
+      "description": "Node.js and TypeScript backend API for managing technical interviews, featuring BullMQ queues, Prisma persistence, and OpenAI integration.",
+      "gabs": {
+        "card": "Node/TS API with REST endpoints for interviews, queue processing, and OpenAI-powered evaluation/transcription.",
+        "demoButton": "No visual demo. Use the endpoints to test the full interview flow.",
+        "githubButton": "Opens the backend repository with Express, Prisma, BullMQ, and OpenAI integration."
+      }
     }
   }
 }

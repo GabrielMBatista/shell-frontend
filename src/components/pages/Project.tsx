@@ -108,6 +108,16 @@ export default function Projetos({ isDark }: ProjectsProps) {
       demo: '',
       featured: false,
     },
+    {
+      id: 6,
+      title: t('items.6.title'),
+      description: t('items.6.description'),
+      category: 'backend' as const,
+      technologies: ['Node.js', 'TypeScript', 'Express', 'Prisma', 'BullMQ', 'OpenAI API'],
+      github: 'https://github.com/GabrielMBatista/backend-node',
+      demo: '',
+      featured: false,
+    },
   ].sort((a, b) => a.id - b.id);
 
   const categories: Category[] = [

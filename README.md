@@ -1,36 +1,96 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Shell Frontend
 
-## Getting Started
+Aplicação web desenvolvida com [Next.js](https://nextjs.org/) que reúne Tailwind CSS, Prisma e autenticação com NextAuth. O projeto foi iniciado com `create-next-app` e serve como base para aplicações que utilizam uma arquitetura moderna em React.
 
-First, run the development server:
+## Pré-requisitos
+
+- Node.js 18 ou superior
+- npm, yarn, pnpm ou bun
+
+## Instalação
+
+Instale as dependências do projeto:
+
+```bash
+npm install
+```
+
+## Executando em desenvolvimento
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+A aplicação ficará disponível em [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Build de produção
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+```
 
-## Learn More
+O comando executa a compilação do Next.js e prepara o projeto para deploy.
 
-To learn more about Next.js, take a look at the following resources:
+## Estrutura do repositório
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+├── prisma/              # Definição do schema Prisma e migrações
+├── public/              # Arquivos estáticos como imagens e ícones
+├── src/
+│   ├── assets/          # Recursos estáticos internos
+│   ├── components/      # Componentes React reutilizáveis
+│   ├── hooks/           # Hooks customizados
+│   ├── i18n/            # Configuração de internacionalização
+│   ├── lib/             # Código utilitário e integrações
+│   ├── pages/           # Rotas tradicionais do Next.js
+│   ├── providers/       # Contextos e provedores globais
+│   ├── styles/          # Estilos Tailwind e CSS
+│   ├── types/           # Definições TypeScript compartilhadas
+│   └── utils/           # Funções auxiliares
+├── next.config.js       # Configurações do Next.js
+├── tailwind.config.ts   # Configuração do Tailwind CSS
+└── package.json         # Dependências e scripts do projeto
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Scripts
 
-## Deploy on Vercel
+- `npm run dev` – inicializa o servidor de desenvolvimento
+- `npm run build` – gera a versão de produção
+- `npm run start` – executa a versão de produção
+- `npm run seed` – popula o banco de dados utilizando Prisma
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Exemplos de código e uso
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Componente React com Tailwind
+
+```tsx
+import { UiButton } from "@/components";
+
+export function Exemplo() {
+  return (
+    <UiButton onClick={() => alert("Olá!")}>Clique aqui</UiButton>
+  );
+}
+```
+
+### Consulta simples com Prisma
+
+```ts
+import { prisma } from "@/lib/prisma";
+
+async function listarUsuarios() {
+  const users = await prisma.user.findMany();
+  console.log(users);
+}
+```
+
+Esses trechos demonstram como utilizar componentes do projeto e realizar uma consulta ao banco de dados.
+
+## Contribuindo
+
+Sinta-se à vontade para abrir issues e pull requests com melhorias ou correções.
+
+## Licença
+
+Este repositório não possui licença definida.
+

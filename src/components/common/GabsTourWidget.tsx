@@ -6,8 +6,6 @@ import { isEnvTrue } from '@/utils/env';
 
 const isTourMobileEnabled = isEnvTrue(process.env.NEXT_PUBLIC_TOUR_MOBILE);
 
-const tourMobileEnabled = isTourMobileEnabled;
-
 export interface GabsTourWidgetProps {
   fixedTourSteps: TourStep[];
   initialStep?: number;
@@ -16,41 +14,65 @@ export interface GabsTourWidgetProps {
 }
 
 export function GabsTourWidget(props: GabsTourWidgetProps) {
-  const [GabsTour, setGabsTour] = React.useState<React.ComponentType<GabsTourWidgetProps> | null>(
-    null,
-  );
+  const [GabsTour, setGabsTour] =
+    React.useState<React.ComponentType<GabsTourWidgetProps> | null>(null);
+
   const router = useRouter();
   const pathname = usePathname();
+  const mountedRef = React.useRef(true);
 
-  const handleNavigate = (route: string) => {
-    if (route && pathname !== route) {
-      router.push(route);
-    }
-  };
+  const handleNavigate = React.useCallback(
+    (route: string) => {
+      if (route && pathname !== route) {
+        router.push(route);
+      }
+    },
+    [pathname, router],
+  );
 
   React.useEffect(() => {
-    if (tourMobileEnabled) {
-      (async () => {
-        try {
-          const mod = await import('Chatbot/GabsTourWidget');
-          if (!mod?.default) {
-            console.error('Módulo remoto Chatbot/GabsTourWidget não contém um componente padrão.');
-            return;
-          }
-          setGabsTour(() => mod.default);
-        } catch (error) {
-          console.error('Erro ao carregar o módulo remoto Chatbot/GabsTourWidget:', error);
-        }
-      })();
-    } else {
-      console.log('Tour mobile está desabilitado. Componente não será exibido.');
+    mountedRef.current = true;
+    if (!isTourMobileEnabled) {
+      // silencioso quando desabilitado
+      return;
     }
+
+    (async () => {
+      try {
+        const mod = await import('Chatbot/GabsTourWidget');
+        const Comp =
+          (mod && (mod as any).default) || // default export
+          (mod && (mod as any).GabsTourWidget) || // named export (fallback)
+          null;
+
+        if (!Comp) {
+          console.error('Módulo remoto Chatbot/GabsTourWidget não exporta um componente válido.');
+          return;
+        }
+
+        if (mountedRef.current) {
+          setGabsTour(() => Comp as React.ComponentType<GabsTourWidgetProps>);
+        }
+      } catch (error) {
+        console.error('Erro ao carregar Chatbot/GabsTourWidget:', error);
+      }
+    })();
+
+    return () => {
+      mountedRef.current = false;
+    };
   }, []);
 
-  if (!tourMobileEnabled) return null;
+  if (!isTourMobileEnabled) return null;
   if (!GabsTour) return <Loading />;
 
-  return <GabsTour {...props} onNavigate={handleNavigate} fixedPosition={props.fixedPosition} />;
+  return (
+    <GabsTour
+      {...props}
+      onNavigate={props.onNavigate ?? handleNavigate}
+      fixedPosition={props.fixedPosition}
+    />
+  );
 }
 
 export default GabsTourWidget;
