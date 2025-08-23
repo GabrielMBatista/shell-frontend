@@ -14,8 +14,9 @@ export interface GabsTourWidgetProps {
 }
 
 export function GabsTourWidget(props: GabsTourWidgetProps) {
-  const [GabsTour, setGabsTour] =
-    React.useState<React.ComponentType<GabsTourWidgetProps> | null>(null);
+  const [GabsTour, setGabsTour] = React.useState<React.ComponentType<GabsTourWidgetProps> | null>(
+    null,
+  );
 
   const router = useRouter();
   const pathname = usePathname();
@@ -40,10 +41,16 @@ export function GabsTourWidget(props: GabsTourWidgetProps) {
     (async () => {
       try {
         const mod = await import('Chatbot/GabsTourWidget');
-        const Comp =
-          (mod && (mod as any).default) || // default export
-          (mod && (mod as any).GabsTourWidget) || // named export (fallback)
-          null;
+        // Type guard para garantir que é um componente React
+        let Comp: React.ComponentType<GabsTourWidgetProps> | undefined;
+        if (typeof mod.default === 'function') {
+          Comp = mod.default as React.ComponentType<GabsTourWidgetProps>;
+        } else if (typeof (mod as Record<string, unknown>).GabsTourWidget === 'function') {
+          Comp = (mod as { GabsTourWidget: React.ComponentType<GabsTourWidgetProps> })
+            .GabsTourWidget;
+        } else {
+          Comp = undefined;
+        }
 
         if (!Comp) {
           console.error('Módulo remoto Chatbot/GabsTourWidget não exporta um componente válido.');
@@ -51,7 +58,7 @@ export function GabsTourWidget(props: GabsTourWidgetProps) {
         }
 
         if (mountedRef.current) {
-          setGabsTour(() => Comp as React.ComponentType<GabsTourWidgetProps>);
+          setGabsTour(() => Comp!);
         }
       } catch (error) {
         console.error('Erro ao carregar Chatbot/GabsTourWidget:', error);
