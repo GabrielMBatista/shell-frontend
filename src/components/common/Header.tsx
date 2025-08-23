@@ -1,11 +1,12 @@
 'use client';
 import React, { useState } from 'react';
-import { Sun, Moon, Menu, Globe, HelpCircle } from 'lucide-react';
+import { Sun, Moon, Menu, Globe } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { useTranslation } from '@/hooks/useTranslation';
 import { locales, type Locale } from '@/i18n';
 import { isEnvTrue } from '@/utils/env';
+import { useIsMobile } from '@/hooks/useMobile';
 
 interface HeaderProps {
   isDark: boolean;
@@ -16,30 +17,10 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const isActive = (path: string) => pathname === path;
-
   const { t, locale, changeLocale } = useTranslation('common');
   const isChatbotEnabled = isEnvTrue(process.env.NEXT_PUBLIC_CHATBOT);
-
-  // Detecta se está em mobile
-  const isMobile = typeof window !== 'undefined' ? window.innerWidth <= 768 : false;
-
-  const handleTourClick = async () => {
-    if (isMobile && window.startGabsTour) {
-      window.startGabsTour();
-      return;
-    }
-    // fallback para desktop: importa e chama direto do federado
-    try {
-      const mod = await import('Chatbot/GabsIAWidget');
-      if (mod?.startGabsTour) {
-        mod.startGabsTour();
-      } else {
-        window.dispatchEvent(new CustomEvent('startGabsTour'));
-      }
-    } catch (error) {
-      console.error('Erro ao carregar o módulo remoto Chatbot/GabsIAWidget:', error);
-    }
-  };
+  const isMobileTourEnabled = isEnvTrue(process.env.NEXT_PUBLIC_TOUR_MOBILE);
+  const isMobile = useIsMobile();
 
   return (
     <header
@@ -49,41 +30,32 @@ export default function Header({ isDark, setIsDark }: HeaderProps) {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <div id="gabs-header-anchor" className="flex items-center gap-4">
-            {isChatbotEnabled && (
-              <button
-                onClick={handleTourClick}
-                className="flex items-center gap-4 focus:outline-none"
-                title={t('Header.tooltip.reopenAssistant')}
-              >
-                <div
-                  className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors duration-200 ${
-                    isDark
-                      ? 'bg-gradient-to-r from-blue-700 to-purple-700 border-2 border-white'
-                      : 'bg-gradient-to-r from-blue-500 to-purple-400 border-2 border-blue-900'
-                  }`}
-                >
-                  {isMobile && (
-                    <HelpCircle
-                      size={28}
-                      color={isDark ? '#fff' : '#0028af'}
-                      style={{
-                        cursor: 'pointer',
-                        filter: isDark
-                          ? 'drop-shadow(0 0 2px #fff)'
-                          : 'drop-shadow(0 0 2px #0028af)',
-                      }}
-                      aria-label="Iniciar tour"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        if (window.startGabsTour) window.startGabsTour();
-                      }}
-                    />
-                  )}
-                </div>
-              </button>
-            )}
-          </div>
+          {!isMobile && isChatbotEnabled && (
+            <div id="gabs-header-anchor" className="flex items-center gap-4">
+              <div
+                className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors duration-200 ${
+                  isDark
+                    ? 'bg-gradient-to-r from-blue-700 to-purple-700 border-2 border-white'
+                    : 'bg-gradient-to-r from-blue-500 to-purple-400 border-2 border-blue-900'
+                }`}
+                title="G•One Assistente"
+                aria-label="Assistente do portfólio"
+              />
+            </div>
+          )}
+          {isMobile && isMobileTourEnabled && (
+            <div id="gabs-header-anchor" className="flex items-center gap-4">
+              <div
+                className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors duration-200 ${
+                  isDark
+                    ? 'bg-gradient-to-r from-blue-700 to-purple-700 border-2 border-white'
+                    : 'bg-gradient-to-r from-blue-500 to-purple-400 border-2 border-blue-900'
+                }`}
+                title="Help Tour"
+                aria-label="help button"
+              />
+            </div>
+          )}
           <nav className="hidden md:flex items-center gap-8">
             <Link
               href="/"

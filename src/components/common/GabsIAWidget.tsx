@@ -1,9 +1,9 @@
 import { useRouter, usePathname } from 'next/navigation';
-import { isEnvTrue } from '@/utils/env';
 import React from 'react';
 import { GabsIAWidgetProps, TourStep } from '@/types/chatbot';
+import { isEnvTrue } from '@/utils/env';
 
-const isChatbotEnabled = isEnvTrue(process.env.NEXT_PUBLIC_CHATBOT);
+const chatbotEnabled = isEnvTrue(process.env.NEXT_PUBLIC_CHATBOT);
 
 export function GabsIAWidget({
   fixedPosition,
@@ -27,7 +27,7 @@ export function GabsIAWidget({
   };
 
   React.useEffect(() => {
-    if (isChatbotEnabled) {
+    if (chatbotEnabled) {
       (async () => {
         try {
           const mod = await import('Chatbot/GabsIAWidget');
@@ -45,7 +45,7 @@ export function GabsIAWidget({
     }
   }, []);
 
-  if (!isChatbotEnabled) return null;
+  if (!chatbotEnabled) return null;
   if (!GabsIA) return null;
 
   return (
