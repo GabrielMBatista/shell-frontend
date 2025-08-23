@@ -67,8 +67,6 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   const widgetPosTour = useWidgetPosition('tour-header-anchor', 32);
   useClarity();
   const isMobile = useIsMobile();
-  console.log('widgetPos', widgetPos);
-  console.log('widgetPosTour', widgetPosTour);
 
   useGabsIATourStarter();
 
