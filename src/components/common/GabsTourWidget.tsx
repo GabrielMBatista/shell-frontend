@@ -20,7 +20,6 @@ export function GabsTourWidget(props: GabsTourWidgetProps) {
 
   const router = useRouter();
   const pathname = usePathname();
-  const mountedRef = React.useRef(true);
 
   const handleNavigate = React.useCallback(
     (route: string) => {
@@ -32,42 +31,22 @@ export function GabsTourWidget(props: GabsTourWidgetProps) {
   );
 
   React.useEffect(() => {
-    mountedRef.current = true;
-    if (!isTourMobileEnabled) {
-      // silencioso quando desabilitado
-      return;
+    if (isTourMobileEnabled) {
+      (async () => {
+        try {
+          const mod = await import('Chatbot/GabsIAWidget');
+          if (!mod?.default) {
+            console.error('Módulo remoto Chatbot/GabsIAWidget não contém um componente padrão.');
+            return;
+          }
+          setGabsTour(() => mod.default);
+        } catch (error) {
+          console.error('Erro ao carregar o módulo remoto Chatbot/GabsIAWidget:', error);
+        }
+      })();
+    } else {
+      console.log('Chatbot está desabilitado. Componente não será exibido.');
     }
-
-    (async () => {
-      try {
-        const mod = await import('Chatbot/GabsTourWidget');
-        // Type guard para garantir que é um componente React
-        let Comp: React.ComponentType<GabsTourWidgetProps> | undefined;
-        if (typeof mod.default === 'function') {
-          Comp = mod.default as React.ComponentType<GabsTourWidgetProps>;
-        } else if (typeof (mod as Record<string, unknown>).GabsTourWidget === 'function') {
-          Comp = (mod as { GabsTourWidget: React.ComponentType<GabsTourWidgetProps> })
-            .GabsTourWidget;
-        } else {
-          Comp = undefined;
-        }
-
-        if (!Comp) {
-          console.error('Módulo remoto Chatbot/GabsTourWidget não exporta um componente válido.');
-          return;
-        }
-
-        if (mountedRef.current) {
-          setGabsTour(() => Comp!);
-        }
-      } catch (error) {
-        console.error('Erro ao carregar Chatbot/GabsTourWidget:', error);
-      }
-    })();
-
-    return () => {
-      mountedRef.current = false;
-    };
   }, []);
 
   if (!isTourMobileEnabled) return null;
