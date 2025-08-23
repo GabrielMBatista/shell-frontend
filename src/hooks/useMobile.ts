@@ -6,14 +6,12 @@ export function useIsMobile(breakpoint = 768, heightThreshold = 1024) {
       return false;
     }
 
-    // Verifica o userAgent para identificar dispositivos móveis
     const userAgent = navigator.userAgent || '';
     const isMobileDevice = /Mobi|Android|iPhone|iPad|iPod/i.test(userAgent);
 
     const isMobileWidth = window.matchMedia(`(max-width: ${breakpoint - 1}px)`).matches;
     const isMobileHeight = window.innerHeight <= heightThreshold;
 
-    // Considera como móvel se for identificado pelo userAgent ou atender aos critérios de largura e altura
     return isMobileDevice || (isMobileWidth && isMobileHeight);
   };
 
@@ -31,7 +29,6 @@ export function useIsMobile(breakpoint = 768, heightThreshold = 1024) {
       const isMobileWidth = mqlWidth.matches;
       const isMobileHeight = window.innerHeight <= heightThreshold;
 
-      // Atualiza o estado com base no userAgent e nos critérios de largura e altura
       setIsMobile(isMobileDevice || (isMobileWidth && isMobileHeight));
     };
 

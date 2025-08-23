@@ -16,20 +16,15 @@ export function useWidgetPosition(targetId: string, size: number) {
   useEffect(() => {
     const compute = () => {
       const el = document.getElementById(targetId);
-      if (!el) {
-        console.warn(`Elemento com ID "${targetId}" não encontrado.`);
-        return;
-      }
+      if (!el) return;
       const rect = el.getBoundingClientRect();
-      console.log('Element bounds:', rect); // Log para depuração
       const top = Math.round(rect.top + rect.height / 2 - size / 2);
       const left = Math.round(rect.left + rect.width / 2 - size / 2);
-      console.log('Computed position:', { top, left }); // Log para depuração
       setWidgetPos({ top, left });
     };
 
     const delayedCompute = () => {
-      setTimeout(compute, 100); // Adiciona um pequeno atraso de 100ms
+      setTimeout(compute, 100);
     };
 
     const raf = requestAnimationFrame(delayedCompute);
@@ -42,6 +37,5 @@ export function useWidgetPosition(targetId: string, size: number) {
     };
   }, [targetId, size]);
 
-  console.log('Final widget position:', widgetPos); // Log para depuração
   return widgetPos;
 }
