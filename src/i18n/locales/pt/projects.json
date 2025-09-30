@@ -22,13 +22,7 @@
     "title": "Todos os Projetos",
     "note": "Aqui você encontra os projetos que desenvolvi e compartilhei publicamente, seja para praticar, explorar novas ideias ou aprimorar minhas habilidades.",
     "demo": "Ver Demo",
-    "code": "Código",
-    "features": {
-      "title": "Principais Funcionalidades",
-      "item1": "Gerenciamento eficiente de conexões SSE",
-      "item2": "Envio de mensagens em tempo real",
-      "item3": "Fácil integração com aplicações Node.js"
-    }
+    "code": "Código"
   },
   "noResults": {
     "title": "Nenhum projeto encontrado",
@@ -86,6 +80,12 @@
         "card": "Core Node/TS para SSE: múltiplos clientes, broadcast seletivo e limpeza de conexões. Foque na API e no gerenciamento eficiente.",
         "demoButton": "Projeto sem demo visual. Veja o GitHub para a API e exemplos de uso.",
         "githubButton": "Abre o repositório com API, exemplos de broadcast/unicast e estratégias de performance/cleanup."
+      },
+      "features": {
+        "title": "Principais Funcionalidades",
+        "item1": "Gerenciamento eficiente de conexões SSE",
+        "item2": "Envio de mensagens em tempo real",
+        "item3": "Fácil integração com aplicações Node.js"
       }
     },
     "6": {
@@ -95,6 +95,22 @@
         "card": "API Node/TS com endpoints REST para entrevistas, processamento em fila e avaliação/transcrição via OpenAI.",
         "demoButton": "Projeto sem demo visual. Use os endpoints para testar o fluxo completo de entrevistas.",
         "githubButton": "Abre o repositório do backend com Express, Prisma, BullMQ e integração OpenAI."
+      },
+      "features": {
+        "title": "Principais Funcionalidades",
+        "item1": "API REST com Node.js e Express",
+        "item2": "Gerenciamento de filas com BullMQ",
+        "item3": "Integração com OpenAI para transcrição e avaliação"
+      }
+    },
+    "7": {
+      "title": "Sistema Automatizado de Geração de Vídeos",
+      "description": "Pipeline completo de produção de vídeos usando IA, transformando prompts em vídeos cinematográficos com n8n, Google Veo 3.0, Gemini e múltiplos agentes autônomos",
+      "features": {
+        "title": "Principais Funcionalidades",
+        "item1": "Geração automatizada de vídeos a partir de prompts de texto",
+        "item2": "Integração com modelos de IA (Veo 3.0, Gemini)",
+        "item3": "Orquestração de fluxos com n8n e agentes autônomos"
       }
     }
   }

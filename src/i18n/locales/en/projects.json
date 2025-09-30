@@ -22,13 +22,7 @@
     "title": "All Projects",
     "note": "Here you’ll find the projects I’ve developed and shared publicly, whether to practice, explore new ideas, or enhance my skills..",
     "demo": "View Demo",
-    "code": "Code",
-    "features": {
-      "title": "Main Features",
-      "item1": "Efficient management of SSE connections",
-      "item2": "Real-time message sending",
-      "item3": "Easy integration with Node.js applications"
-    }
+    "code": "Code"
   },
   "noResults": {
     "title": "No projects found",
@@ -87,6 +81,12 @@
         "card": "Node/TS core for SSE: multiple clients, selective broadcast and connection cleanup. Focus on the API and efficient management.",
         "demoButton": "This project has no visual demo. Check GitHub for the API and usage examples.",
         "githubButton": "Opens the repository with the API, broadcast/unicast examples and performance/cleanup strategies."
+      },
+      "features": {
+        "title": "Main Features",
+        "item1": "Efficient management of SSE connections",
+        "item2": "Real-time message sending",
+        "item3": "Easy integration with Node.js applications"
       }
     },
     "6": {
@@ -96,6 +96,22 @@
         "card": "Node/TS API with REST endpoints for interviews, queue processing, and OpenAI-powered evaluation/transcription.",
         "demoButton": "No visual demo. Use the endpoints to test the full interview flow.",
         "githubButton": "Opens the backend repository with Express, Prisma, BullMQ, and OpenAI integration."
+      },
+      "features": {
+        "title": "Main Features",
+        "item1": "REST API with Node.js and Express",
+        "item2": "Queue management with BullMQ",
+        "item3": "OpenAI integration for transcription and evaluation"
+      }
+    },
+    "7": {
+      "title": "Automated Video Generation System",
+      "description": "Complete video production pipeline using AI, transforming prompts into cinematic videos with n8n, Google Veo 3.0, Gemini and multiple autonomous agents",
+      "features": {
+        "title": "Main Features",
+        "item1": "Automated video generation from text prompts",
+        "item2": "Integration with AI models (Veo 3.0, Gemini)",
+        "item3": "Orchestrated workflows with n8n and autonomous agents"
       }
     }
   }

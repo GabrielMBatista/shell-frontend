@@ -118,6 +118,25 @@ export default function Projetos({ isDark }: ProjectsProps) {
       demo: '',
       featured: false,
     },
+    {
+      id: 7,
+      title: t('items.7.title'),
+      description: t('items.7.description'),
+      category: 'fullstack' as const,
+      technologies: [
+        'n8n',
+        'Google Veo 3.0',
+        'Gemini AI',
+        'Groq',
+        'Docker',
+        'FFmpeg',
+        'Baserow',
+        'TypeScript',
+      ],
+      github: 'https://github.com/GabrielMBatista/workflow-veo3',
+      demo: '',
+      featured: false,
+    },
   ].sort((a, b) => a.id - b.id);
 
   const categories: Category[] = [
@@ -350,7 +369,7 @@ export default function Projetos({ isDark }: ProjectsProps) {
             <h1
               className={`text-4xl md:text-6xl font-bold mb-6 ${isDark ? 'text-white' : 'text-gray-900'}`}
             >
-              {t('hero.title')}{' '}
+              {t('hero.title')}
               <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                 {t('hero.highlight')}
               </span>
@@ -640,34 +659,41 @@ export default function Projetos({ isDark }: ProjectsProps) {
                         <h3
                           className={`text-xl font-bold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}
                         >
-                          {project.title}
+                          {t(`items.${project.id}.title`)}
                         </h3>
                         <p
                           className={`mb-4 text-sm leading-relaxed ${isDark ? 'text-gray-400' : 'text-gray-600'}`}
                         >
-                          {project.description}
+                          {t(`items.${project.id}.description`)}
                         </p>
-                        <div className="mb-4">
-                          <h4
-                            className={`text-sm font-semibold mb-2 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}
-                          >
-                            {t('all.features.title')}
-                          </h4>
-                          <ul
-                            className={`list-disc pl-5 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}
-                          >
-                            <li>{t('all.features.item1')}</li>
-                            <li>{t('all.features.item2')}</li>
-                            <li>{t('all.features.item3')}</li>
-                          </ul>
-                        </div>
+                        {t(`items.${project.id}.features.title`) && (
+                          <div className="mb-4">
+                            
+                            <h4
+                              className={`text-sm font-semibold mb-2 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}
+                            >
+                              {t(`items.${project.id}.features.title`)}
+                            </h4>
+                            <ul
+                              className={`list-disc pl-5 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}
+                            >
+                              {t(`items.${project.id}.features.item1`) && (
+                                <li>{t(`items.${project.id}.features.item1`)}</li>
+                              )}
+                              {t(`items.${project.id}.features.item2`) && (
+                                <li>{t(`items.${project.id}.features.item2`)}</li>
+                              )}
+                              {t(`items.${project.id}.features.item3`) && (
+                                <li>{t(`items.${project.id}.features.item3`)}</li>
+                              )}
+                            </ul>
+                          </div>
+                        )}
                         <div className="flex flex-wrap gap-1 mb-4">
                           {project.technologies.map((tech, index) => (
                             <span
                               key={index}
-                              className={`px-2 py-1 text-xs rounded-full ${
-                                isDark ? 'bg-gray-700 text-gray-300' : 'bg-gray-100 text-gray-700'
-                              }`}
+                              className={`px-2 py-1 text-xs rounded-full ${isDark ? 'bg-gray-700 text-gray-300' : 'bg-gray-100 text-gray-700'}`}
                             >
                               {tech}
                             </span>
@@ -681,14 +707,9 @@ export default function Projetos({ isDark }: ProjectsProps) {
                             target="_blank"
                             rel="noopener noreferrer"
                             onClick={() => handleProjectClick(project, 'github', position)}
-                            className={`flex-1 inline-flex items-center justify-center gap-1 px-3 py-2 border rounded-lg transition-colors duration-200 text-sm font-medium ${
-                              isDark
-                                ? 'text-white border-gray-600 hover:bg-gray-700'
-                                : 'text-gray-800 border-gray-300 hover:bg-gray-50'
-                            }`}
+                            className={`flex-1 inline-flex items-center justify-center gap-1 px-3 py-2 border rounded-lg transition-colors duration-200 text-sm font-medium ${isDark ? 'text-white border-gray-600 hover:bg-gray-700' : 'text-gray-800 border-gray-300 hover:bg-gray-50'}`}
                           >
-                            <Github size={14} />
-                            {t('all.code')}
+                            <Github size={14} /> {t('featured.code')}
                           </a>
                         </div>
                       </div>
