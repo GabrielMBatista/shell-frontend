@@ -112,6 +112,36 @@
         "item2": "Integração com modelos de IA (Veo 3.0, Gemini)",
         "item3": "Orquestração de fluxos com n8n e agentes autônomos"
       }
+    },
+    "8": {
+      "title": "ShortAI Studio",
+      "description": "Frontend da plataforma de criação de vídeos curtos com IA. Interface moderna para roteirização, geração de mídia e edição.",
+      "gabs": {
+        "card": "Interface moderna para criação de vídeos com IA. Foco em UX para edição e geração de conteúdo.",
+        "demoButton": "Sem demo disponível publicamente no momento.",
+        "githubButton": "Repositório do frontend da aplicação ShortAI."
+      },
+      "features": {
+        "title": "Principais Funcionalidades",
+        "item1": "Interface intuitiva para criação de roteiros",
+        "item2": "Integração com serviços de IA para geração de mídia",
+        "item3": "Edição e preview em tempo real"
+      }
+    },
+    "9": {
+      "title": "ShortsAI API",
+      "description": "Backend robusto para orquestração de serviços de IA, gerenciamento de projetos e processamento de vídeo.",
+      "gabs": {
+        "card": "API backend para gerenciamento de projetos de vídeo e orquestração de serviços de IA.",
+        "demoButton": "Sem demo disponível publicamente no momento.",
+        "githubButton": "Repositório do backend da aplicação ShortAI."
+      },
+      "features": {
+        "title": "Principais Funcionalidades",
+        "item1": "Orquestração de serviços de IA",
+        "item2": "Gerenciamento de projetos e usuários",
+        "item3": "Processamento de vídeo escalável"
+      }
     }
   }
 }

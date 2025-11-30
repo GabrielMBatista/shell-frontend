@@ -36,7 +36,6 @@
     "description": "Get in touch so we can discuss how I can help with your project.",
     "primary": "Contact Me"
   },
-
   "items": {
     "1": {
       "title": "Interview AI",
@@ -112,6 +111,36 @@
         "item1": "Automated video generation from text prompts",
         "item2": "Integration with AI models (Veo 3.0, Gemini)",
         "item3": "Orchestrated workflows with n8n and autonomous agents"
+      }
+    },
+    "8": {
+      "title": "ShortAI Studio",
+      "description": "Frontend for the AI short video creation platform. Modern interface for scripting, media generation, and editing.",
+      "gabs": {
+        "card": "Modern interface for AI video creation. Focus on UX for editing and content generation.",
+        "demoButton": "No public demo available at the moment.",
+        "githubButton": "ShortAI application frontend repository."
+      },
+      "features": {
+        "title": "Main Features",
+        "item1": "Intuitive interface for script creation",
+        "item2": "Integration with AI services for media generation",
+        "item3": "Real-time editing and preview"
+      }
+    },
+    "9": {
+      "title": "ShortsAI API",
+      "description": "Robust backend for AI service orchestration, project management, and video processing.",
+      "gabs": {
+        "card": "Backend API for video project management and AI service orchestration.",
+        "demoButton": "No public demo available at the moment.",
+        "githubButton": "ShortAI application backend repository."
+      },
+      "features": {
+        "title": "Main Features",
+        "item1": "AI service orchestration",
+        "item2": "Project and user management",
+        "item3": "Scalable video processing"
       }
     }
   }
