@@ -16,7 +16,8 @@
     "title": "Projetos em Destaque",
     "label": "Destaque",
     "demo": "Ver Demo",
-    "code": "Código"
+    "code": "Código",
+    "externalPreview": "Preview Externo"
   },
   "all": {
     "title": "Todos os Projetos",
@@ -149,8 +150,7 @@
       "gabs": {
         "card": "Sistema robusto de gestão de conteúdo para agências. Explore fluxos de aprovação, multi-tenancy e calendários visuais.",
         "demoButton": "Abre o painel de gestão em uma nova aba.",
-        "githubButton": "Repositório do projeto Social Media Calendar (Gestão de Conteúdo).",
-        "externalPreview": true
+        "githubButton": "Repositório do projeto Social Media Calendar (Gestão de Conteúdo)."
       }
     },
     "11": {

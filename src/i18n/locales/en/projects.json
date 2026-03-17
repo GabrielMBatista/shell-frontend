@@ -16,7 +16,8 @@
     "title": "Featured Projects",
     "label": "Featured",
     "demo": "View Demo",
-    "code": "Code"
+    "code": "Code",
+    "externalPreview": "External Preview"
   },
   "all": {
     "title": "All Projects",
