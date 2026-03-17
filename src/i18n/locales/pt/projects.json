@@ -168,6 +168,12 @@
         "card": "Edição de vídeo no browser: FFmpeg WASM + Gemini para narrativas automáticas. Isolamento via Module Federation.",
         "demoButton": "Este projeto não possui demo pública ativa no momento.",
         "githubButton": "Código do MFE Narrative: processamento pesado no cliente e orquestração de IA."
+      },
+      "features": {
+        "title": "Principais Funcionalidades",
+        "item1": "Orquestração de IA Multimodal (Gemini Pro/Flash)",
+        "item2": "Processamento e renderização via FFmpeg WASM",
+        "item3": "Integração via Module Federation"
       }
     }
   }
