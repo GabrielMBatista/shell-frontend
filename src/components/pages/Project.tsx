@@ -38,6 +38,28 @@ export default function Projetos({ isDark }: ProjectsProps) {
 
   const projects: Project[] = [
     {
+      id: 10,
+      title: t('items.10.title'),
+      description: t('items.10.description'),
+      category: 'fullstack' as const,
+      technologies: ['Next.js', 'Prisma', 'PostgreSQL', 'Multi-tenant', 'Lucide React'],
+      github: 'https://github.com/GabrielMBatista/social-media-calendar',
+      demo: 'https://social-media-calendar-two.vercel.app/login',
+      featured: true,
+      externalDemo: true,
+    },
+    {
+      id: 11,
+      title: t('items.11.title'),
+      description: t('items.11.description'),
+      category: 'fullstack' as const,
+      technologies: ['Next.js 15', 'React 19', 'TypeScript', 'Google GenAI', 'Gemini'],
+      github: 'https://github.com/GabrielMBatista/cs-ad-pro',
+      demo: 'https://cs-ad-pro.vercel.app/',
+      featured: true,
+      externalDemo: true,
+    },
+    {
       id: 1,
       title: t('items.1.title'),
       description: t('items.1.description'),
@@ -158,28 +180,6 @@ export default function Projetos({ isDark }: ProjectsProps) {
       featured: false,
     },
     {
-      id: 10,
-      title: t('items.10.title'),
-      description: t('items.10.description'),
-      category: 'fullstack' as const,
-      technologies: ['Next.js', 'Prisma', 'PostgreSQL', 'Multi-tenant', 'Lucide React'],
-      github: 'https://github.com/GabrielMBatista/social-media-calendar',
-      demo: 'https://social-media-calendar-two.vercel.app/login',
-      featured: true,
-      externalDemo: true,
-    },
-    {
-      id: 11,
-      title: t('items.11.title'),
-      description: t('items.11.description'),
-      category: 'fullstack' as const,
-      technologies: ['Next.js 15', 'React 19', 'TypeScript', 'Google GenAI', 'Gemini'],
-      github: 'https://github.com/GabrielMBatista/cs-ad-pro',
-      demo: 'https://cs-ad-pro.vercel.app/',
-      featured: true,
-      externalDemo: true,
-    },
-    {
       id: 12,
       title: t('items.12.title'),
       description: t('items.12.description'),
@@ -189,7 +189,7 @@ export default function Projetos({ isDark }: ProjectsProps) {
       demo: '',
       featured: false,
     },
-  ].sort((a, b) => a.id - b.id);
+  ];
 
   const categories: Category[] = [
     { id: 'todos', name: t('categories.all'), icon: Globe },
@@ -452,8 +452,7 @@ export default function Projetos({ isDark }: ProjectsProps) {
                 key={project.id}
                 data-gabs={`featured-project-${project.id}`}
                 gabs-content={t(`items.${project.id}.gabs.card`)}
-                className={`group rounded-2xl overflow-hidden shadow-xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 ${isDark ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200'
-                  }`}
+                className={`group rounded-2xl overflow-hidden shadow-xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 ${isDark ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200'}`}
               >
                 <div className="relative flex items-center justify-center">
                   <div
