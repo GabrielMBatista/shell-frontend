@@ -29,7 +29,7 @@ export default function Projetos({ isDark }: ProjectsProps) {
   const [pageStartTime] = useState<number>(Date.now());
   const [scrollDepthTracked, setScrollDepthTracked] = useState<Set<number>>(new Set());
 
-  const resolution = resolutions[selectedResolution];
+  const resolution = resolutions[selectedResolution as keyof typeof resolutions];
 
   const closeModal = (): void => {
     setIsModalOpen(false);
@@ -157,6 +157,36 @@ export default function Projetos({ isDark }: ProjectsProps) {
       demo: '',
       featured: false,
     },
+    {
+      id: 10,
+      title: t('items.10.title'),
+      description: t('items.10.description'),
+      category: 'fullstack' as const,
+      technologies: ['Next.js', 'Prisma', 'PostgreSQL', 'Multi-tenant', 'Lucide React'],
+      github: 'https://github.com/GabrielMBatista/social-media-calendar',
+      demo: 'https://social-media-calendar-two.vercel.app/login',
+      featured: true,
+    },
+    {
+      id: 11,
+      title: t('items.11.title'),
+      description: t('items.11.description'),
+      category: 'fullstack' as const,
+      technologies: ['Next.js 15', 'React 19', 'TypeScript', 'Google GenAI', 'Gemini'],
+      github: 'https://github.com/GabrielMBatista/cs-ad-pro',
+      demo: 'https://cs-ad-pro.vercel.app/',
+      featured: true,
+    },
+    {
+      id: 12,
+      title: t('items.12.title'),
+      description: t('items.12.description'),
+      category: 'fullstack' as const,
+      technologies: ['FFmpeg WASM', 'Google GenAI', 'Gemini', 'Next.js', 'Module Federation'],
+      github: 'https://github.com/GabrielMBatista/mfe-narrative',
+      demo: '',
+      featured: false,
+    },
   ].sort((a, b) => a.id - b.id);
 
   const categories: Category[] = [
@@ -216,7 +246,7 @@ export default function Projetos({ isDark }: ProjectsProps) {
       [25, 50, 75, 100].forEach((depth) => {
         if (scrollPercent >= depth && !scrollDepthTracked.has(depth)) {
           trackScrollDepth(depth, 'projects');
-          setScrollDepthTracked((prev) => new Set(prev).add(depth));
+          setScrollDepthTracked((prev: Set<number>) => new Set(prev).add(depth));
         }
       });
     };
@@ -354,7 +384,7 @@ export default function Projetos({ isDark }: ProjectsProps) {
             <div className="sticky top-0 left-0 right-0 bg-gray-100 border-b border-gray-300 flex items-center justify-between px-4 py-2 z-10">
               <select
                 value={selectedResolution}
-                onChange={(e) => setSelectedResolution(e.target.value as keyof typeof resolutions)}
+                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setSelectedResolution(e.target.value as keyof typeof resolutions)}
                 className="block px-3 py-1 border rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
               >
                 {Object.keys(resolutions).map((key) => (
@@ -487,8 +517,8 @@ export default function Projetos({ isDark }: ProjectsProps) {
                       rel="noopener noreferrer"
                       onClick={() => handleProjectClick(project, 'github', 0)}
                       className={`flex-1 inline-flex items-center justify-center gap-2 px-6 py-3 border rounded-xl transition-colors duration-200 font-medium ${isDark
-                          ? 'text-white border-gray-600 hover:bg-gray-700'
-                          : 'text-gray-800 border-gray-300 hover:bg-gray-50'
+                        ? 'text-white border-gray-600 hover:bg-gray-700'
+                        : 'text-gray-800 border-gray-300 hover:bg-gray-50'
                         }`}
                     >
                       <Github size={18} />
@@ -514,10 +544,10 @@ export default function Projetos({ isDark }: ProjectsProps) {
                 type="text"
                 placeholder={t('search.placeholder')}
                 value={searchTerm}
-                onChange={(e) => handleSearchChange(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleSearchChange(e.target.value)}
                 className={`w-full pl-10 pr-4 py-3 border rounded-xl transition-all duration-200 outline-none focus:ring-2 focus:ring-blue-200 ${isDark
-                    ? 'bg-gray-800 border-gray-600 text-white focus:border-blue-500'
-                    : 'bg-white border-gray-300 text-gray-900 focus:border-blue-500'
+                  ? 'bg-gray-800 border-gray-600 text-white focus:border-blue-500'
+                  : 'bg-white border-gray-300 text-gray-900 focus:border-blue-500'
                   }`}
               />
             </div>
@@ -529,10 +559,10 @@ export default function Projetos({ isDark }: ProjectsProps) {
                     key={category.id}
                     onClick={() => handleFilterChange(category.id)}
                     className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl transition-all duration-200 font-medium ${activeFilter === category.id
-                        ? 'bg-blue-600 text-white shadow-lg'
-                        : isDark
-                          ? 'bg-gray-800 text-gray-300 hover:bg-gray-700 border border-gray-700'
-                          : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-200 shadow-sm'
+                      ? 'bg-blue-600 text-white shadow-lg'
+                      : isDark
+                        ? 'bg-gray-800 text-gray-300 hover:bg-gray-700 border border-gray-700'
+                        : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-200 shadow-sm'
                       }`}
                   >
                     <Icon size={16} />
@@ -584,8 +614,8 @@ export default function Projetos({ isDark }: ProjectsProps) {
                     data-gabs={`project-${project.id}`}
                     gabs-content={t(`items.${project.id}.gabs.card`)}
                     className={`group rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-2 ${isDark
-                        ? 'bg-gray-800 border border-gray-700'
-                        : 'bg-white border border-gray-200'
+                      ? 'bg-gray-800 border border-gray-700'
+                      : 'bg-white border border-gray-200'
                       }`}
                   >
                     {hasDemo ? (
@@ -655,8 +685,8 @@ export default function Projetos({ isDark }: ProjectsProps) {
                               rel="noopener noreferrer"
                               onClick={() => handleProjectClick(project, 'github', position)}
                               className={`flex-1 inline-flex items-center justify-center gap-1 px-3 py-2 border rounded-lg transition-colors duration-200 text-sm font-medium ${isDark
-                                  ? 'text-white border-gray-600 hover:bg-gray-700'
-                                  : 'text-gray-800 border-gray-300 hover:bg-gray-50'
+                                ? 'text-white border-gray-600 hover:bg-gray-700'
+                                : 'text-gray-800 border-gray-300 hover:bg-gray-50'
                                 }`}
                             >
                               <Github size={14} />

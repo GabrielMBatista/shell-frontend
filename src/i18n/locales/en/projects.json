@@ -142,6 +142,33 @@
         "item2": "Project and user management",
         "item3": "Scalable video processing"
       }
+    },
+    "10": {
+      "title": "Social Media Calendar",
+      "description": "Complete social media content management platform, with multi-tenant support, calendars, and approvals.",
+      "gabs": {
+        "card": "Robust content management system for agencies. Explore approval flows, multi-tenancy, and visual calendars.",
+        "demoButton": "Opens the management dashboard. See the calendar, post creation, and client feedback system.",
+        "githubButton": "Social Media Calendar project repository (Content Management)."
+      }
+    },
+    "11": {
+      "title": "CS-AD Pro",
+      "description": "Intelligent tool for creating personalized creatives and ads using generative AI.",
+      "gabs": {
+        "card": "Ad media generator: Gemini AI integration for scripting and skin design. Focus on conversion and speed.",
+        "demoButton": "Opens the ad generation tool. Test skin and script creation with AI.",
+        "githubButton": "CS-AD Pro repository: Next.js 15, React 19, and Google GenAI."
+      }
+    },
+    "12": {
+      "title": "MFE Narrative",
+      "description": "Micro-frontend specialized in narrative editing and video processing via AI and FFmpeg.",
+      "gabs": {
+        "card": "In-browser video editing: FFmpeg WASM + Gemini for automatic narratives. Isolation via Module Federation.",
+        "demoButton": "This project currently has no active public demo.",
+        "githubButton": "MFE Narrative code: heavy client-side processing and AI orchestration."
+      }
     }
   }
 }

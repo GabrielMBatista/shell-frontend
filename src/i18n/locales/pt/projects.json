@@ -142,6 +142,33 @@
         "item2": "Gerenciamento de projetos e usuários",
         "item3": "Processamento de vídeo escalável"
       }
+    },
+    "10": {
+      "title": "Social Media Calendar",
+      "description": "Plataforma completa para gestão de conteúdo de redes sociais, com suporte a multi-tenant, calendários e aprovações.",
+      "gabs": {
+        "card": "Sistema robusto de gestão de conteúdo para agências. Explore fluxos de aprovação, multi-tenancy e calendários visuais.",
+        "demoButton": "Abre o painel de gestão. Veja o calendário, criação de posts e sistema de feedback do cliente.",
+        "githubButton": "Repositório do projeto Social Media Calendar (Gestão de Conteúdo)."
+      }
+    },
+    "11": {
+      "title": "CS-AD Pro",
+      "description": "Ferramenta inteligente para criação de criativos e anúncios personalizados usando IA generativa.",
+      "gabs": {
+        "card": "Gerador de mídia para anúncios: integração com Gemini AI para roteirização e design de skins. Foco em conversão e rapidez.",
+        "demoButton": "Abre a ferramenta de geração de anúncios. Teste a criação de skins e roteiros com IA.",
+        "githubButton": "Repositório do CS-AD Pro: Next.js 15, React 19 e Google GenAI."
+      }
+    },
+    "12": {
+      "title": "MFE Narrative",
+      "description": "Micro-frontend especializado em edição de narrativas e processamento de vídeo via IA e FFmpeg.",
+      "gabs": {
+        "card": "Edição de vídeo no browser: FFmpeg WASM + Gemini para narrativas automáticas. Isolamento via Module Federation.",
+        "demoButton": "Este projeto não possui demo pública ativa no momento.",
+        "githubButton": "Código do MFE Narrative: processamento pesado no cliente e orquestração de IA."
+      }
     }
   }
 }
