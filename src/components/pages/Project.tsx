@@ -166,6 +166,7 @@ export default function Projetos({ isDark }: ProjectsProps) {
       github: 'https://github.com/GabrielMBatista/social-media-calendar',
       demo: 'https://social-media-calendar-two.vercel.app/login',
       featured: true,
+      externalDemo: true,
     },
     {
       id: 11,
@@ -176,6 +177,7 @@ export default function Projetos({ isDark }: ProjectsProps) {
       github: 'https://github.com/GabrielMBatista/cs-ad-pro',
       demo: 'https://cs-ad-pro.vercel.app/',
       featured: true,
+      externalDemo: true,
     },
     {
       id: 12,
@@ -340,6 +342,10 @@ export default function Projetos({ isDark }: ProjectsProps) {
   };
 
   const openModal = (project: Project, position: number): void => {
+    if (project.externalDemo) {
+      window.open(project.demo, '_blank');
+      return;
+    }
     setDemoUrl(project.demo);
     setIsModalOpen(true);
 
@@ -459,13 +465,22 @@ export default function Projetos({ isDark }: ProjectsProps) {
                       transformOrigin: 'center',
                     }}
                   >
-                    <iframe
-                      src={project.demo}
-                      className="absolute top-0 left-0 w-full h-full border-none"
-                      sandbox="allow-scripts allow-same-origin allow-forms allow-modals allow-popups allow-presentation"
-                      allow="camera; microphone; fullscreen; clipboard-read; clipboard-write"
-                      title={`Preview of ${project.title}`}
-                    ></iframe>
+                    {project.externalDemo ? (
+                      <div className={`absolute inset-0 flex items-center justify-center bg-gradient-to-br ${isDark ? 'from-gray-700 to-gray-800' : 'from-gray-100 to-gray-200'}`}>
+                        <div className="flex flex-col items-center gap-3 text-slate-400">
+                          <Globe size={48} strokeWidth={1} />
+                          <span className="text-sm font-medium tracking-wide opacity-50 uppercase">{t('featured.externalPreview')}</span>
+                        </div>
+                      </div>
+                    ) : (
+                      <iframe
+                        src={project.demo}
+                        className="absolute top-0 left-0 w-full h-full border-none"
+                        sandbox="allow-scripts allow-same-origin allow-forms allow-modals allow-popups allow-presentation"
+                        allow="camera; microphone; fullscreen; clipboard-read; clipboard-write"
+                        title={`Preview of ${project.title}`}
+                      ></iframe>
+                    )}
                   </div>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   <div className="absolute top-4 right-4">
@@ -622,13 +637,19 @@ export default function Projetos({ isDark }: ProjectsProps) {
                       <>
                         <div className="relative overflow-hidden">
                           <div className="w-full h-48 relative">
-                            <iframe
-                              src={project.demo}
-                              className="absolute top-0 left-0 w-full h-full border-none scale-[1.5] origin-top-left"
-                              sandbox="allow-scripts allow-same-origin allow-forms allow-modals allow-popups allow-presentation"
-                              allow="camera; microphone; fullscreen; clipboard-read; clipboard-write"
-                              title={`Preview of ${project.title}`}
-                            ></iframe>
+                            {project.externalDemo ? (
+                              <div className={`absolute inset-0 flex items-center justify-center bg-gradient-to-br ${isDark ? 'from-gray-700 to-gray-800' : 'from-gray-100 to-gray-200'}`}>
+                                <Globe size={32} className="text-slate-400 opacity-30" />
+                              </div>
+                            ) : (
+                              <iframe
+                                src={project.demo}
+                                className="absolute top-0 left-0 w-full h-full border-none scale-[1.5] origin-top-left"
+                                sandbox="allow-scripts allow-same-origin allow-forms allow-modals allow-popups allow-presentation"
+                                allow="camera; microphone; fullscreen; clipboard-read; clipboard-write"
+                                title={`Preview of ${project.title}`}
+                              ></iframe>
+                            )}
                           </div>
                           <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                         </div>

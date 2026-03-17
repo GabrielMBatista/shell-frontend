@@ -148,8 +148,9 @@
       "description": "Plataforma completa para gestão de conteúdo de redes sociais, com suporte a multi-tenant, calendários e aprovações.",
       "gabs": {
         "card": "Sistema robusto de gestão de conteúdo para agências. Explore fluxos de aprovação, multi-tenancy e calendários visuais.",
-        "demoButton": "Abre o painel de gestão. Veja o calendário, criação de posts e sistema de feedback do cliente.",
-        "githubButton": "Repositório do projeto Social Media Calendar (Gestão de Conteúdo)."
+        "demoButton": "Abre o painel de gestão em uma nova aba.",
+        "githubButton": "Repositório do projeto Social Media Calendar (Gestão de Conteúdo).",
+        "externalPreview": true
       }
     },
     "11": {
@@ -157,7 +158,7 @@
       "description": "Ferramenta inteligente para criação de criativos e anúncios personalizados usando IA generativa.",
       "gabs": {
         "card": "Gerador de mídia para anúncios: integração com Gemini AI para roteirização e design de skins. Foco em conversão e rapidez.",
-        "demoButton": "Abre a ferramenta de geração de anúncios. Teste a criação de skins e roteiros com IA.",
+        "demoButton": "Abre a ferramenta de geração de anúncios em uma nova aba.",
         "githubButton": "Repositório do CS-AD Pro: Next.js 15, React 19 e Google GenAI."
       }
     },

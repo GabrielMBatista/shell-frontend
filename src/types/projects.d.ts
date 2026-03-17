@@ -11,6 +11,7 @@ export interface Project {
   github: string;
   demo: string;
   featured: boolean;
+  externalDemo?: boolean;
 }
 
 export interface Category {

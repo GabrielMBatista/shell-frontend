@@ -148,7 +148,7 @@
       "description": "Complete social media content management platform, with multi-tenant support, calendars, and approvals.",
       "gabs": {
         "card": "Robust content management system for agencies. Explore approval flows, multi-tenancy, and visual calendars.",
-        "demoButton": "Opens the management dashboard. See the calendar, post creation, and client feedback system.",
+        "demoButton": "Opens the management dashboard in a new tab.",
         "githubButton": "Social Media Calendar project repository (Content Management)."
       }
     },
@@ -157,7 +157,7 @@
       "description": "Intelligent tool for creating personalized creatives and ads using generative AI.",
       "gabs": {
         "card": "Ad media generator: Gemini AI integration for scripting and skin design. Focus on conversion and speed.",
-        "demoButton": "Opens the ad generation tool. Test skin and script creation with AI.",
+        "demoButton": "Opens the ad generation tool in a new tab.",
         "githubButton": "CS-AD Pro repository: Next.js 15, React 19, and Google GenAI."
       }
     },
